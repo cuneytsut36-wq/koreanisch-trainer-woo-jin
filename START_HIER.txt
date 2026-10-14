@@ -1,0 +1,28 @@
+KOREANISCH TRAINER 14.0 – WOO JIN MIT ECHTER KI
+
+Voraussetzung: Node.js 20+ und ein OpenAI-API-Schlüssel mit aktivierter API-Abrechnung.
+Der ChatGPT-App-Zugang allein stellt keinen API-Schlüssel bereit.
+
+1. Terminal in diesem Ordner öffnen.
+2. API-Schlüssel nur im Terminal als Umgebungsvariable setzen:
+   macOS/Linux: export OPENAI_API_KEY="dein_api_schluessel"
+   Windows PowerShell: $env:OPENAI_API_KEY="dein_api_schluessel"
+3. App-Server starten: node server.mjs
+4. Im Browser öffnen: http://localhost:3000
+5. Oben in der Story-Leiste Woo Jin auswählen.
+6. Im Bereich "KI-Verbindung & Datenschutz" den echten KI-Modus einschalten.
+7. "Verbindung prüfen" zeigt an, ob der Schlüssel erkannt wurde.
+
+Ohne API-Schlüssel funktioniert der lokale Dialogmodus weiter.
+
+Für ein iPhone: Server auf einer öffentlich erreichbaren HTTPS-Adresse hosten
+(z.B. auf einer Node.js-fähigen Hosting-Plattform) und den API-Schlüssel
+als geschützte Server-Umgebungsvariable setzen. localhost auf dem iPhone
+ist NICHT der PC-Server. Ein Hosting-Account ist nötig.
+
+Datenschutz: Im KI-Modus werden die Nachricht und bis zu 10 vorherige
+Chat-Nachrichten an den eigenen Server und weiter an die OpenAI-API gesendet.
+Im lokalen Modus bleibt der Chatverlauf im Browser. Die API kann Kosten verursachen.
+
+Wichtig: Woo Jin ist eine fiktive KI-Figur, kein echter Mensch.
+Die Sprachausgabe nutzt die Browser-Stimme; die Aussprache ist nicht garantiert perfekt.
