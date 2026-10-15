@@ -1,1 +1,9 @@
 .rpg29-monument{display:block;background-repeat:no-repeat;background-size:400% 300%;image-rendering:pixelated}.rpg29-human{display:block;width:100%;height:330px;background-repeat:no-repeat;background-size:300% 100%;image-rendering:pixelated}
+.rpg29-monument{filter:url(#rpg29-magenta);flex-shrink:0;background-color:transparent}
+.rpg29-human{filter:url(#rpg29-cyan);background-color:transparent}
+.rpg26-scenery .rpg29-monument{position:absolute;animation:rpg26-sway 4s steps(4,end) infinite}
+.rpg26-mini-monuments .rpg29-monument{width:140px;height:108px}
+.rpg26-map-monument.rpg29-monument{position:absolute;width:120px;height:115px}
+.rpg26-chapter-icon .rpg29-monument{width:54px;height:54px}
+.rpg26-avatar .rpg29-human{height:335px}
+@media(max-width:680px){.rpg26-avatar .rpg29-human{height:260px}.rpg26-mini-monuments .rpg29-monument{height:80px;width:65px}.rpg26-map-monument.rpg29-monument{width:80px;height:75px}}
