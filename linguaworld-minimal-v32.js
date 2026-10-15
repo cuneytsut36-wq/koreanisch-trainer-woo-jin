@@ -126,6 +126,16 @@ function coach(){
  const main=document.getElementById('main');if(!main)return;
  main.querySelector('.v18-coach-mount')?.classList.add('lw32-coach');
  main.querySelector('.v22-page.v22-woojin')?.classList.add('lw32-chat');
+ const status=main.querySelector('.wj-open-status');
+ if(status&&!status.querySelector('.lw32-ai-note')){
+   const paras=[...status.children].filter(el=>el.tagName==='P');
+   if(paras.length){
+      const details=document.createElement('details');details.className='lw32-ai-note';
+      const label=document.createElement('summary');
+      label.textContent=({de:'Wie funktioniert der KI-Chat?',en:'How does AI chat work?',tr:'Yapay zekâ sohbeti nasıl çalışır?',fr:'Comment fonctionne le chat IA ?',es:'¿Cómo funciona el chat IA?',ja:'AIチャットについて',ko:'AI 채팅 정보'})[typeof v27Lang==='string'?v27Lang:'de']||'Wie funktioniert der KI-Chat?';
+      details.append(label);paras.forEach(p=>details.append(p));status.append(details);
+   }
+ }
  if(wjTarget==='ko')main.querySelector('.v18-guide-page')?.classList.add('lw32-duplicate-guide');
 }
 function media(){
