@@ -211,3 +211,13 @@ html[data-learning-mode] .v18-side-langs{display:none!important}
  .v19-home,.v19-hero-avatar{animation:none!important}
  .v19-action,.v19-flag{transition:none!important}
 }
+
+
+/* Mother tongue is separate from the three country flags, both controls live on Home only. */
+.v20-native-picker{display:flex;align-items:center;justify-content:flex-start;gap:13px;margin:-6px 0 17px;padding:11px 14px;max-width:max-content;flex-wrap:wrap;border:1px solid var(--v19-border);background:var(--v19-bg-soft);border-radius:13px}
+.v20-native-picker label{color:var(--v19-muted);font-size:12px;font-weight:750;white-space:nowrap}
+.v20-native-picker select{background:var(--v19-surface);border:1px solid var(--v19-border);border-radius:10px;color:var(--v19-text);font:inherit;font-size:13px;padding:8px 33px 8px 12px;min-width:160px;max-width:260px;cursor:pointer}
+.v20-native-picker select:focus-visible{outline:2px solid var(--v19-accent);outline-offset:2px}
+.v19-home[translate="no"]{unicode-bidi:normal}
+html[data-learning-mode] .v20-native-picker{box-shadow:none}
+@media(max-width:550px){.v20-native-picker{width:100%;max-width:none;justify-content:space-between;margin:0 0 15px}.v20-native-picker select{min-width:145px;flex:1}}
