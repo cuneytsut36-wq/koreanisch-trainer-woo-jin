@@ -87,7 +87,7 @@ function homeMinimal(){
   '<header class="v19-welcome"><div><span class="v18-kicker">LINGUAWORLD · LANGUAGE STUDIO</span><h1>'+ui('Deine Lernwelt','Your learning world')+'</h1><p>'+ui('Ich möchte lernen','I want to learn')+'</p></div>'+flags()+'</header>'+(typeof window.wjNativePicker==='function'?window.wjNativePicker():'')+
   '<section class="v19-hero"><img class="v19-scene" src="'+m.scene+'" alt="'+ui('Pixelart-Landschaft','Pixel-art landscape')+' '+m.land+'">'+
    '<div class="v19-shade"></div><div class="v19-hero-body"><span class="v19-country">'+m.flag+' '+m.land+'</span>'+
-   '<h2>'+m.greeting+'</h2><p>'+m.description+'</p>'+
+   '<h2>'+m.greeting+'</h2><p>'+(typeof window.wjNativeDescription==='function'?window.wjNativeDescription(wjTarget):m.description)+'</p>'+
    '<button class="v18-btn" type="button" onclick="go(\'storyMap\')">'+ui('Jetzt entdecken','Explore now')+' <span>↗</span></button></div>'+
    '<img class="v19-hero-avatar" src="'+m.avatar+'" alt="'+m.guide+' Pixelart-Avatar"></section>'+
   '<div class="v19-guide-note"><span class="v19-guide-dot">✦</span><span><strong>'+m.guide+'</strong> · '+ui('Dein Sprachbegleiter','Your language companion')+'</span></div>'+
