@@ -106,7 +106,7 @@ nav=function(){
   ['wooJin','✦',m.guide]
  ];
  const side=document.getElementById('sideNav'),bottom=document.getElementById('bottomNav');
- if(side)side.innerHTML='<div class="v19-side-brand">LINGUAWORLD<small>'+m.flag+' '+m.name+'</small></div>'+
+ if(side)side.innerHTML='<div class="v19-side-brand">LINGUAWORLD<small>'+m.flag+' '+(window.wjNativeStudyName?.(wjTarget)||m.name)+'</small></div>'+
    labels.map(([page,symbol,name])=>'<button type="button" class="nav '+(state.page===page?'active':'')+'" onclick="go(\''+page+'\')"><span class="v22-navico">'+symbol+'</span> '+name+'</button>').join('')+
    '<p class="v19-side-hint">'+ui('Sprache ändern: Startseite','Change language: Home')+'</p>';
  if(bottom)bottom.innerHTML=labels.map(([page,symbol,name])=>'<button type="button" class="'+(state.page===page||(page==='studyScroll'&&state.page==='lesson')?'current':'')+'" onclick="go(\''+page+'\')"><span>'+symbol+'</span>'+name+'</button>').join('');
@@ -114,7 +114,7 @@ nav=function(){
 socialTop=function(){
  const m=mode(),head=document.getElementById('socialHeader'),storyModes=document.getElementById('storyModes');
  if(head)head.innerHTML='<div class="v22-topbar v19-topbar"><button class="v19-top-logo" type="button" onclick="go(\'home\')" aria-label="'+ui('Zur Startseite','Go to Home')+'">LinguaWorld <span>✦</span></button>'+
-  '<div class="v19-top-actions"><span class="v19-current-mode">'+m.flag+' '+m.name+'</span>'+
+  '<div class="v19-top-actions"><span class="v19-current-mode">'+m.flag+' '+(window.wjNativeStudyName?.(wjTarget)||m.name)+'</span>'+
   '<button type="button" class="v36-progress-trigger" onclick="v36OpenProgress()" aria-label="'+ui('Lernfortschritt anzeigen','Show learning progress')+'"><img src="'+m.avatar+'" alt=""><span class="v36-online-dot"></span></button></div></div>';
  if(storyModes)storyModes.innerHTML='';
 };
