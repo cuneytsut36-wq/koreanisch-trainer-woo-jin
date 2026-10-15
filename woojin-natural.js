@@ -1,8 +1,19 @@
 /* Woo Jin V42 — natural, deliberately paced conversational layer.
    Offline fallback is rule-based, not falsely presented as a generative AI.
    Hosted AI / local WebGPU remains optional. No credentials in client code. */
-const wj42={recognition:null,voiceActive:false,thinkingMin:850,thinkingMax:1800};
+const wj42={recognition:null,voiceActive:false,thinkingMin:1450,thinkingMax:3100};
 const wj42Wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const wj43Conversation={lastTopic:'',lastQuestion:'',lastUser:''};
+function wj43ContextReply(raw){
+ const t=wjNorm(raw),p=wj43Conversation.lastTopic;
+ if(/^(ja|ja klar|ja gerne|gerne|klar|yes|okay|ok|sure|evet)$/.test(t)&&p==='day')return {ko:'Geuraeyo!',de:'Schön. Erzähl mir, was heute passiert ist. Ich höre zu.'};
+ if(/^(nein|nee|no|hayir)$/.test(t)&&p==='day')return {ko:'Algesseoyo.',de:'Alles gut. Dann reden wir über etwas anderes. Was liegt dir gerade im Kopf?'};
+ if(/^(ja|ja klar|ja gerne|gerne|klar|yes|okay|ok|sure|evet)$/.test(t)&&p==='korea')return {ko:'Joayo!',de:'Was interessiert dich mehr: Alltag in Seoul, Essen oder die koreanische Sprache?'};
+ if(/^(warum|wieso|weshalb|why)\??$/.test(t)&&wj43Conversation.lastQuestion)return {ko:'Jal saenggakhaebwayo.',de:'Ich habe gerade nach '+wj43Conversation.lastQuestion+' gefragt, weil ich besser verstehen möchte, was dich interessiert. Du kannst auch einfach ein anderes Thema anfangen.'};
+ if(/^(und du|du auch|and you|sen|ya sen)\??$/.test(t))return {ko:'Jeoneun Woo Jin-ieyo.',de:'Ich habe keine eigenen Erlebnisse wie ein Mensch, aber ich unterhalte mich gerne mit dir darüber. Was würdest du mir erzählen?'};
+ return null;
+}
+function wj43Remember(raw,result){wj43Conversation.lastUser=String(raw).slice(0,250);const t=wjNorm(raw);if(/(tag|heute|day|bugun)/.test(t))wj43Conversation.lastTopic='day';else if(/(korea|seoul|sudkorea)/.test(t))wj43Conversation.lastTopic='korea';if(result?.de){const match=String(result.de).match(/([^.!?]{8,})\?/);if(match)wj43Conversation.lastQuestion=match[1].trim().toLowerCase()}}
 function wj42Reply(raw){
  const t=wjNorm(raw),prev=wjHistory.filter(x=>x.who==='me').slice(-3).map(x=>wjNorm(x.ko));
  const who=typeof wjV2!=='undefined'&&wjV2.name?wjV2.name:'';
@@ -28,8 +39,8 @@ async function wj42Typing(text){
  const chat=document.getElementById('wjChat');if(!chat)return;
  const bubble=document.createElement('div');bubble.className='wj-message theirs wj42-live';bubble.innerHTML='<span class="wj-avatar-mini"><img src="woo-jin-pixel.svg" alt=""></span><div class="wj-bubble"><div class="wj-korean"></div><div class="wj-de"></div></div>';chat.appendChild(bubble);
  const node=bubble.querySelector('.wj-korean'),secondary=bubble.querySelector('.wj-de');const words=Array.from(String(text.ko||'')),de=Array.from(String(text.de||''));let i=0;
- while(i<words.length&&bubble.isConnected){i=Math.min(words.length,i+2);node.textContent=words.slice(0,i).join('');chat.scrollTop=chat.scrollHeight;await wj42Wait(34)}
- if(de.length){await wj42Wait(240);i=0;while(i<de.length&&bubble.isConnected){i=Math.min(de.length,i+2);secondary.textContent=de.slice(0,i).join('');chat.scrollTop=chat.scrollHeight;await wj42Wait(32)}}
+ while(i<words.length&&bubble.isConnected){i=Math.min(words.length,i+2);node.textContent=words.slice(0,i).join('');chat.scrollTop=chat.scrollHeight;await wj42Wait(58)}
+ if(de.length){await wj42Wait(240);i=0;while(i<de.length&&bubble.isConnected){i=Math.min(de.length,i+2);secondary.textContent=de.slice(0,i).join('');chat.scrollTop=chat.scrollHeight;await wj42Wait(54)}}
  if(bubble.isConnected)bubble.remove();
 }
 async function wj42Send(value){
@@ -41,8 +52,8 @@ async function wj42Send(value){
   if(wjOpenChat.backend||wjOpenChat.localReady){
    try{const answer=await wjOpenReply();if(answer)result={ko:answer,de:''}}catch(e){wjOpenChat.error='KI-Verbindung unterbrochen · Offline-Gespräch verfügbar';wjOpenChat.backend=false}
   }
-  if(!result){result=wj42StudyIntent(text)?wjV2Respond(text):(wj42Reply(text)||wjV2Respond(text))}
-  const delay=Math.min(wj42.thinkingMax,Math.max(wj42.thinkingMin,420+text.length*22));
+  if(!result){result=wj42StudyIntent(text)?wjV2Respond(text):(wj43ContextReply(text)||wj42Reply(text)||wjV2Respond(text))}wj43Remember(text,result)
+  const delay=Math.min(wj42.thinkingMax,Math.max(wj42.thinkingMin,750+text.length*28));
   await wj42Wait(Math.max(0,delay-(Date.now()-started)));
   document.getElementById('wj-type-indicator')?.remove();
   await wj42Typing(result);
