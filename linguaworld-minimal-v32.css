@@ -742,3 +742,32 @@ html[data-lw32] #main.lw32-other-page :where(.btn,button.btn){
 @media(prefers-reduced-motion:reduce){
  html[data-lw32] *,html[data-lw32] *::before,html[data-lw32] *::after{animation:none!important;scroll-behavior:auto!important}
 }
+
+/* V32.1 usability refinement: navigation is always reachable, no duplicate floating widget. */
+html[data-lw32] #wj-float{display:none!important}
+html[data-lw32] .lw32-chat .lw32-ai-note{
+ width:100%;margin-top:10px!important;border-top:1px solid var(--ui-line)!important;
+ padding:8px 2px 1px!important;background:transparent!important;
+ color:var(--ui-sub)!important;font-size:11px!important
+}
+.lw32-ai-note summary{
+ cursor:pointer;list-style:none;color:var(--ui-sub)!important;
+ font-size:11px!important;padding:4px 0!important
+}
+.lw32-ai-note summary::after{content:'⌄';margin-left:7px}
+.lw32-ai-note[open] summary::after{content:'⌃'}
+.lw32-ai-note p{font-size:11px!important;color:var(--ui-sub)!important;line-height:1.55!important;margin:9px 0 2px!important}
+@media(max-width:850px){
+ html[data-lw32] #sideNav.lw32-sidebar{display:none!important}
+ html[data-lw32] #bottomNav.lw32-bottom{
+  position:fixed!important;z-index:150!important;
+  left:10px!important;right:10px!important;width:auto!important;
+  bottom:calc(8px + env(safe-area-inset-bottom, 0px))!important;
+  margin:0!important;padding:5px 6px!important;box-sizing:border-box!important;
+  box-shadow:0 6px 22px #03091660!important
+ }
+ html[data-lw32] #main.lw32-main{padding-bottom:96px!important}
+}
+@media(min-width:851px){
+ html[data-lw32] #bottomNav.lw32-bottom{display:none!important}
+}
