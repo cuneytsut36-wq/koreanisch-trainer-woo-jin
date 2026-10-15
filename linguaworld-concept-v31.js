@@ -125,6 +125,8 @@ function classifyWord(word){const text=word.toLowerCase();
  return 'daily'}
 function allVocabCards(){return [...document.querySelectorAll('.lw30-vocab .v25-word')]}
 function vocabularyGrid(){
+ // New minimalist swipe view preserves the original lesson engine and IntersectionObserver.
+ if(window.lw33ClassicSwipe===true)return;
  const main=document.getElementById('main');if(!main||!['studyScroll','lesson'].includes(state.page))return;
  main.classList.add('lw31-vocab');
  const learning=main.querySelector('.v25-learning'),track=main.querySelector('.v25-track');if(!learning||!track)return;
