@@ -1,0 +1,22 @@
+/* Higgsfield V27 – actual generated sprites and interactive pixel RPG controls. */
+.rpg27-hero .rpg26-avatar img{height:340px!important;object-fit:contain!important;image-rendering:pixelated!important}
+.rpg27-character{image-rendering:pixelated!important;object-fit:contain!important}
+.rpg27-pills{display:flex;gap:7px;margin-bottom:20px}.rpg27-pills span{background:#10152bd8;color:var(--rpg-glint);border:2px solid var(--rpg-frame);padding:5px 9px;font-size:11px;font-weight:900}
+.rpg27-petal-field{position:absolute;inset:0;z-index:11;pointer-events:none;overflow:hidden}.rpg27-petal-field i{position:absolute;width:8px;height:8px;background:var(--rpg-sun);animation:rpg27-fall 9s linear infinite}
+@keyframes rpg27-fall{from{transform:translate(-8px,-20px);opacity:.8}to{transform:translate(35px,450px);opacity:0}}
+.rpg27-hero .rpg26-copy{top:18%!important}.rpg27-hero .rpg26-copy h2{font-size:clamp(45px,7vw,85px)!important}
+.rpg27-hero .rpg26-avatar{z-index:12!important;width:29%!important;right:3%!important}
+.rpg27-shop{position:absolute;bottom:7%;left:42%;width:19%;height:36%;z-index:6}
+.rpg27-shop-roof{position:absolute;top:2%;width:100%;height:29%;background:repeating-linear-gradient(90deg,#a56980 0 17px,#694767 17px 32px);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%)}
+.rpg27-shop-wall{position:absolute;inset:30% 10% 0;background:#cca399;border:6px solid #795a78;display:flex;justify-content:space-around;align-items:center}.rpg27-shop-wall i{width:18%;height:68%;background:#4d475c;border:3px solid #8b697c}
+.rpg27-shop-sign{position:absolute;bottom:1%;left:32%;padding:3px;background:#503c68;color:#ffe5ac;border:2px solid #d4a78b;font-size:8px}
+.rpg27-quest{border:3px solid var(--rpg-frame)!important}.rpg27-quest-gem{position:absolute;right:8px;top:8px;color:var(--rpg-glint);font-size:10px}
+.rpg27-map-marker{position:absolute;z-index:3;font-size:25px;animation:rpg26-bob 3.5s steps(3,end) infinite;pointer-events:none}
+.rpg27-card-mark{position:absolute;top:4px;right:4px;background:var(--rpg-floor);color:var(--rpg-glint);font-size:9px;padding:2px 5px}
+.rpg27-quest-status{display:flex;justify-content:space-between;align-items:center;gap:10px;border:3px solid var(--rpg-frame);background:var(--rpg-floor);margin:14px 0;padding:13px 17px}
+.rpg27-quest-status strong{font-size:13px;color:var(--rpg-glint)}.rpg27-quest-status small{font-size:10px;color:var(--px-muted)}
+.rpg27-quest-dots{display:flex;gap:7px}.rpg27-quest-dots span{width:20px;height:9px;border:2px solid var(--px-line)}.rpg27-quest-dots .done{background:var(--px-accent)}
+.rpg27-answer{display:flex!important;align-items:center!important;gap:11px!important;border:2px solid var(--rpg-frame)!important}
+.rpg27-answer-index{display:grid;place-items:center;background:var(--rpg-floor);color:var(--rpg-glint);width:31px;height:31px;border:2px solid var(--rpg-frame);font-weight:900;flex:0 0 31px}
+@media(max-width:680px){.rpg27-hero .rpg26-avatar{width:45%!important;right:-9%!important}.rpg27-hero .rpg26-avatar img{height:260px!important}.rpg27-shop{left:45%;width:25%;height:29%}.rpg27-pills span{font-size:8px;padding:4px}.rpg27-map-marker{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.rpg27-hero *,.rpg27-map *{animation:none!important}}
