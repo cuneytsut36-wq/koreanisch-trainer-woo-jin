@@ -135,11 +135,11 @@
    if(node&&node.nodeValue!==heading(wjTarget)){node.nodeValue=heading(wjTarget)}
   }
   const label=map.querySelector('.v18-map-head .v18-kicker');
-  if(label)label.textContent=(wjTarget==='ko'?'🇰🇷':wjTarget==='de'?'🇩🇪':'🇬🇧')+' '+country().toUpperCase()+' · '+exact('STORY MODE');
+  if(label){const next=(wjTarget==='ko'?'🇰🇷':wjTarget==='de'?'🇩🇪':'🇬🇧')+' '+country().toUpperCase()+' · '+exact('STORY MODE');if(label.textContent!==next)label.textContent=next;}
   const caption=map.querySelector('.v18-map-caption');
-  if(caption)caption.textContent=(wjTarget==='ko'?'🇰🇷':wjTarget==='de'?'🇩🇪':'🇬🇧')+' '+country()+' · A1–C2';
+  if(caption){const next=(wjTarget==='ko'?'🇰🇷':wjTarget==='de'?'🇩🇪':'🇬🇧')+' '+country()+' · A1–C2';if(caption.textContent!==next)caption.textContent=next;}
   const banner=map.querySelector('.v18-scene-strip span');
-  if(banner)banner.textContent=(wjTarget==='ko'?'🌸':wjTarget==='de'?'🏰':'🎡')+' '+exact('Entdecke die Kultur');
+  if(banner){const next=(wjTarget==='ko'?'🌸':wjTarget==='de'?'🏰':'🎡')+' '+exact('Entdecke die Kultur');if(banner.textContent!==next)banner.textContent=next;}
  }
  function localizeRoot(root){
   if(!root)return;
