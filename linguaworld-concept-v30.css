@@ -125,3 +125,42 @@ html[data-lw30] .lw30-chapters{padding:8px!important}
 .lw30-story-art{height:290px}.lw30-story-avatar{width:41%;height:78%}.lw30-story-dialog{left:32%;bottom:6px;right:6px;padding:8px;min-height:78px}
 }
 @media(prefers-reduced-motion:reduce){.lw30-character,.lw30-hero-scene>img,.lw30-sakura{animation:none!important}}
+
+/* V30.1 concept alignment: white vocabulary tiles, comic visual-novel cards, jewel HUD */
+html[data-lw30] .lw30-vocab .v25-learning{background:#07132a!important;color:#fff!important;border:3px solid #5a79bc!important;border-radius:14px!important;padding:12px!important}
+html[data-lw30] .lw30-vocab .v25-track{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;max-width:100%!important;width:100%!important;overflow:visible!important;transform:none!important}
+html[data-lw30] .lw30-vocab .v25-word{position:relative!important;display:flex!important;flex-direction:column!important;width:auto!important;max-width:none!important;min-width:0!important;height:auto!important;min-height:194px!important;margin:0!important;transform:none!important;opacity:1!important;filter:none!important;background:#fffdfb!important;color:#172540!important;border:2px solid #b4d3ea!important;border-radius:9px!important;box-shadow:0 3px 0 #183454!important;overflow:hidden!important;scroll-snap-align:none!important;padding:5px!important}
+html[data-lw30] .lw30-vocab .v25-stage{height:110px!important;min-height:110px!important;max-height:110px!important;overflow:hidden!important;background:linear-gradient(#d8f2ff,#fff7f0)!important;border:0!important;border-radius:6px!important;position:relative!important}
+html[data-lw30] .lw30-vocab .v25-stage .v40-animated-image{width:100%!important;height:100%!important;max-height:100%!important}
+html[data-lw30] .lw30-vocab .v25-stage img{width:100%!important;height:100%!important;max-height:110px!important;object-fit:contain!important;image-rendering:pixelated!important}
+html[data-lw30] .lw30-vocab .v25-card-head{margin:0!important;padding:2px!important;min-height:20px!important;color:#4b5480!important;font-size:9px!important}
+html[data-lw30] .lw30-vocab .v25-card-head>span{font-size:8px!important}
+html[data-lw30] .lw30-vocab .v25-card-head button{padding:0!important;font-size:14px!important;color:#d5487e!important}
+html[data-lw30] .lw30-vocab .v25-caption{color:#101e40!important;padding:4px 2px!important;min-height:42px!important}
+html[data-lw30] .lw30-vocab .v25-caption :where(h2,h3,strong){color:#13234a!important;font-size:12px!important;line-height:1.3!important;overflow-wrap:anywhere}
+html[data-lw30] .lw30-vocab .v25-caption :where(p,small,span){color:#536481!important;font-size:10px!important;overflow-wrap:anywhere}
+html[data-lw30] .lw30-vocab .v25-underline{margin:1px 0!important}
+html[data-lw30] .lw30-vocab .v25-timeline{display:none!important}
+html[data-lw30] .lw30-vocab .v25-card-foot{display:flex!important;justify-content:center!important;gap:2px!important;padding:3px!important;flex-wrap:wrap!important}
+html[data-lw30] .lw30-vocab .v25-card-actions{display:flex!important;gap:3px!important;flex-wrap:wrap!important;justify-content:center!important}
+html[data-lw30] .lw30-vocab .v25-card-actions button{border:1px solid #83b6e1!important;color:#165a95!important;background:#eaf6ff!important;font-size:10px!important;padding:4px!important;min-height:24px!important;border-radius:5px!important}
+html[data-lw30] .lw30-vocab .v25-word:hover{border-color:#16bcf0!important;box-shadow:0 0 0 2px #50d9ff77!important}
+html[data-lw30] .lw30-story .s32-msteps{display:flex!important;gap:7px!important;justify-content:space-between!important;margin:8px 0 12px!important}
+html[data-lw30] .lw30-story .s32-msteps button{border:2px solid #57769e!important;background:#0e2747!important;border-radius:50%!important;min-width:29px!important;min-height:29px!important;color:#a9defd!important}
+html[data-lw30] .lw30-story .s32-msteps button.done{background:#36c795!important;border-color:#71ffce!important;color:#0b1e28!important}
+html[data-lw30] .lw30-story .s32-msteps button.active{background:#22aefa!important;border-color:#80f1ff!important;color:white!important;box-shadow:0 0 10px #29c8ff!important}
+html[data-lw30] .lw30-story .s32-scene .s32-target-term{color:#fff!important;text-shadow:2px 2px #14214b}
+html[data-lw30] .lw30-story .s32-scene .s32-meaning{font-size:14px!important;color:#c3deff!important}
+html[data-lw30] .lw30-story .s32-scene .s32-actions button{background:#192b58!important;border:1px solid #64bce4!important;color:white!important;border-radius:7px!important}
+html[data-lw30] .lw30-home .lw30-status,.lw30-map .lw30-map-canvas{background-clip:padding-box}
+@media(max-width:550px){
+html[data-lw30] .lw30-vocab .v25-learning{padding:6px!important}
+html[data-lw30] .lw30-vocab .v25-track{gap:6px!important}
+html[data-lw30] .lw30-vocab .v25-word{padding:3px!important;min-height:171px!important}
+html[data-lw30] .lw30-vocab .v25-stage{height:87px!important;min-height:87px!important;max-height:87px!important}
+html[data-lw30] .lw30-vocab .v25-stage img{max-height:87px!important}
+html[data-lw30] .lw30-vocab .v25-caption{min-height:32px!important}
+html[data-lw30] .lw30-vocab .v25-caption :where(h2,h3,strong){font-size:10px!important}
+html[data-lw30] .lw30-vocab .v25-card-actions button{font-size:9px!important}
+html[data-lw30] .lw30-vocab .v25-card-head>span{font-size:7px!important}
+}
