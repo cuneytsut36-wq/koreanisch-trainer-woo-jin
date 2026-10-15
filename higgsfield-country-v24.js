@@ -7,6 +7,7 @@ const W={
  de:{name:'Deutschland',portrait:'assets/v18-avatar-lukas.svg',scene:'assets/v24-de-dreamscape.svg',guide:'Lukas',flag:'🇩🇪',icons:['🏰','🏛️','⛪','🚉','🌲'],landmarks:[[12,22],[79,15],[12,73],[85,80]],hint:'BERLIN • MÜNCHEN • HAMBURG • KÖLN'},
  en:{name:'Großbritannien',portrait:'assets/v18-avatar-alex.svg',scene:'assets/v24-en-dreamscape.svg',guide:'Alex',flag:'🇬🇧',icons:['🏰','🕰️','🌉','🚌','☕'],landmarks:[[12,15],[80,13],[8,78],[80,82]],hint:'LONDON • EDINBURGH • OXFORD • MANCHESTER'}
 };
+const animatedGif={spark:'data:image/gif;base64,R0lGODlhFAAUAIEAAAAAAP/yoAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJEgAAACwAAAAAFAAUAAAILQABCBxIsKDBgwgTKlzIsKHDhxAjQgxAcSLFig4vYmyoMYBFjxJDihxJsqTJgAAh+QQJEgAAACwHAAcABwAHAIEAAAD31ncAAAAAAAAIGAABAAhAUKBAggEOIlzIsGHBgQ8VJgQQEAAh+QQJEgAAACwFAAUACwALAIEAAAD//OsAAAAAAAAIKAABCAQQoODAgwQNIhRYMMBChgohNpxIsaLFigcbPkzo8KFGjxEBBAQAIfkECRIAAAAsBwAHAAcABwCBAAAA99Z3AAAAAAAACBgAAQAIQFCgQIIBDiJcyLBhwYEPFSYEEBAAOw==',ship:'data:image/gif;base64,R0lGODlhGAAYAIEAAAAAAHa4/+r2///PciH/C05FVFNDQVBFMi4wAwEAAAAh+QQJDwAAACwAAAAAGAAYAAAIZwABCBxIsKDBgwgTKlzIsKHDhxAjDgwgkWCAixUBXNwocaNHiAEEiBwpgGLDiyRHYly4MaVIjgk9uiwJ06DHmzhXHsyJkyHPmj57RrwZcYBRjQCMDniodGBTh0+THoU6VepSqlcXBgQAIfkECQ8AAAAsBAAFABEAEwCBAAAAdrj//89y6vb/CF0AAQgcKDAAwYMIAyhEyFChQ4YEHUqECCDAgIsYBxhMaDHjxYURFXr8CLKiw5EaH0pcyRJkS5YHXz5sCJOiyZkQBeisCECngJw7BfoE+lNoUIRDjRZFejQp06UMAwIAIfkECQ8AAAAsBAAEABEAEgCBAAAAdrj/6vb//89yCFkAAQgcKDAAwYMIAyhEyFChQ4YEHUqECCCAgIsYBRhMaDHjxYURFXr8CLKiw5EaH0pcyRJkS5YHXz5sCJOiyZkQB+isCEDngJw7BfoE+lNoUIRDjRZFepRhQAAh+QQJDwAAACwEAAUAEQATAIEAAAB2uP//z3Lq9v8IXQABCBwoMADBgwgDKETIUKFDhgQdSoQIIIMCAixgHGExoMePFhREVevwIsqLDkRofSlzJEmRLlgdfPmwIk6LJmRAH6KwIQKeAnDsF+gT6U2hQhEONFkV6NCnTpQwDAgAh+QQJDwAAACwEAAYAEQASAIEAAAB2uP/q9v//z3IIWQABCBwoMADBgwgDKETIUKFDhgQdSoQIIICAixgFGExoMePFhREVevwIsqLDkRofSlzJEmRLlgdfPmwIk6LJmRAH6KwIQOeAnDsF+gT6U2hQhEONFkV6lGFAADs='};
 const concepts=[
  ['Korea · Start','https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_145647_b1382254-572d-4f86-bd90-223f03f1b7dc.png'],
  ['Korea · Karte','https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_145647_dcc8e91a-4034-4d33-9361-1e509b4a87f4.png'],
@@ -23,7 +24,7 @@ function appendSparkles(host){
  let bits='<span class="v24-cloud"></span><span class="v24-cloud"></span>';
  for(let i=0;i<10;i++)bits+='<i class="v24-sakura" style="--left:'+(i*9+5)+'%;--speed:'+(7+i%6)+'s;--delay:-'+(i*1.4)+'s"></i>';
  for(let i=0;i<8;i++)bits+='<i class="v24-glint" style="--left:'+(8+(i*13)%86)+'%;--top:'+(9+(i*22)%76)+'%;--delay:-'+i*.43+'s"></i>';
- v.innerHTML=bits;host.appendChild(v);
+ v.innerHTML=bits;const gif=document.createElement('img');gif.src=animatedGif.spark;gif.alt='';gif.className='v24-real-gif v24-twinkle-gif';v.append(gif);host.appendChild(v);
 }
 function createImage(className,src,alt){const img=document.createElement('img');img.className=className;img.src=src;img.alt=alt;img.loading='lazy';return img}
 function banner(cls,scene,caption){
@@ -60,7 +61,7 @@ function addMap(){
   const water=document.createElement('div');water.className='v24-river';overlay.append(water);
   w.landmarks.forEach(([left,top],i)=>{const el=document.createElement('span');el.className='v24-landmark';el.style.left=left+'%';el.style.top=top+'%';el.textContent=w.icons[i];overlay.append(el)});
   [[22,12],[80,53],[18,66]].forEach(([left,top])=>{const el=document.createElement('span');el.className='v24-map-star';el.style.left=left+'%';el.style.top=top+'%';overlay.append(el)});
-  map.append(overlay);
+  const ship=document.createElement('img');ship.src=animatedGif.ship;ship.alt='';ship.className='v24-real-gif v24-ship-gif';overlay.append(ship);map.append(overlay);
  }
  const strip=root.querySelector('.v18-scene-strip img');if(strip)strip.src=w.scene;
 }
