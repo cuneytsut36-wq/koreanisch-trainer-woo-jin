@@ -1,0 +1,161 @@
+/* V19 Minimal Länderwelten: ein Modus, eine Farbwelt, Sprachwechsel nur auf Start. */
+(function(){
+'use strict';
+const MODES={
+ ko:{flag:'🇰🇷',name:'Koreanisch',land:'Korea',greeting:'Annyeong!',guide:'Woo Jin',avatar:'assets/v18-avatar-woo-jin.svg',scene:'assets/v18-scene-ko.svg',description:'Entdecke Korea und lerne in deinem Tempo.'},
+ de:{flag:'🇩🇪',name:'Deutsch',land:'Deutschland',greeting:'Hallo!',guide:'Lukas',avatar:'assets/v18-avatar-lukas.svg',scene:'assets/v18-scene-de.svg',description:'Entdecke Deutschland und lerne in deinem Tempo.'},
+ en:{flag:'🇬🇧',name:'English',land:'United Kingdom',greeting:'Hello!',guide:'Alex',avatar:'assets/v18-avatar-alex.svg',scene:'assets/v18-scene-en.svg',description:'Explore Britain and learn at your own pace.'}
+};
+const fixedUi={ko:'de',de:'de',en:'en'};
+function ui(de,en){return wjTarget==='en'?en:de}
+function mode(){return MODES[wjTarget]||MODES.ko}
+function syncMode(){
+ const safe=MODES[wjTarget]?wjTarget:'ko';
+ const locale=fixedUi[safe];
+ if(v27Lang!==locale)v27Lang=locale;
+ try{localStorage.setItem('v27-language',locale);localStorage.setItem('wj-learning-language',safe)}catch(e){}
+ document.documentElement.dataset.learningMode=safe;
+ document.documentElement.lang=locale;
+ document.documentElement.setAttribute('translate','no');
+}
+syncMode();
+const oldSwitch=wjSwitchTarget;
+wjSwitchTarget=function(lang){
+ if(state.page!=='home'||!MODES[lang])return;
+ if(lang===wjTarget){syncMode();return;}
+ const next=fixedUi[lang];v27Lang=next;
+ try{localStorage.setItem('v27-language',next)}catch(e){}
+ document.documentElement.lang=next;
+ oldSwitch(lang);
+ syncMode();
+};
+const oldSetLanguage=v27SetLanguage;
+v27SetLanguage=function(lang){
+ /* No second language selector: the interface is tied to the selected country. */
+ if(lang!==fixedUi[wjTarget])return;
+ oldSetLanguage(lang);
+};
+const englishTitles={
+ 'Begrüßung':'Greetings','Im Café':'At the café','Am Flughafen':'At the airport','Unterwegs':'Getting around',
+ 'Einkaufen':'Shopping','Neue Freunde':'New friends','Im Restaurant':'At the restaurant','Im Hotel':'At the hotel',
+ 'Pläne machen':'Making plans','Gesundheit':'Health','In der Schule':'At school','Freizeit':'Free time',
+ 'Neues Zuhause':'A new home','Bei der Arbeit':'At work','Ein Missverständnis':'A misunderstanding',
+ 'Erlebnisse':'Experiences','Meinung sagen':'Expressing opinions','Kultur erleben':'Exploring culture',
+ 'Im Team':'Teamwork','Verhandeln':'Negotiating','Streit lösen':'Resolving conflict',
+ 'Eine Präsentation':'Giving a presentation','Gesellschaft':'Society','Geschichten':'Stories',
+ 'Politik und Gesellschaft':'Politics and society','Wissenschaft':'Science','Kulturgeschichte':'Cultural history',
+ 'Beruf und Führung':'Work and leadership','Medienkritik':'Media criticism','Tiefes Gespräch':'Deep conversation',
+ 'Diplomatie':'Diplomacy','Feiner Humor':'Subtle humour','Philosophie':'Philosophy',
+ 'Komplexe Verhandlung':'Complex negotiations','Literatur und Stil':'Literature and style',
+ 'Freies Argumentieren':'Open discussion'
+};
+if(window.wjLanguageWorlds&&Array.isArray(window.wjLanguageWorlds.en)){
+ window.wjLanguageWorlds.en.forEach(level=>level.chapters.forEach(ch=>{if(englishTitles[ch.title])ch.title=englishTitles[ch.title]}));
+}
+wjWorldSupport=function(word){
+ if(!word)return '';
+ if(wjTarget==='de')return String(word.en||word.de||word.term||'');
+ if(wjTarget==='en')return String(word.de||word.en||word.term||'');
+ return String(word.de||word.en||word.term||'');
+};
+wjWorldChooser=function(){return ''};
+wjWorldMenu=function(){return ''};
+wjWorldToggleMenu=function(){};
+function flags(){
+ return '<div class="v19-flag-picker" role="group" aria-label="'+ui('Lernsprache wählen','Choose learning language')+'">'+
+ Object.entries(MODES).map(([lang,m])=>
+ '<button type="button" class="v19-flag '+(wjTarget===lang?'selected':'')+'" onclick="wjSwitchTarget(\''+lang+'\')" aria-pressed="'+(wjTarget===lang)+'" aria-label="'+(lang==='ko'?'Koreanisch':lang==='de'?'Deutsch':'Englisch')+'">'+m.flag+'</button>').join('')+'</div>';
+}
+function stats(){
+ if(wjTarget==='ko'){
+  const lesson=selected(),words=lesson?.words||[],knownWords=known(),count=words.filter((_,i)=>knownWords[lesson.id+':'+i]).length;
+  return [[Object.values(knownWords).filter(Boolean).length,ui('Wörter gelernt','Words learned')],[count+'/'+words.length,ui('Aktuelle Lektion','Current lesson')],[streak(),ui('Tage in Folge','Day streak')]];
+ }
+ const finished=Object.keys(wjWorldProgress).filter(k=>k.startsWith(wjTarget+':')&&wjWorldProgress[k]).length;
+ return [[finished,ui('Lernschritte','Study steps')],[wjWorldLevel,ui('Sprachniveau','Study level')],[wjWorldData().length*6,ui('Kapitel','Chapters')]];
+}
+function homeMinimal(){
+ const m=mode(),numbers=stats();
+ const cards=[
+  ['🗺️',ui('Story','Stories'),ui('Länderkarte & Kapitel','Country map & chapters'),'storyMap'],
+  ['📚',ui('Vokabeln','Vocabulary'),ui('Bilder & Aussprache','Images & pronunciation'),'studyScroll'],
+  ['✦',ui('Sprachcoach','Language coach'),m.guide,'wooJin']
+ ];
+ return '<section class="v18-shell v19-home" data-lang="'+wjTarget+'">'+
+  '<header class="v19-welcome"><div><span class="v18-kicker">LINGUAWORLD · LANGUAGE STUDIO</span><h1>'+ui('Deine Lernwelt','Your learning world')+'</h1><p>'+ui('Lernsprache wählen','Choose a language')+'</p></div>'+flags()+'</header>'+
+  '<section class="v19-hero"><img class="v19-scene" src="'+m.scene+'" alt="'+ui('Pixelart-Landschaft','Pixel-art landscape')+' '+m.land+'">'+
+   '<div class="v19-shade"></div><div class="v19-hero-body"><span class="v19-country">'+m.flag+' '+m.land+'</span>'+
+   '<h2>'+m.greeting+'</h2><p>'+m.description+'</p>'+
+   '<button class="v18-btn" type="button" onclick="go(\'storyMap\')">'+ui('Jetzt entdecken','Explore now')+' <span>↗</span></button></div>'+
+   '<img class="v19-hero-avatar" src="'+m.avatar+'" alt="'+m.guide+' Pixelart-Avatar"></section>'+
+  '<div class="v19-guide-note"><span class="v19-guide-dot">✦</span><span><strong>'+m.guide+'</strong> · '+ui('Dein Sprachbegleiter','Your language companion')+'</span></div>'+
+  '<div class="v19-action-grid">'+cards.map(c=>'<button type="button" class="v19-action" onclick="go(\''+c[3]+'\')"><span class="v19-action-icon">'+c[0]+'</span><span><strong>'+c[1]+'</strong><small>'+c[2]+'</small></span><span aria-hidden="true" class="v19-chevron">↗</span></button>').join('')+'</div>'+
+  '<div class="v19-progress">'+numbers.map(n=>'<div><strong>'+n[0]+'</strong><small>'+n[1]+'</small></div>').join('')+'</div>'+
+ '</section>';
+}
+home=homeMinimal;
+wjWorldHeader=homeMinimal;
+const oldNav=nav;
+nav=function(){
+ const m=mode();
+ const labels=[
+  ['home','⌂',ui('Start','Home')],['storyMap','◇',ui('Story','Stories')],
+  ['studyScroll','▤',ui('Vokabeln','Vocabulary')],['media','▶',ui('Medien','Media')],
+  ['wooJin','✦',m.guide]
+ ];
+ const side=document.getElementById('sideNav'),bottom=document.getElementById('bottomNav');
+ if(side)side.innerHTML='<div class="v19-side-brand">LINGUAWORLD<small>'+m.flag+' '+m.name+'</small></div>'+
+   labels.map(([page,symbol,name])=>'<button type="button" class="nav '+(state.page===page?'active':'')+'" onclick="go(\''+page+'\')"><span class="v22-navico">'+symbol+'</span> '+name+'</button>').join('')+
+   '<p class="v19-side-hint">'+ui('Sprache ändern: Startseite','Change language: Home')+'</p>';
+ if(bottom)bottom.innerHTML=labels.map(([page,symbol,name])=>'<button type="button" class="'+(state.page===page||(page==='studyScroll'&&state.page==='lesson')?'current':'')+'" onclick="go(\''+page+'\')"><span>'+symbol+'</span>'+name+'</button>').join('');
+};
+socialTop=function(){
+ const m=mode(),head=document.getElementById('socialHeader'),storyModes=document.getElementById('storyModes');
+ if(head)head.innerHTML='<div class="v22-topbar v19-topbar"><button class="v19-top-logo" type="button" onclick="go(\'home\')" aria-label="'+ui('Zur Startseite','Go to Home')+'">LinguaWorld <span>✦</span></button>'+
+  '<div class="v19-top-actions"><span class="v19-current-mode">'+m.flag+' '+m.name+'</span>'+
+  '<button type="button" class="v36-progress-trigger" onclick="v36OpenProgress()" aria-label="'+ui('Lernfortschritt anzeigen','Show learning progress')+'"><img src="'+m.avatar+'" alt=""><span class="v36-online-dot"></span></button></div></div>';
+ if(storyModes)storyModes.innerHTML='';
+};
+function translateEnglishInterface(){
+ if(wjTarget!=='en')return;
+ const main=document.getElementById('main');if(!main)return;
+ const texts={
+  'Deine Großbritannien-Karte.':'Your United Kingdom map.',
+  'Tippe auf Orte, entdecke Geschichten und schalte neue Kapitel frei.':'Tap a place, discover stories and unlock new chapters.',
+  '← Startseite':'← Home','← Landkarte':'← Map','← Korea-Karte':'← Korea map',
+  'DEINE STATIONEN':'YOUR STOPS',
+  'Alle sechs Kapitel eines Niveaus führen dich durch Geschichten, Vokabeln und einen Abschlusstest.':'Each level has six story chapters, vocabulary and a final quiz.',
+  'Entdecke die Kultur':'Discover the culture',
+  'Dein Sprachbegleiter':'Your language companion',
+  'Story-Modus':'Story mode',
+  'Vokabeln':'Vocabulary','Hören':'Listen','Merken':'Save','Gelernt':'Learned',
+  'Weiter ↓':'Next ↓','Zurück':'Back','Weiter →':'Next →',
+  'Bitte lade die Lernwelt erneut.':'Please reload the learning world.',
+  'DEINE NÄCHSTE REISE':'YOUR NEXT JOURNEY',
+  'Wähle die richtige Bedeutung.':'Choose the correct meaning.',
+  'Höre die Aussprache und sprich nach.':'Listen and repeat.',
+  'Schreibe den Ausdruck aus dem Gedächtnis.':'Write the expression from memory.',
+  'Letzte Aufgabe – ohne Hilfen.':'Final task – no hints.',
+  'Entdecke einen neuen Ausdruck.':'Discover a new expression.',
+  'Nächster Satz':'Next sentence','Teste mich':'Quiz me','Begrüßung':'Greetings',
+  'Schreibt •••':'Typing •••'
+ };
+ const elements=main.querySelectorAll('.v18-map-page .v18-sub,.v18-map-page .v18-map-head .v18-btn,.v18-chapters>p,.v18-chapters .v18-kicker,.v18-scene-strip>span,.wj-world-return,.wj-world-mission-scene>p,.wj-world-suggestions button,.wj-world-msg p,.wj-world-next,.wj-world-vocab-head>p,.wj-world-vocab-head>small,.wj-world-note');
+ for(const el of elements){if(el.closest('.wj-target-term,.wj-target-gloss,.wj-world-msg.user'))continue;
+  const source=el.textContent.trim(),localized=texts[source];
+  if(localized)el.textContent=localized;
+  if(el.matches('.v18-scene-strip>span'))el.textContent=el.textContent.replace('Entdecke die Kultur','Discover the culture').replace('Story in ','Story in ');
+ }
+ const mapTitle=main.querySelector('.v18-map-page .v18-title');if(mapTitle)mapTitle.innerHTML='Your United Kingdom map<span style="color:var(--v18-accent)">.</span>';
+}
+const baseRender=render;
+render=function(){
+ syncMode();
+ const result=baseRender.apply(this,arguments);
+ translateEnglishInterface();
+ return result;
+};
+document.getElementById('v26-welcome')?.remove();
+try{sessionStorage.setItem('v26-welcome','1')}catch(e){}
+render();
+})();
