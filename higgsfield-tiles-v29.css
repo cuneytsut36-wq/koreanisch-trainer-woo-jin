@@ -7,3 +7,5 @@
 .rpg26-chapter-icon .rpg29-monument{width:54px;height:54px}
 .rpg26-avatar .rpg29-human{height:335px}
 @media(max-width:680px){.rpg26-avatar .rpg29-human{height:260px}.rpg26-mini-monuments .rpg29-monument{height:80px;width:65px}.rpg26-map-monument.rpg29-monument{width:80px;height:75px}}
+
+.rpg26-scenery .rpg29-monument,.rpg26-mini-monuments .rpg29-monument{filter:url('#rpg29-magenta')!important}
