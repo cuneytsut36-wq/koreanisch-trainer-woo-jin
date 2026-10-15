@@ -12,7 +12,8 @@ en:[{id:'ohJCdihPWqc',title:'English Lesson One – Introduction',by:'English Ad
 let wjWorldLevel='A1',wjWorldChapter=0,wjWorldMission=0,wjWorldPicked=null,wjWorldHint=false,wjWorldAuto=true,wjWorldTimer=null,wjWorldCurrent=0,wjWorldVideoCurrent=-1,wjWorldObs=null;
 const wjWorldKey='wj-world-progress-v1';
 let wjWorldProgress=(()=>{try{return JSON.parse(localStorage.getItem(wjWorldKey)||'{}')}catch{return {}}})();
-let wjWorldChatData={de:[],en:[]};
+let wjWorldChatData=(()=>{try{const x=JSON.parse(localStorage.getItem('wj-v18-tutor-chats')||'{}');return {de:Array.isArray(x.de)?x.de.slice(-40):[],en:Array.isArray(x.en)?x.en.slice(-40):[]}}catch{return {de:[],en:[]}}})();
+function wjWorldSaveChats(){try{localStorage.setItem('wj-v18-tutor-chats',JSON.stringify({de:wjWorldChatData.de.slice(-40),en:wjWorldChatData.en.slice(-40)}))}catch{}}
 function wjWorldSave(){try{localStorage.setItem(wjWorldKey,JSON.stringify(wjWorldProgress))}catch{}}
 function wjWorldData(){return window.wjLanguageWorlds?.[wjTarget]||[]}
 function wjWorldWord(c){return wjTarget==='de'?c.en:c.de}
@@ -76,14 +77,14 @@ function wjWorldVideosMount(){if(wjWorldVideoObs)wjWorldVideoObs.disconnect();wj
 function wjWorldVideoNext(){const track=document.getElementById('wj-world-video-feed'),cards=track?.querySelectorAll('.wj-world-video');if(!cards?.length)return;const n=Math.min(cards.length-1,wjWorldVideoIndex+1);cards[n]?.scrollIntoView({behavior:'smooth',block:'start'})}
 function wjWorldFindMore(){window.open('https://www.youtube.com/results?search_query='+encodeURIComponent('learn '+(wjTarget==='de'?'German':'English')+' beginner short lessons'),'_blank','noopener,noreferrer')}
 function wjWorldVideos(){const videos=wjWorldVideoCatalog[wjTarget]||[];return `<section class="wj-world-videos"><small>${wjWorldLabels[wjTarget].flag} · VIDEO LEARNING</small><h1>Video-Reels<span>.</span></h1><p>Vertikal wischen und echte Lernvideos ansehen.</p><div id="wj-world-video-feed" class="wj-world-video-feed">${videos.map((v,i)=>`<article class="wj-world-video" data-index="${i}" data-video="${v.id}"><small>YOUTUBE · ${wjWorldLabels[wjTarget].name.toUpperCase()} · ${i+1}/${videos.length}</small><div class="wj-world-video-frame"><iframe src="about:blank" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><div class="wj-world-video-body"><strong>${esc(v.title)}</strong><p>${esc(v.by)} · Untertitel über CC aktivieren.</p><div><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer">YouTube ↗</a><button onclick="wjWorldVideoNext()">Nächstes ↓</button></div></div></article>`).join('')}</div><button class="wj-world-find-more" onclick="wjWorldFindMore()">Weitere Videos suchen ↗</button><p class="wj-world-note">Autoplay mit Ton ist auf dem iPhone oft blockiert. Untertitel sind nicht für jedes Video verfügbar.</p></section>`}
-function wjWorldCoach(){const guide=wjWorldGuides[wjTarget]||'Woo Jin';const data=wjWorldChatData[wjTarget],pool=wjWorldWords();return '<section class="wj-world-coach"><span class="wj-world-eyebrow">'+wjWorldLabels[wjTarget].flag+' · WOO JIN SPRACHCOACH</span><h1>Mit '+guide+' üben<span>.</span></h1><p>Kurze Lern-Dialoge und Vokabeltraining in '+wjWorldLabels[wjTarget].name+'. Ohne bezahlte KI.</p><div id="wj-open-panel">'+wjOpenControls()+'</div><div id="wj-world-chat">'+(data.length?data.map(x=>'<div class="wj-world-msg '+x.role+'"><strong>'+(x.role==='bot'?''+guide+'':'Du')+'</strong><p>'+esc(x.text)+'</p></div>').join(''):'<div class="wj-world-msg bot"><strong>'+guide+'</strong><p>'+(wjTarget==='de'?'Hallo! Lass uns Deutsch üben.':'Hello! Let’s practise English.')+'</p></div>')+'</div><div class="wj-world-suggestions"><button onclick="wjWorldCoachSend(\'Teste mich\')">Teste mich</button><button onclick="wjWorldCoachSend(\'Hallo\')">Begrüßung</button><button onclick="wjWorldCoachSend(\'Nächster Satz\')">Nächster Satz</button></div><form onsubmit="event.preventDefault();wjWorldCoachSend(document.getElementById(\'wj-world-input\').value)"><input id="wj-world-input" placeholder="Nachricht an '+guide+' …" autocomplete="off"><button>Senden ↗</button></form><p class="wj-world-note">Regelbasierter Offline-Lerncoach mit passenden Beispielsätzen, kein frei denkendes KI-Modell.</p></section>'}
+function wjWorldCoach(){const guide=wjWorldGuides[wjTarget]||'Woo Jin';const data=wjWorldChatData[wjTarget],pool=wjWorldWords();return '<section class="wj-world-coach"><span class="wj-world-eyebrow">'+wjWorldLabels[wjTarget].flag+' · '+guide.toUpperCase()+' SPRACHCOACH</span><h1>Mit '+guide+' üben<span>.</span></h1><p>Kurze Lern-Dialoge und Vokabeltraining in '+wjWorldLabels[wjTarget].name+'. Ohne bezahlte KI.</p><div id="wj-open-panel">'+wjOpenControls()+'</div><div id="wj-world-chat">'+(data.length?data.map(x=>'<div class="wj-world-msg '+x.role+'"><strong>'+(x.role==='bot'?''+guide+'':'Du')+'</strong><p>'+esc(x.text)+'</p></div>').join(''):'<div class="wj-world-msg bot"><strong>'+guide+'</strong><p>'+(wjTarget==='de'?'Hallo! Lass uns Deutsch üben.':'Hello! Let’s practise English.')+'</p></div>')+'</div><div class="wj-world-suggestions"><button onclick="wjWorldCoachSend(\'Teste mich\')">Teste mich</button><button onclick="wjWorldCoachSend(\'Hallo\')">Begrüßung</button><button onclick="wjWorldCoachSend(\'Nächster Satz\')">Nächster Satz</button></div><form onsubmit="event.preventDefault();wjWorldCoachSend(document.getElementById(\'wj-world-input\').value)"><input id="wj-world-input" placeholder="Nachricht an '+guide+' …" autocomplete="off"><button>Senden ↗</button></form><p class="wj-world-note">'+(wjOpenChat.backend||wjOpenChat.localReady?'KI-Gespräch aktiviert · dein persönlicher Sprachbegleiter.':'Offline-Übungen aktiv · freie KI-Gespräche benötigen ein optionales Sprachmodell.')+'</p></section>'}
 async function wjWorldCoachSend(raw){
  const q=String(raw||'').trim();if(!q||wjOpenChat.busy)return;
  const data=wjWorldChatData[wjTarget];
- data.push({role:'user',text:q});wjOpenChat.busy=true;
+ data.push({role:'user',text:q});wjWorldSaveChats();wjOpenChat.busy=true;
  render();
  const chat=document.getElementById('wj-world-chat');
- if(chat){const p=document.createElement('div');p.className='wj-world-msg bot';p.id='wj-open-typing';p.innerHTML='<strong>Woo Jin</strong><p>Schreibt •••</p>';chat.appendChild(p);chat.scrollTop=chat.scrollHeight}
+ if(chat){const p=document.createElement('div');p.className='wj-world-msg bot';p.id='wj-open-typing';p.innerHTML='<strong>'+wjWorldGuides[wjTarget]+'</strong><p>Schreibt •••</p>';chat.appendChild(p);chat.scrollTop=chat.scrollHeight}
  try{
   let answer;
   if(wjOpenChat.localReady||wjOpenChat.backend){
@@ -98,9 +99,9 @@ async function wjWorldCoachSend(raw){
    else if(/(hallo|hello|hi|merhaba)/i.test(q))answer=wjTarget==='de'?'Hallo! Schön, dass du da bist.':'Hello! Great to see you.';
    else answer=word.term+' — '+wjWorldSupport(word)+'. Sprich den Satz laut nach!';
   }
-  data.push({role:'bot',text:answer});
+  data.push({role:'bot',text:answer});wjWorldSaveChats();
  }catch(e){
-  data.push({role:'bot',text:'Der freie KI-Modus ist gerade nicht verfügbar. Der normale Offline-Coach funktioniert weiter.'});
+  data.push({role:'bot',text:'Der freie KI-Modus ist gerade nicht verfügbar. Der normale Offline-Coach funktioniert weiter.'});wjWorldSaveChats();
  }finally{wjOpenChat.busy=false;if(state.page==='wooJin'){render();document.getElementById('wj-world-chat')?.scrollTo(0,100000)}}
 }
 
