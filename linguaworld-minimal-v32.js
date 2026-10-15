@@ -162,6 +162,14 @@ function refine(){
   else if(page==='progress')progress();
  }catch(e){console.warn('LinguaWorld minimal design:',e)}
 }
+// The optional AI status can be refreshed asynchronously; keep its explanation tucked away.
+const mainWatch=document.getElementById('main');
+if(mainWatch&&typeof MutationObserver!=='undefined'){
+ const observer=new MutationObserver(()=>{
+   if(state?.page==='wooJin'&&mainWatch.querySelector('.wj-open-status > p'))coach();
+ });
+ observer.observe(mainWatch,{childList:true,subtree:true});
+}
 const previous=render;
 render=function(){const result=previous.apply(this,arguments);refine();return result};
 window.lw32Refine=refine;
