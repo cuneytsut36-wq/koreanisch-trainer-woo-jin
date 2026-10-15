@@ -26,6 +26,8 @@
  'Langsam sprechen':{en:'Speak slowly',tr:'Yavaş konuş',ja:'ゆっくり話す',ko:'천천히 말하기',es:'Habla despacio',fr:'Parle lentement'}
  };
  for(const [k,v] of Object.entries(ADDITIONAL))DATA[k]=Object.assign({},DATA[k]||{},v);
+ /* English course titles are stored in English. Make them localisable too. */
+ for(const [,translations] of Object.entries({...DATA})){const en=translations.en;if(en&&!DATA[en])DATA[en]={...translations};}
  const BLOCK='.wj-target-term,[data-study-term],[data-native-src],[data-wj-gloss],.wj-target-gloss,.s32-target-term,.s32-scene h2,.s32-options button,.v25-caption h2,.v36-quiz-sheet h1,.v36-quiz-options button,.v36-quiz-summary strong,.options .option,.v25-card-foot [data-native-src],.wj-world-msg,.wj-message,.wj-chat-message,.wj-world-chat,.v22-wj-messages,.wj-world-word-stage h2,.v25-word .v25-caption p,code,pre,script,style,svg,iframe,select,option';
  const NATIVE_UI_COUNTRY={
  ko:{de:'Korea',en:'Korea',tr:'Kore',ja:'韓国',ko:'한국',es:'Corea',fr:'Corée'},
