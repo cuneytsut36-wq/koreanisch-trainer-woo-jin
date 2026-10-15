@@ -83,7 +83,7 @@ function homeMinimal(){
   ['📚',ui('Vokabeln','Vocabulary'),ui('Bilder & Aussprache','Images & pronunciation'),'studyScroll'],
   ['✦',ui('Sprachcoach','Language coach'),m.guide,'wooJin']
  ];
- return '<section class="v18-shell v19-home" data-lang="'+wjTarget+'">'+
+ return '<section class="v18-shell v19-home" data-lang="'+wjTarget+'" translate="no">'+
   '<header class="v19-welcome"><div><span class="v18-kicker">LINGUAWORLD · LANGUAGE STUDIO</span><h1>'+ui('Deine Lernwelt','Your learning world')+'</h1><p>'+ui('Ich möchte lernen','I want to learn')+'</p></div>'+flags()+'</header>'+(typeof window.wjNativePicker==='function'?window.wjNativePicker():'')+
   '<section class="v19-hero"><img class="v19-scene" src="'+m.scene+'" alt="'+ui('Pixelart-Landschaft','Pixel-art landscape')+' '+m.land+'">'+
    '<div class="v19-shade"></div><div class="v19-hero-body"><span class="v19-country">'+m.flag+' '+m.land+'</span>'+
