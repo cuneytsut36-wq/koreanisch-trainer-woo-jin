@@ -95,6 +95,21 @@
   const progressCount=original.match(/^(\d+)\s*\/\s*(\d+)\s+(Kapitel)\s+(abgeschlossen)$/i);
   if(progressCount){return progressCount[1]+' / '+progressCount[2]+' '+exact('Kapitel')+' '+exact('abgeschlossen')}
   if(original==='Lukas · Sprachcoach'||original==='Alex · Sprachcoach'||original==='Woo Jin · Sprachcoach')return original.replace('Sprachcoach',exact('Sprachcoach'));
+
+  const flag={'ko':'🇰🇷','de':'🇩🇪','en':'🇬🇧'}[wjTarget]||'🇰🇷';
+  const germanStudy={'ko':'Koreanisch','de':'Deutsch','en':'Englisch'}[wjTarget]||'Koreanisch';
+  if(original===flag+' '+germanStudy||original===flag+' English')return flag+' '+study();
+  if(original===germanStudy||original==='Englisch'||original==='Koreanisch'||original==='Deutsch')return (original===germanStudy)?study():(NATIVE_STUDY[(original==='Koreanisch'?'ko':original==='Deutsch'?'de':'en')]?.[l]||original);
+  if(original.startsWith(flag+' · DEIN ')&&original.endsWith('-COACH')){
+   const tutor={'en':'YOUR LANGUAGE COACH','tr':'DİL EĞİTMENİN','ja':'あなたの語学コーチ','ko':'나의 언어 코치','es':'TU TUTOR DE IDIOMAS','fr':'TON COACH LINGUISTIQUE'}[l];
+   return flag+' · '+(tutor||original.slice(5));
+  }
+  if(original.startsWith('Illustrierte Pixelart-Sehenswürdigkeiten in ')){
+   const t={en:'Illustrated pixel-art landmarks in ',tr:'Piksel sanat ile ',ja:'ピクセルアートで描いた ',ko:'픽셀 아트 랜드마크: ',es:'Monumentos pixel art de ',fr:'Monuments en pixel art de '}[l];
+   return t+country();
+  }
+  if(original.startsWith('KOREA JOURNEY'))return original.replace('KOREA JOURNEY',({en:'KOREA JOURNEY',tr:'KORE YOLCULUĞU',ja:'韓国の旅',ko:'한국 여행',es:'VIAJE A COREA',fr:'VOYAGE EN CORÉE'}[l]||'KOREA JOURNEY'));
+
   return original;
  }
  function forbidden(element){
