@@ -123,3 +123,15 @@ body{background:radial-gradient(ellipse at 35% -5%,#17456d 0,transparent 39%),#0
  .v18-chapters{padding:14px}
 }
 @media(prefers-reduced-motion:reduce){.v18-shell,.v18-hero-avatar,.v18-particles span,.v18-map-canvas .v18-map-cloud{animation:none!important}}
+
+.v18-side-guide{display:grid;grid-template-columns:62px 1fr;gap:4px 12px;align-items:center;background:linear-gradient(135deg,#123459,#1b3459);border:1px solid #347aab;border-radius:15px;padding:11px;margin:7px 0 20px}
+.v18-side-guide img{grid-row:span 2;width:62px;height:68px;object-fit:cover;border-radius:10px;image-rendering:pixelated;border:2px solid #62b8ed}
+.v18-side-guide strong{font-size:15px;color:#fff}.v18-side-guide small{font-size:11px;color:#b9d9ed}
+.v18-side-langs{display:flex;gap:8px;margin-top:20px}.v18-side-langs button{flex:1;background:#13385a;border:1px solid #38759d;border-radius:10px;padding:8px;font-size:23px;cursor:pointer}
+.v18-side-langs button:hover{background:#205486}
+.v18-shell .s32-chapters button,.v18-shell .wj-world-chapter{cursor:pointer}
+.v18-shell .s32-world{border:0!important;box-shadow:none!important}
+.v18-shell .wj-world-mission,.v18-shell .s32-mission{max-width:1100px}
+.v18-shell .v25-stage .v40-animated-image,.v18-shell .wj-world-word-stage .v40-animated-image{background:linear-gradient(#123455,#1b436a);border:2px solid #4890bc;border-radius:18px}
+.v18-shell .v25-stage .v40-animated-image img,.v18-shell .wj-world-word-stage .v40-animated-image img{image-rendering:auto;object-fit:cover}
+@media(max-width:800px){.v18-side-guide{display:none}}
