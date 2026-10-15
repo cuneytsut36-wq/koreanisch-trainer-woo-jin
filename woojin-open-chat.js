@@ -66,8 +66,9 @@ async function wjOpenStart(){
  wjOpenChat.loading=true;wjOpenChat.error='';wjOpenChat.status='Prüfe KI-Modell …';wjOpenRefresh();
  try{
   const {CreateMLCEngine,prebuiltAppConfig}=await import('https://esm.sh/@mlc-ai/web-llm@0.2.85?bundle');
-  const model=prebuiltAppConfig?.model_list?.find(x=>x.model_id===wjOpenChat.modelId);
-  if(!model)throw Error('Modell nicht in der Bibliothek enthalten');
+  const model=prebuiltAppConfig?.model_list?.find(x=>x.model_id===wjOpenChat.modelId)||prebuiltAppConfig?.model_list?.find(x=>x.model_id==='Qwen2-0.5B-Instruct-q4f16_1-MLC');
+  if(!model)throw Error('Kein kleines unterstütztes Modell gefunden');
+  wjOpenChat.modelId=model.model_id;
   wjOpenChat.engine=await CreateMLCEngine(wjOpenChat.modelId,{
    initProgressCallback:p=>{wjOpenChat.status='Lade KI-Modell · '+Math.round(Math.max(0,Math.min(1,Number(p.progress)||0))*100)+'%';wjOpenRefresh();}
   });
