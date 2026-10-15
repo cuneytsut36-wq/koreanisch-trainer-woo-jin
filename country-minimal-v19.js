@@ -17,6 +17,8 @@ function syncMode(){
  document.documentElement.dataset.learningMode=safe;
  document.documentElement.lang=locale;
  document.documentElement.setAttribute('translate','no');
+ const tint={ko:'#21192f',de:'#2b261b',en:'#172b47'}[safe];
+ const metaTheme=document.querySelector('meta[name="theme-color"]');if(metaTheme)metaTheme.content=tint;
 }
 syncMode();
 const oldSwitch=wjSwitchTarget;
@@ -148,11 +150,78 @@ function translateEnglishInterface(){
  }
  const mapTitle=main.querySelector('.v18-map-page .v18-title');if(mapTitle)mapTitle.innerHTML='Your United Kingdom map<span style="color:var(--v18-accent)">.</span>';
 }
+
+/* Restrict translations to interface labels: never rewrite studied words, their meanings, messages, or quiz answer options. */
+function localizeEnglishLabels(){
+ if(wjTarget!=='en')return;
+ const root=document.getElementById('main');if(!root||typeof NodeFilter==='undefined')return;
+ const dict={
+  'Vokabeln':'Vocabulary','Vokabeln.':'Vocabulary.','ENGLISCH':'ENGLISH',
+  'Nach oben wischen. Hören. Merken.':'Swipe up. Listen. Learn.',
+  '♫ Hören':'♫ Listen','♫ Hören.':'♫ Listen.','○ Merken':'○ Save','✓ Gelernt':'✓ Learned',
+  'Weiter ↓':'Next ↓','Weiter →':'Continue →','Kapitel abgeschlossen ✓':'Chapter complete ✓',
+  'Ⅱ Auto an':'Ⅱ Auto on','▶ Auto aus':'▶ Auto off',
+  'Automatisch weiterblättern. Sprachausgabe durch Tippen aktivieren.':'Cards advance automatically. Tap to enable audio.',
+  'Bedeutung verborgen':'Meaning hidden','◇ Tipp':'◇ Hint','Prüfen':'Check','Antwort schreiben …':'Type your answer …',
+  '✓ Richtig!':'✓ Correct!','Noch nicht – versuche es erneut.':'Not quite – try again.',
+  'Schreibe den Ausdruck aus dem Gedächtnis.':'Write the expression from memory.',
+  'Was bedeutet dieser Satz?':'What does this sentence mean?',
+  'Senden ↗':'Send ↗','Nachricht an Alex …':'Message Alex …',
+  'Teste mich':'Quiz me','Begrüßung':'Greetings','Nächster Satz':'Next sentence',
+  'Mit Alex üben.':'Practice with Alex.','Mit Alex üben':'Practice with Alex',
+  'Kurze Lern-Dialoge und Vokabeltraining in Englisch. Ohne bezahlte KI.':'Short conversations and vocabulary practice in English. No paid AI needed.',
+  'Offline-Übungen aktiv · freie KI-Gespräche benötigen ein optionales Sprachmodell.':'Offline practice available · free-form AI chat needs an optional language model.',
+  'KI-Gespräch aktiviert · dein persönlicher Sprachbegleiter.':'AI chat active · your personal language coach.',
+  'Antwort schreiben …':'Type your answer …',
+  'Level bestanden':'Level passed','Dein Level-Quiz wartet!':'Your level quiz is ready!',
+  'Finaler Level-Test':'Final level quiz','Quiz starten →':'Start quiz →',
+  'Wiederholen ↗':'Review ↗','Erneut versuchen ↻':'Try again ↻',
+  'Zur Story-Karte':'Back to the story map','Zur Story-Karte →':'Back to the story map →',
+  '← Story-Karte':'← Story map','← Zur Story':'← Back to story',
+  'Story-Level-Test':'Story level quiz','Level geschafft!':'Level completed!','Weiter üben!':'Keep practising!',
+  'Nächstes Level freigeschaltet.':'Next level unlocked.',
+  'Du brauchst mindestens 4 richtige Antworten.':'You need at least four correct answers.',
+  'Welche Bedeutung passt zu diesem Ausdruck?':'Which meaning matches this expression?',
+  'Ergebnis ansehen':'View results','Nächste Frage →':'Next question →',
+  'Vertikal wischen und echte Lernvideos ansehen.':'Swipe vertically to watch real learning videos.',
+  'Weitere Videos suchen ↗':'Find more videos ↗',
+  'Nächstes ↓':'Next ↓','Untertitel über CC aktivieren.':'Turn on subtitles with CC.',
+  'Autoplay mit Ton ist auf dem iPhone oft blockiert. Untertitel sind nicht für jedes Video verfügbar.':'Autoplay with sound may be blocked on iPhone. Subtitles are not available for every video.',
+  '✦ Echte KI starten':'✦ Start AI chat','Modell lädt …':'Loading model …',
+  '✦ Freier KI-Chat · auf diesem Gerät':'✦ AI chat · on this device',
+  '✦ Freier KI-Chat · Servermodell':'✦ AI chat · server model',
+  'Offline-Lerncoach · echte KI optional':'Offline learning coach · optional AI model',
+  'Ein richtiges Sprachmodell kann frei antworten und den Gesprächsverlauf berücksichtigen. Lokal nur auf Geräten mit WebGPU. Der erste Download kann mehrere hundert MB groß sein.':'A language model can respond freely and follow your conversation. Local AI requires WebGPU and may need a large download.',
+  'Aktiv':'Active','Schreibt •••':'Typing •••','SPRACHCOACH':'LANGUAGE COACH',
+  'Lernsprache auswählen':'Choose learning language'
+ };
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ for(const node of nodes){
+  const parent=node.parentElement;if(!parent)continue;
+  if(parent.closest('.wj-target-term,.wj-target-gloss,.wj-world-word-stage h2,.wj-world-msg,.wj-message,.v36-quiz-options,.v36-quiz-summary,.v36-quiz-sheet h1,.wj-world-video-body strong,[data-study-term]'))continue;
+  const raw=node.nodeValue,text=raw.trim();if(!text)continue;
+  let translated=dict[text];
+  if(!translated&&/^\d+ Ausdrücke$/.test(text))translated=text.replace('Ausdrücke','expressions');
+  if(!translated&&/^\d+ \/ 6 abgeschlossen$/.test(text))translated=text.replace('abgeschlossen','complete');
+  if(!translated&&/^\d+ von 5 richtig/.test(text))translated=text.replace('von 5 richtig','of 5 correct').replace('Nächstes Level freigeschaltet.','Next level unlocked.').replace('Du brauchst mindestens 4 richtige Antworten.','You need at least four correct answers.');
+  if(!translated&&text.includes(' · LEVEL-ABSCHLUSS'))translated=text.replace('LEVEL-ABSCHLUSS','LEVEL QUIZ');
+  if(!translated&&/^FRAGE \d+/.test(text))translated=text.replace('FRAGE','QUESTION');
+  if(!translated&&text.startsWith('Richtige Antwort: '))translated=text.replace('Richtige Antwort: ','Correct answer: ');
+  if(!translated&&text.startsWith('Sprich den Satz laut nach!'))translated=text.replace('Sprich den Satz laut nach!','Say the sentence aloud!');
+  if(translated)node.nodeValue=raw.replace(text,translated);
+ }
+ for(const input of root.querySelectorAll('input[placeholder]')){
+  if(input.closest('.wj-world-coach,.wj-world-mission')&&dict[input.placeholder])input.placeholder=dict[input.placeholder];
+ }
+}
+
 const baseRender=render;
 render=function(){
  syncMode();
  const result=baseRender.apply(this,arguments);
  translateEnglishInterface();
+ localizeEnglishLabels();
  return result;
 };
 document.getElementById('v26-welcome')?.remove();
