@@ -94,6 +94,19 @@ function nativePicker(){
  const native=currentNative();
  return '<div class="v20-native-picker"><label for="v20-native-language"><span>🌐 '+nativeUI('Ich spreche','I speak')+'</span></label><select id="v20-native-language" aria-label="'+nativeUI('Ich spreche','I speak')+'" onchange="v27SetLanguage(this.value)">'+LANGS.map(x=>'<option value="'+x[0]+'" '+(x[0]===native?'selected':'')+'>'+x[1]+' '+x[2]+'</option>').join('')+'</select></div>';
 }
+const CULTURE_LABELS={
+ ko:{de:'Korea',en:'Korea',tr:'Kore',ja:'韓国',ko:'한국',es:'Corea',fr:'Corée'},
+ de:{de:'Deutschland',en:'Germany',tr:'Almanya',ja:'ドイツ',ko:'독일',es:'Alemania',fr:'Allemagne'},
+ en:{de:'Großbritannien',en:'United Kingdom',tr:'Birleşik Krallık',ja:'イギリス',ko:'영국',es:'Reino Unido',fr:'Royaume-Uni'}
+};
+const STUDY_LABELS={
+ ko:{de:'Koreanisch',en:'Korean',tr:'Korece',ja:'韓国語',ko:'한국어',es:'Coreano',fr:'Coréen'},
+ de:{de:'Deutsch',en:'German',tr:'Almanca',ja:'ドイツ語',ko:'독일어',es:'Alemán',fr:'Allemand'},
+ en:{de:'Englisch',en:'English',tr:'İngilizce',ja:'英語',ko:'영어',es:'Inglés',fr:'Anglais'}
+};
+window.wjNativeCountry=function(mode){return CULTURE_LABELS[mode]?.[currentNative()]||CULTURE_LABELS.ko.de};
+window.wjNativeStudyName=function(mode){return STUDY_LABELS[mode]?.[currentNative()]||STUDY_LABELS.ko.de};
+
 window.wjNativeMeaning=displayMeaning;
 window.wjNativeUI=nativeUI;
 window.wjNativePicker=nativePicker;
