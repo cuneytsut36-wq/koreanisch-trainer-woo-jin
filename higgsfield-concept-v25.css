@@ -1,1 +1,65 @@
-/* Higgsfield V25 concept visual override */
+/* Higgsfield concept V25: full premium 16-bit RPG treatment based on original concept art. */
+html[data-learning-mode=ko]{--hf-glow:#bf80fd;--hf-tint:#4a226d;--hf-neon:#debbff}
+html[data-learning-mode=de]{--hf-glow:#f2c663;--hf-tint:#614918;--hf-neon:#fff0ae}
+html[data-learning-mode=en]{--hf-glow:#60b6fd;--hf-tint:#123c77;--hf-neon:#b1deff}
+html[data-learning-mode] body{background:radial-gradient(ellipse at 68% 7%,var(--hf-tint),var(--px-base) 70%)!important}
+html[data-learning-mode] .v19-home,html[data-learning-mode] .v18-shell{max-width:1250px!important}
+html[data-learning-mode] :where(.v19-welcome,.v18-map-head){padding:16px 18px!important;background:linear-gradient(135deg,var(--px-surface),var(--px-surface-2))!important;border:2px solid var(--px-line)!important;box-shadow:5px 6px 0 var(--px-overlay)!important}
+html[data-learning-mode] .v19-welcome h1{font-size:clamp(26px,4vw,43px)!important;line-height:1.1!important;text-shadow:3px 4px 0 var(--px-overlay)}
+html[data-learning-mode] .v19-hero.hf25-hero{min-height:410px!important;position:relative;border:4px solid var(--hf-glow)!important;background-image:linear-gradient(90deg,#070b1beb 0%,#070b1bbb 28%,#070b1b57 59%,#080c1100 95%),var(--hf25-bg)!important;background-size:cover!important;background-position:center 52%!important;overflow:hidden;box-shadow:0 0 0 4px var(--px-base),7px 9px 0 var(--px-overlay)!important;image-rendering:auto!important}
+html[data-learning-mode] .hf25-hero .v19-scene{display:none!important}
+html[data-learning-mode] .hf25-hero .v19-shade{background:linear-gradient(90deg,#070a19e0,#070a199c 38%,transparent 75%)!important;z-index:1}
+html[data-learning-mode] .hf25-hero .v19-hero-body{min-height:410px!important;max-width:58%;padding:30px!important;z-index:3}
+html[data-learning-mode] .hf25-hero .v19-hero-body h2{font-size:clamp(42px,5.4vw,78px)!important;letter-spacing:-.025em!important;color:#fff!important;text-shadow:4px 5px 0 #151027,0 0 28px var(--hf-glow)}
+html[data-learning-mode] .hf25-hero .v19-hero-body p{font-size:15px!important;line-height:1.6!important;color:#fff4ff!important;text-shadow:2px 2px #0b0923}
+html[data-learning-mode] .hf25-hero .v18-btn{font-size:15px!important;font-weight:850!important;background:var(--hf-glow)!important;color:var(--px-base)!important;border:3px solid var(--hf-neon)!important;box-shadow:5px 6px 0 #09091b!important;min-height:48px}
+html[data-learning-mode] .hf25-hero .v19-hero-avatar{right:2%!important;width:clamp(140px,22%,255px)!important;bottom:-1%!important;z-index:4!important;filter:drop-shadow(7px 8px 0 #131022a9)!important;animation:hf25-bob 2s steps(4,end) infinite!important}
+html[data-learning-mode] .hf25-hero-tag{position:absolute;right:15px;top:13px;z-index:5;background:#0b1129d9;color:var(--hf-neon);border:2px solid var(--hf-glow);padding:8px 13px;letter-spacing:.07em;font-size:11px;font-weight:900;box-shadow:3px 3px 0 #000a}
+html[data-learning-mode] .hf25-ambient{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+html[data-learning-mode] .hf25-drift{position:absolute;top:-10%;left:var(--x);width:7px;height:7px;background:#ffe6f4e8;box-shadow:5px 5px 0 #ffb9e5ad;animation:hf25-fall var(--speed) linear infinite var(--delay)}
+html[data-learning-mode] .hf25-glimmer{position:absolute;top:var(--y);left:var(--x);width:4px;height:4px;background:var(--hf-neon);box-shadow:8px 0 0 #fff8,0 8px 0 #fff8,-8px 0 0 #fff8;animation:hf25-flash 2.7s steps(3,end) infinite var(--delay)}
+html[data-learning-mode] .v19-flag{border:3px solid var(--hf-glow)!important;box-shadow:4px 4px 0 var(--px-overlay)!important;background:var(--px-surface-2)!important}
+html[data-learning-mode] .v19-flag.selected{background:var(--hf-tint)!important;outline:2px dashed var(--hf-neon)!important;outline-offset:3px}
+html[data-learning-mode] .v19-action-grid{gap:15px!important}
+html[data-learning-mode] .v19-action{background:linear-gradient(135deg,var(--px-surface-3),var(--px-surface))!important;border:3px solid var(--px-line)!important;min-height:108px!important;padding:17px!important;box-shadow:5px 6px 0 var(--px-overlay)!important}
+html[data-learning-mode] .v19-action:hover{background:var(--hf-tint)!important;border-color:var(--hf-glow)!important}
+html[data-learning-mode] .v19-action-icon{font-size:29px!important;filter:drop-shadow(2px 2px 0 #0008)}
+html[data-learning-mode] .v19-action strong{font-size:16px!important;color:#fff!important}
+html[data-learning-mode] .v19-action small{font-size:12px!important;color:var(--px-muted)!important}
+html[data-learning-mode] .v19-guide-note{padding:16px 5px!important;color:var(--hf-neon)!important}
+html[data-learning-mode] .v19-progress>div{border:2px solid var(--px-line)!important;box-shadow:4px 4px 0 var(--px-overlay)!important;background:var(--px-surface)!important}
+html[data-learning-mode] .hf25-map-banner{height:235px;background-size:cover;background-position:center 48%;position:relative;border:4px solid var(--hf-glow);box-shadow:6px 6px 0 var(--px-overlay);margin:18px 0 22px;overflow:hidden}
+html[data-learning-mode] .hf25-map-banner span{position:absolute;left:20px;bottom:17px;color:#fff;font-weight:900;letter-spacing:.04em;font-size:15px;text-shadow:3px 3px 0 #000a;z-index:3}
+html[data-learning-mode] .v18-map-canvas{min-height:600px!important;background:radial-gradient(circle at 50% 38%,var(--hf-tint) 1%,var(--px-map) 65%,var(--px-base))!important;border:4px solid var(--px-line)!important}
+html[data-learning-mode] .hf25-chapter{position:relative;display:flex!important;align-items:center;gap:10px;border:3px solid var(--px-line)!important;background:linear-gradient(115deg,var(--px-surface-2),var(--px-base))!important;box-shadow:4px 5px 0 #0008!important;padding:10px!important;min-height:100px}
+html[data-learning-mode] .hf25-chapter:hover{border-color:var(--hf-glow)!important;transform:translate(-2px,-2px)!important}
+html[data-learning-mode] .hf25-chapter-art{display:block;flex:0 0 78px;align-self:stretch;min-height:75px;background-size:440px;background-position:center;border:2px solid var(--px-line);image-rendering:auto}
+html[data-learning-mode] .hf25-chapter>strong{font-size:14px!important;line-height:1.4!important}
+html[data-learning-mode] .hf25-pixel-locations{position:absolute;inset:0;pointer-events:none;z-index:1}
+html[data-learning-mode] .hf25-location{position:absolute;font-size:25px;filter:drop-shadow(3px 4px 0 #0009);animation:hf25-bob 3s steps(3,end) infinite}
+html[data-learning-mode] .v18-map-pin{z-index:4!important;background:var(--px-surface)!important;border:3px solid var(--hf-glow)!important;box-shadow:4px 5px 0 #0008!important}
+html[data-learning-mode] :where(.v18-chapters,.wj-world-mission-scene,.s32-scene,.v36-quiz-sheet,.v18-guide-page,.wj-world-coach,.v25-card,.v18-vocab-promo){background:linear-gradient(135deg,var(--px-surface),var(--px-surface-2))!important;border:3px solid var(--px-line)!important;box-shadow:5px 5px 0 var(--px-overlay)!important;border-radius:8px!important}
+html[data-learning-mode] :where(.v36-quiz-options button,.s32-options button,.wj-world-choices button,.wj-world-word-actions button){border:3px solid var(--px-line)!important;border-radius:6px!important;box-shadow:3px 4px 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(.v36-quiz-options button:hover,.s32-options button:hover){border-color:var(--hf-glow)!important}
+html[data-learning-mode] .hf25-quest-head{display:flex;align-items:center;gap:11px;padding:10px 14px;background:var(--px-surface-2);color:var(--hf-neon);border:3px solid var(--px-line);margin:12px 0 16px;font-weight:850;font-size:12px}
+html[data-learning-mode] .hf25-quest-sigil{display:grid;place-items:center;background:var(--hf-tint);border:2px solid var(--hf-glow);width:30px;height:30px;font-size:20px}
+html[data-learning-mode] .hf25-learning-card{border-color:var(--hf-glow)!important}
+html[data-learning-mode] .hf25-portrait{filter:drop-shadow(6px 6px 0 #0009);animation:hf25-bob 2.1s steps(4,end) infinite!important}
+html[data-learning-mode] .hf25-coach-stars{color:var(--hf-glow);letter-spacing:15px;font-size:19px;margin-top:8px;animation:hf25-flash 3s steps(3,end) infinite}
+html[data-learning-mode] .hf25-sidebar{background:linear-gradient(160deg,var(--px-surface-3),var(--px-base))!important;border-right:3px solid var(--hf-glow)!important}
+html[data-learning-mode] .v24-artbook{display:none!important}
+@keyframes hf25-fall{0%{transform:translate(0,-20px) rotate(0)}100%{transform:translate(90px,530px) rotate(90deg)}}
+@keyframes hf25-flash{0%,100%{opacity:.18}50%{opacity:1}}
+@keyframes hf25-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(max-width:700px){
+html[data-learning-mode] .v19-hero.hf25-hero{min-height:300px!important}
+html[data-learning-mode] .hf25-hero .v19-hero-body{min-height:300px!important;padding:16px!important;max-width:78%}
+html[data-learning-mode] .hf25-hero .v19-hero-body h2{font-size:clamp(32px,8vw,46px)!important}
+html[data-learning-mode] .hf25-hero .v19-hero-body p{font-size:12px!important}
+html[data-learning-mode] .hf25-hero .v19-hero-avatar{width:38%!important;right:-3%!important}
+html[data-learning-mode] .hf25-map-banner{height:140px}
+html[data-learning-mode] .hf25-chapter-art{flex-basis:55px;min-height:63px}
+html[data-learning-mode] .hf25-chapter{min-height:80px}
+html[data-learning-mode] .v19-action{min-height:82px!important;padding:10px!important}
+}
+@media(prefers-reduced-motion:reduce){html[data-learning-mode] :where(.hf25-drift,.hf25-glimmer,.hf25-location,.hf25-portrait,.hf25-coach-stars,.v19-hero-avatar){animation:none!important}}
