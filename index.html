@@ -578,7 +578,7 @@ function wjV2Distance(a,b){a=wjV2Norm(a);b=wjV2Norm(b);if(a===b)return 0;const p
 function wjV2Score(guess,target){const a=wjV2Norm(guess),b=wjV2Norm(target);if(!a||!b)return 0;if(a===b)return 1;if(a.replace(/\s/g,'')===b.replace(/\s/g,''))return .99;return Math.max(0,1-wjV2Distance(a,b)/Math.max(a.length,b.length))}
 function wjV2Reply(ko,de,intent){wjV2.lastIntent=intent||wjV2.lastIntent;wjV2Save();return wjBAnswer(ko,de,intent)}
 function wjV2Pick(arr){return arr[wjV2.turn%arr.length]}
-function wjV2Recognize(raw){const t=wjNorm(raw);
+function wjV2Recognize(raw){const t=wjNorm(raw);const native=String(raw||'').toLocaleLowerCase();
 const patterns=[
 ['exercise',/^(teste mich|test me|beni test et|시험해|テストして|ponme a prueba|teste moi|quiz|mini quiz|vokabeltest|frage mich|frag mich|practice|al istirma|alistirma|ubung|ubungen|start test|trainiere|test starten|vokabeln abfragen|pruf mich)$/],
 ['next',/^(weiter|next|continue|devam|sonraki|다음|次へ|siguiente|suivant|noch eins|andere frage|andere aufgabe|nochmal testen)$/],
@@ -596,7 +596,7 @@ const patterns=[
 ['review',/(wiederhol|review|tekrar et|복습|復習|repasar|réviser|fehler uben|fehler üben)/],
 ['slow',/(langsam|slow|yavas|yavaş|천천히|ゆっくり|despacio|lentement)/],
 ['greeting',/(wie geht|how are you|nasilsin|nasılsın|잘 지내|元気|como estas|comment ca va)/]
-];return patterns.find(([,p])=>p.test(t))?.[0]||'unknown'}
+];return patterns.find(([,p])=>p.test(t)||p.test(native))?.[0]||'unknown'}
 function wjV2Word(query){const norm=wjV2Norm(query);const exact=all.find(w=>wjV2Norm(w.ko)===norm||wjV2Norm(w.de)===norm);if(exact)return exact;const fragments=all.filter(w=>norm.length>=3&&(wjV2Norm(w.ko).includes(norm)||wjV2Norm(w.de).includes(norm)));if(fragments.length)return fragments.sort((a,b)=>a.ko.length-b.ko.length)[0];if(norm.length<4||norm.length>65)return null;let best=null,score=0;for(const w of all){const sc=Math.max(wjV2Score(norm,w.ko),wjV2Score(norm,w.de));if(sc>score){score=sc;best=w}}return score>=.83?best:null}
 function wjV2ChooseWeak(){const map=new Map(all.map(w=>[w.id,w]));const found=wjV2.weak.filter(id=>map.has(id));return found.length?map.get(found[0]):null}
 function wjV2StartQuestion(mode){const available=all.filter(w=>w.level===state.level);const pool=available.length?available:all;const weak=wjV2ChooseWeak();const fresh=pool.filter(w=>!wjBrain.seen.includes(w.id)&&!known()[w.id]);const selected=mode==='review'&&weak?weak:weak&&wjV2.turn%3===0?weak:fresh.length?fresh[(wjV2.turn*13)%fresh.length]:pool[(wjV2.turn*7)%pool.length];if(!selected)return wjV2Reply('Gwaenchanayo.','Ich habe noch keine Lernwörter gefunden.','empty');
