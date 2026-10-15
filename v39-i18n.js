@@ -5,7 +5,7 @@ function v39T(value){const key=String(value||'');return v39Strings[key]?.[v27Lan
 function v39LocalizedTitle(lang){return v39Labels[v27Lang]?.[lang]||v39Labels.de[lang]}
 function v39DecorateUI(root){if(!root||wjTarget==='ko')return;
   const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),all=[];while(walk.nextNode())all.push(walk.currentNode);
-  for(const node of all){const p=node.parentElement;if(!p||p.closest('.wj-target-term,.wj-target-gloss,[data-study-term],[data-wj-gloss],[translate="no"],.wj-world-video-frame,.wj-world-video-body strong,.wj-world-msg,.v36-quiz-sheet h1,.v36-quiz-options'))continue;
+  for(const node of all){const p=node.parentElement;if(!p||p.closest('.wj-target-term,.wj-target-gloss,[data-study-term],[data-wj-gloss],.wj-world-video-frame,.wj-world-video-body strong,.wj-world-msg,.v36-quiz-sheet h1,.v36-quiz-options'))continue;
     const raw=node.nodeValue,trim=raw.trim();if(!trim)continue;
     const translated=v39T(trim);
     if(translated!==trim)node.nodeValue=raw.replace(trim,translated);
