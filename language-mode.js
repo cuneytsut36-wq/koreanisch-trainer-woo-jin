@@ -16,7 +16,7 @@ function wjWorldSave(){try{localStorage.setItem(wjWorldKey,JSON.stringify(wjWorl
 function wjWorldData(){return window.wjLanguageWorlds?.[wjTarget]||[]}
 function wjWorldWord(c){return wjTarget==='de'?c.en:c.de}
 function wjWorldText(word){return wjTarget==='de'?word.en:word.de}
-function wjWorldSupport(word){if(v27Lang==='de')return wjTarget==='de'?word.en:word.de;if(v27Lang==='en')return word.en;const translated=v27T(word.de);return translated!==word.de?translated:(typeof v28Stored==='function'?v28Stored(word.de,v27Lang):null)||word.de}
+function wjWorldSupport(word){if(v27Lang==='de')return wjTarget==='de'?word.en:word.de;if(v27Lang==='en')return wjTarget==='en'?word.de:word.en;const translated=v27T(word.de);return translated!==word.de?translated:(typeof v28Stored==='function'?v28Stored(word.de,v27Lang):null)||word.de}
 function wjWorldTranslateGlosses(){if(wjTarget==='ko'||v27Lang==='de'||v27Lang==='en'||typeof v28QueueTranslation!=='function')return;document.querySelectorAll('[data-wj-gloss]').forEach(el=>{const de=el.getAttribute('data-wj-gloss');if(!de)return;const trans=v27T(de);if(trans!==de){el.textContent=trans;return}const saved=v28Stored(de,v27Lang);if(saved){el.textContent=saved;return}v28QueueTranslation(de,v27Lang,value=>{if(el.isConnected&&el.getAttribute('data-wj-gloss')===de)el.textContent=value})})}
 function wjWorldId(level,ch,step){return wjTarget+':'+level+':'+ch+':'+step}
 function wjWorldDone(level,ch,step){return !!wjWorldProgress[wjWorldId(level,ch,step)]}
