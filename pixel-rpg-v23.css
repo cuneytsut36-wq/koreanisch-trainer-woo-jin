@@ -1,0 +1,103 @@
+/* V23 PIXEL RPG DESIGN SYSTEM — every language, every page, consistent sharp geometry.
+   Loaded last. Text remains readable across seven interface languages. */
+html[data-learning-mode="ko"]{--px-accent:#bd9aff;--px-accent-dark:#7452b9;--px-accent-bright:#e4d4ff;--px-base:#110d1f;--px-surface:#201730;--px-surface-2:#2b1e40;--px-surface-3:#372751;--px-line:#7b60aa;--px-muted:#c6b6df;--px-text:#faf3ff;--px-map:#312456;--px-overlay:#100c1c}
+html[data-learning-mode="de"]{--px-accent:#f8d56f;--px-accent-dark:#987223;--px-accent-bright:#fff0b6;--px-base:#17140e;--px-surface:#282215;--px-surface-2:#352d1c;--px-surface-3:#443624;--px-line:#a58a4a;--px-muted:#e0d0ad;--px-text:#fff7e4;--px-map:#514321;--px-overlay:#151209}
+html[data-learning-mode="en"]{--px-accent:#83bbff;--px-accent-dark:#396faf;--px-accent-bright:#d7eaff;--px-base:#0b1525;--px-surface:#14263f;--px-surface-2:#203858;--px-surface-3:#28476e;--px-line:#547cae;--px-muted:#c0d5ed;--px-text:#eff8ff;--px-map:#1c4275;--px-overlay:#091529}
+html[data-learning-mode]{
+ --v19-accent:var(--px-accent);--v19-accent2:var(--px-accent-dark);--v19-glow:var(--px-accent);
+ --v19-bg:var(--px-base);--v19-bg-soft:var(--px-surface);--v19-surface:var(--px-surface);
+ --v19-surface2:var(--px-surface-2);--v19-border:var(--px-line);--v19-text:var(--px-text);--v19-muted:var(--px-muted);
+ --v19-map1:var(--px-map);--v19-map2:var(--px-surface-2);
+ --v18-accent:var(--px-accent);--v18-ink:var(--px-text);--v18-panel:var(--px-surface);--v18-stroke:var(--px-line);
+ --px-step:3px;
+ font-synthesis: none;
+}
+html[data-learning-mode] body{background:var(--px-base)!important;color:var(--px-text)!important}
+html[data-learning-mode] body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent 0 17px,#ffffff04 17px 18px),repeating-linear-gradient(90deg,transparent 0 17px,#ffffff03 17px 18px);pointer-events:none;z-index:0}
+html[data-learning-mode] .app,html[data-learning-mode] .bottom{position:relative;z-index:1}
+html[data-learning-mode] .app{background:transparent!important}
+html[data-learning-mode] .side{background:var(--px-surface)!important;border-right:3px solid var(--px-line)!important}
+html[data-learning-mode] .bottom{background:var(--px-surface)!important;border-top:3px solid var(--px-line)!important;backdrop-filter:none!important}
+html[data-learning-mode] :where(.v19-topbar,.v22-topbar,.panel,.tile,.stat,.card,.v18-hero,.v19-hero,.v19-guide-note,.v19-action,.v19-progress>div,.v18-chapters,.v18-guide-page,.v18-guide-strip,.v18-action,.v18-world-tile,.v18-stats>div,.v18-scene-strip,.v18-vocab-promo,.v18-map-canvas,.wj-world-word,.wj-world-word-stage,.wj-world-mission-scene,.s32-scene,.s32-world,.s32-chapters button,.s32-mission-scene,.wj-world-chapter,.wj-world-map,.wj-world-coach,.wj-world-vocab,.v36-level-quiz,.v36-quiz-sheet,.v36-quiz-banner,.v36-quiz-summary>div,.v36-quiz-options>button,.v25-stage,.v25-card,.v25-caption,.wj-world-msg,.wj-world-feed,.v20-native-picker,.v19-flag,.v18-map-pin){
+ border-radius:0!important;
+ box-shadow:4px 4px 0 var(--px-overlay)!important;
+}
+html[data-learning-mode] :where(.v19-topbar,.v22-topbar,.panel,.tile,.stat,.card,.v18-hero,.v19-hero,.v19-action,.v19-progress>div,.v18-chapters,.v18-guide-page,.v18-guide-strip,.v18-action,.v18-world-tile,.v18-stats>div,.v18-scene-strip,.v18-map-canvas,.wj-world-word,.wj-world-mission-scene,.s32-scene,.s32-mission-scene,.wj-world-chapter,.wj-world-coach,.wj-world-vocab,.v36-quiz-sheet,.v36-quiz-banner,.v25-stage,.v20-native-picker){
+ border:2px solid var(--px-line)!important;
+}
+html[data-learning-mode] :where(.v19-topbar,.v22-topbar,.v19-action,.v19-progress>div,.v18-chapters,.v18-guide-page,.v18-guide-strip,.v18-action,.v18-world-tile,.v18-stats>div,.wj-world-coach,.wj-world-vocab,.wj-world-chapter,.v36-quiz-sheet,.v36-quiz-banner,.v20-native-picker){background:var(--px-surface)!important;color:var(--px-text)!important}
+html[data-learning-mode] :where(.v18-map-canvas,.wj-world-map){background:var(--px-map)!important}
+html[data-learning-mode] :where(.v19-action,.v18-action,.wj-world-chapter,.s32-chapters button,.v36-quiz-options button):hover{transform:translate(-2px,-2px)!important;box-shadow:6px 6px 0 var(--px-overlay)!important;border-color:var(--px-accent)!important}
+html[data-learning-mode] :where(button,[role="button"],input,select,textarea){font-family:inherit}
+html[data-learning-mode] :where(.v19-action,.v18-action,.wj-world-chapter,.s32-chapters button,.v18-map-pin,.v19-flag,button){transition:transform .13s steps(2,end),border-color .13s steps(2,end),background .13s steps(2,end)!important}
+html[data-learning-mode] :where(button,.nav,.v19-action,.v18-action):active{transform:translate(2px,2px)!important;box-shadow:0 0 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(.v18-btn,.btn,.v19-action,.v36-quiz-main,.v36-quiz-secondary,.v36-quiz-back,.wj-world-next,.wj-world-return,.wj-world-buttons button,.wj-world-write button,.wj-world-word-actions button,.wj-world-autocontrol button,.wj-world-levels button,.v18-country-tabs button,.v19-flag,.v18-map-pin,.wj-world-choices button,.wj-world-coach button,.v36-quiz-options button,.v36-quiz-banner button,.s32-actions button,.s32-options button,.s32-mission button,.v19-top-logo,.v19-top-actions button,.v20-native-picker select,.side .nav,.bottom button,.v19-action,.v18-action){
+ border-radius:0!important;
+}
+html[data-learning-mode] :where(.v18-btn,.btn,.v36-quiz-main,.wj-world-next,.wj-world-buttons button,.wj-world-word-actions button,.v36-quiz-banner button,.wj-world-write button){
+ background:var(--px-accent-dark)!important;border:2px solid var(--px-accent)!important;
+ color:var(--px-text)!important;text-shadow:none!important;
+ box-shadow:0 4px 0 var(--px-overlay)!important;
+}
+html[data-learning-mode] :where(.v18-btn,.btn,.v36-quiz-main,.wj-world-next,.wj-world-buttons button,.wj-world-word-actions button,.v36-quiz-banner button,.wj-world-write button):disabled{filter:grayscale(.7);opacity:.5;cursor:not-allowed}
+html[data-learning-mode] :where(.v18-btn,.btn,.v36-quiz-main,.wj-world-next):not(:disabled):hover{background:var(--px-accent)!important;color:var(--px-overlay)!important}
+html[data-learning-mode] :where(.v18-btn.ghost,.btn.secondary,.v36-quiz-secondary,.v36-quiz-back,.wj-world-return){background:var(--px-surface-2)!important;color:var(--px-text)!important;border-color:var(--px-line)!important}
+html[data-learning-mode] :where(.nav,.bottom button){border:2px solid transparent!important;border-radius:0!important;color:var(--px-muted)!important;background:transparent!important;box-shadow:none!important}
+html[data-learning-mode] :where(.nav.active,.bottom button.current){border-color:var(--px-line)!important;background:var(--px-surface-3)!important;color:var(--px-accent-bright)!important;box-shadow:3px 3px 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(.v18-country-tabs button,.wj-world-levels button,.s32-levels button,.v18-map-pin){background:var(--px-surface-2)!important;color:var(--px-text)!important;border:2px solid var(--px-line)!important;box-shadow:3px 3px 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(.v18-country-tabs button.selected,.wj-world-levels button.selected,.s32-levels button.selected,.v18-map-pin.selected){background:var(--px-accent-dark)!important;border-color:var(--px-accent)!important;color:var(--px-text)!important}
+html[data-learning-mode] :where(.v19-flag){border:3px solid var(--px-line)!important;background:var(--px-surface-2)!important;box-shadow:3px 3px 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(.v19-flag.selected){outline:2px dashed var(--px-accent);outline-offset:3px;border-color:var(--px-accent)!important}
+html[data-learning-mode] :where(.v19-scene,.v19-hero-avatar,.v18-hero-bg,.v18-hero-avatar img,.v18-scene-strip img,.v18-guide-strip img,.v18-guide-page img,.v19-top-actions img,.v18-map-canvas .v18-map-svg,.wj-world-scene-head img,.v40-animated-image img){image-rendering:pixelated!important}
+html[data-learning-mode] .v19-hero-avatar{filter:drop-shadow(5px 5px 0 var(--px-overlay))!important;animation:px-bob 1.4s steps(3,end) infinite!important}
+html[data-learning-mode] :where(.v18-map-canvas .v18-map-cloud,.v18-particles span){animation:px-bob 2s steps(4,end) infinite!important}
+html[data-learning-mode] :where(.v18-map-pin .pin-icon,.v19-action-icon,.v18-action .em,.v22-navico){filter:drop-shadow(2px 2px 0 var(--px-overlay))!important}
+html[data-learning-mode] :where(.v19-action-icon,.v22-navico,.v18-action .em){display:inline-flex;align-items:center;justify-content:center;min-width:23px;min-height:23px}
+html[data-learning-mode] .px-icon{width:24px;height:24px;display:inline-block;vertical-align:middle;flex:none;image-rendering:pixelated;shape-rendering:crispEdges}
+html[data-learning-mode] .px-icon svg{width:100%;height:100%;shape-rendering:crispEdges;fill:currentColor}
+html[data-learning-mode] :where(.v18-map-pin .pin-icon,.wj-world-chapter>span:first-child,.v19-action-icon){color:var(--px-accent-bright)}
+html[data-learning-mode] :where(.v19-home h1,.v19-hero h2,.v18-title,.v18-chapters h2,.v36-level-quiz h1,.wj-world-mission h1,.wj-world-vocab h1,.wj-world-coach h1){
+ letter-spacing:0!important;text-shadow:2px 3px 0 var(--px-overlay);font-weight:850!important;
+}
+html[data-learning-mode] :where(.v18-kicker,.v19-country,.v19-progress strong,.v19-action strong,.wj-world-chapter strong){letter-spacing:.025em;color:var(--px-accent-bright)}
+/* Every progress element becomes a segmented HP / XP bar. */
+html[data-learning-mode] :where(.s32-chapters i,.wj-world-chapter i,.v36-quiz-progress,.bar,.v19-progress-track,.v25-progress,.s32-progress,.v36-level-bar,.wj-world-word-stage i,.v22-progress-bar,.v36-progress-track){
+ border-radius:0!important;overflow:hidden!important;background:var(--px-surface-3)!important;
+ border:2px solid var(--px-line)!important;
+}
+html[data-learning-mode] :where(.s32-chapters i b,.wj-world-chapter i b,.bar>div,.v19-progress-track>div,.v25-progress>div,.s32-progress>div,.v36-level-bar>div,.v22-progress-bar>div,.v36-progress-track>div){
+ border-radius:0!important;
+ background:repeating-linear-gradient(90deg,var(--px-accent) 0 12px,var(--px-accent-dark) 12px 14px)!important;
+ box-shadow:none!important;
+}
+html[data-learning-mode] .v36-quiz-progress{border:0!important;background:transparent!important;display:flex!important;gap:4px!important;overflow:visible!important}
+html[data-learning-mode] .v36-quiz-progress span{border:2px solid var(--px-line)!important;border-radius:0!important;background:var(--px-surface-3)!important;box-shadow:2px 2px 0 var(--px-overlay)}
+html[data-learning-mode] .v36-quiz-progress span.active,html[data-learning-mode] .v36-quiz-progress span.done{background:var(--px-accent)!important;border-color:var(--px-accent-bright)!important}
+html[data-learning-mode] :where(input:not([type="checkbox"]),textarea,select,.v20-native-picker select){background:var(--px-surface-2)!important;border:2px solid var(--px-line)!important;color:var(--px-text)!important;border-radius:0!important;box-shadow:inset 3px 3px 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(input:focus,textarea:focus,select:focus){outline:2px solid var(--px-accent)!important;outline-offset:2px}
+html[data-learning-mode] :where(.wj-world-msg,.v22-chat-bubble,.wj-chat-bubble){border:2px solid var(--px-line)!important;background:var(--px-surface-2)!important;border-radius:0!important;box-shadow:3px 3px 0 var(--px-overlay)!important}
+html[data-learning-mode] :where(.wj-world-msg.user,.v22-chat-bubble.user){background:var(--px-surface-3)!important;border-color:var(--px-accent)!important}
+html[data-learning-mode] :where(.wj-world-scene-head,.wj-world-word-meta,.v36-quiz-number,.v36-quiz-kicker){color:var(--px-accent-bright)}
+html[data-learning-mode] :where(.wj-world-mission-step button,.v36-quiz-options button,.s32-options button){border:2px solid var(--px-line)!important;border-radius:0!important;box-shadow:2px 3px 0 var(--px-overlay)!important;background:var(--px-surface-2)!important;color:var(--px-text)!important}
+html[data-learning-mode] :where(.wj-world-mission-step button.selected,.v36-quiz-options button.correct,.s32-options button.right){background:var(--px-accent-dark)!important;border-color:var(--px-accent)!important}
+html[data-learning-mode] :where(.v18-map-canvas,.v19-hero,.v18-hero,.v18-scene-strip){overflow:hidden}
+html[data-learning-mode] :where(.v18-map-svg .land){stroke:var(--px-accent-bright)!important;stroke-width:3!important}
+html[data-learning-mode] :where(.v18-chapters .wj-world-chapter,.v18-chapters .s32-chapters button){background:var(--px-surface-2)!important;border:2px solid var(--px-line)!important}
+html[data-learning-mode] :where(.v18-chapters .wj-world-chapter.locked,.v18-chapters .s32-chapters button.locked){opacity:.65}
+html[data-learning-mode] :where(.wj-world-feed,.v25-feed){scrollbar-color:var(--px-accent-dark) var(--px-surface)}
+html[data-learning-mode] :where(.v19-action,.v18-action,.v18-chapters,.v19-progress>div){background-image:none!important}
+html[data-learning-mode] :where(.v19-guide-note,.v18-guide-strip){box-shadow:none!important}
+html[data-learning-mode] .v19-guide-dot{color:var(--px-accent-bright)!important}
+html[data-learning-mode] .v18-map-pin:focus-visible,html[data-learning-mode] :where(button,select,input):focus-visible{outline:3px dashed var(--px-accent)!important;outline-offset:4px}
+html[data-learning-mode] .v20-native-picker option{background:var(--px-surface);color:var(--px-text)}
+@keyframes px-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(max-width:700px){
+ html[data-learning-mode] .main{padding:12px 14px 110px!important}
+ html[data-learning-mode] :where(.v19-topbar,.v22-topbar,.v19-hero,.v18-map-canvas,.v18-chapters){box-shadow:3px 3px 0 var(--px-overlay)!important}
+ html[data-learning-mode] .v19-action{min-height:72px}
+ html[data-learning-mode] .v18-map-pin{max-width:54%!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-learning-mode] .v19-hero-avatar,html[data-learning-mode] :where(.v18-map-canvas .v18-map-cloud,.v18-particles span){animation:none!important}
+ html[data-learning-mode] *{scroll-behavior:auto!important;transition:none!important}
+}
