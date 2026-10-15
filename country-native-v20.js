@@ -123,6 +123,14 @@ function refreshNativeMeanings(){
   item.setAttribute('translate','no');
  }
 }
+/* The learner's target language (including Korean romanization) must never be machine-translated. */
+const previousShouldTranslate=v28ShouldTranslate;
+v28ShouldTranslate=function(text,node){
+ const p=node?.parentElement;
+ if(p?.closest('.s32-scene h2,.s32-meaning,.s32-options,.v25-caption h2,.v25-caption [data-native-src],.v25-card-foot [data-native-src],.v36-quiz-options,.v36-quiz-sheet h1,.v36-quiz-summary,.question[data-native-src],.wj-target-term,.wj-target-gloss,[data-native-src],[data-wj-gloss],.wj-world-video-body strong'))return false;
+ return previousShouldTranslate(text,node);
+};
+
 const precedingRender=render;
 render=function(){
  const result=precedingRender.apply(this,arguments);
