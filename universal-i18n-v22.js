@@ -27,7 +27,9 @@
  };
  for(const [k,v] of Object.entries(ADDITIONAL))DATA[k]=Object.assign({},DATA[k]||{},v);
  /* English course titles are stored in English. Make them localisable too. */
- for(const [,translations] of Object.entries({...DATA})){const en=translations.en;if(en&&!DATA[en])DATA[en]={...translations};}
+ for(const [german,translations] of Object.entries({...DATA})){const en=translations.en;if(en&&!DATA[en])DATA[en]={de:german,...translations};}
+ const EnglishCourseTitles={"Begrüßung":"Greetings","Im Café":"At the café","Am Flughafen":"At the airport","Unterwegs":"Getting around","Einkaufen":"Shopping","Neue Freunde":"New friends","Im Restaurant":"At the restaurant","Im Hotel":"At the hotel","Pläne machen":"Making plans","Gesundheit":"Health","In der Schule":"At school","Freizeit":"Free time","Neues Zuhause":"A new home","Bei der Arbeit":"At work","Ein Missverständnis":"A misunderstanding","Erlebnisse":"Experiences","Meinung sagen":"Expressing opinions","Kultur erleben":"Exploring culture","Im Team":"Teamwork","Verhandeln":"Negotiating","Streit lösen":"Resolving conflict","Eine Präsentation":"Giving a presentation","Gesellschaft":"Society","Geschichten":"Stories","Politik und Gesellschaft":"Politics and society","Wissenschaft":"Science","Kulturgeschichte":"Cultural history","Beruf und Führung":"Work and leadership","Medienkritik":"Media criticism","Tiefes Gespräch":"Deep conversation","Diplomatie":"Diplomacy","Feiner Humor":"Subtle humour","Philosophie":"Philosophy","Komplexe Verhandlung":"Complex negotiations","Literatur und Stil":"Literature and style","Freies Argumentieren":"Open discussion"};
+ for(const [german,english] of Object.entries(EnglishCourseTitles)){if(DATA[german])DATA[english]={de:german,...DATA[german]};}
  const BLOCK='.wj-target-term,[data-study-term],[data-native-src],[data-wj-gloss],.wj-target-gloss,.s32-target-term,.s32-scene h2,.s32-options button,.v25-caption h2,.v36-quiz-sheet h1,.v36-quiz-options button,.v36-quiz-summary strong,.options .option,.v25-card-foot [data-native-src],.wj-world-msg,.wj-message,.wj-chat-message,.wj-world-chat,.v22-wj-messages,.wj-world-word-stage h2,.v25-word .v25-caption p,code,pre,script,style,svg,iframe,select,option';
  const NATIVE_UI_COUNTRY={
  ko:{de:'Korea',en:'Korea',tr:'Kore',ja:'韓国',ko:'한국',es:'Corea',fr:'Corée'},
@@ -43,7 +45,7 @@
  function country(){return window.wjNativeCountry?.(wjTarget)||NATIVE_UI_COUNTRY[wjTarget]?.[locale()]||'Korea'}
  function study(){return window.wjNativeStudyName?.(wjTarget)||NATIVE_STUDY[wjTarget]?.[locale()]||'Koreanisch'}
  function exact(source){
-  if(locale()==='de')return source;
+  if(locale()==='de')return DATA[source]?.de||source;
   const entry=DATA[source];
   if(entry?.[locale()])return entry[locale()];
   const before=source;
@@ -69,7 +71,7 @@
   const original=String(source||'').trim();
   if(!original)return original;
   const l=locale();
-  if(l==='de')return original;
+  if(l==='de')return exact(original);
   const direct=exact(original);
   if(direct!==original)return direct;
   const chapters=original.match(/^(\d+)\s*\/\s*(\d+)\s+Kapitel abgeschlossen$/i);
