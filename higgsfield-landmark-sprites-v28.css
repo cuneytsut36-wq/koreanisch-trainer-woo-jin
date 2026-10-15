@@ -1,0 +1,15 @@
+/* V28 original Higgsfield pixel-landmark sprites, never screenshots behind the interface */
+.rpg28-landmark{object-fit:contain!important;object-position:center bottom!important;image-rendering:pixelated!important;background:none!important;filter:drop-shadow(5px 7px 0 #090f2780)!important}
+.rpg26-scenery img.rpg28-landmark{position:absolute;animation:rpg26-sway 4s steps(4,end) infinite;max-width:none}
+.rpg26-scenery img.rpg26-castle{bottom:10%;left:51%;height:46%;width:29%}
+.rpg26-scenery img.rpg26-tower{bottom:7%;right:0;height:66%;width:24%}
+.rpg26-scenery img.rpg26-house{bottom:4%;left:39%;height:34%;width:28%}
+.rpg26-mini-monuments img.rpg28-mini{height:130px!important;width:150px!important;max-width:25vw}
+.rpg27-map .v18-map-canvas img.rpg28-map-sprite{position:absolute!important;height:120px!important;width:120px!important;object-fit:contain!important}
+.rpg27-map .v18-map-canvas img.rpg28-map-sprite.first{left:7%!important;top:5%!important}
+.rpg27-map .v18-map-canvas img.rpg28-map-sprite.second{right:2%!important;bottom:7%!important}
+.rpg26-chapter-icon img.rpg28-chapter-sprite{height:54px!important;width:54px!important;object-fit:contain!important}
+.rpg26-page-sprite img.rpg28-page-sprite{height:65px!important;width:80px!important}
+.rpg28-floating-guild{position:absolute;top:47%;right:4%;color:var(--rpg-glint);letter-spacing:.1em;font-size:11px;font-weight:900;text-shadow:2px 3px 0 #000c;pointer-events:none}
+.rpg28-hero .rpg26-copy h2{letter-spacing:-.05em!important}
+@media(max-width:680px){.rpg26-scenery img.rpg26-castle{height:39%;width:34%;left:45%}.rpg26-scenery img.rpg26-tower{height:55%;width:29%;right:0}.rpg26-scenery img.rpg26-house{width:32%;left:42%}.rpg26-mini-monuments img.rpg28-mini{height:90px!important;width:70px!important}.rpg27-map .v18-map-canvas img.rpg28-map-sprite{width:78px!important;height:78px!important}.rpg28-floating-guild{font-size:8px}}
