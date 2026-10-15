@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200" role="img" aria-label="Animierte Lernszene">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#534365"/><stop offset="1" stop-color="#242338"/></linearGradient><linearGradient id="cup" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#efdbfa"/><stop offset="1" stop-color="#bca9d3"/></linearGradient></defs>
+<rect width="380" height="200" rx="20" fill="url(#sky)"/>
+<circle cx="306" cy="40" r="22" fill="#fbdff3" opacity=".65"><animate attributeName="opacity" values=".4;.85;.4" dur="5s" repeatCount="indefinite"/></circle>
+<path d="M0 152 Q76 134 138 151 Q235 171 380 147 V200 H0Z" fill="#211d30"/>
+<ellipse cx="190" cy="169" rx="93" ry="14" fill="#100e18" opacity=".48"/>
+<path d="M139 81 H227 V151 Q227 168 207 168 H159 Q139 165 139 148Z" fill="url(#cup)"/>
+<path d="M226 98 H240 Q262 100 258 124 Q254 145 227 142" fill="none" stroke="#d1b8dd" stroke-width="10" stroke-linecap="round"/>
+<ellipse cx="183" cy="81" rx="44" ry="10" fill="#faf1f9"/><ellipse cx="183" cy="82" rx="33" ry="6" fill="#7f5663"/>
+<g fill="none" stroke="#efd6fb" stroke-width="5" stroke-linecap="round" opacity=".9">
+<path d="M164 69 Q152 52 167 37 Q182 22 168 8"><animateTransform attributeName="transform" type="translate" values="0 1;0 -12;0 1" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".15;.9;.15" dur="3s" repeatCount="indefinite"/></path>
+<path d="M185 69 Q173 49 189 35 Q201 23 192 7"><animateTransform attributeName="transform" type="translate" values="0 2;0 -12;0 2" dur="3.7s" repeatCount="indefinite"/><animate attributeName="opacity" values=".15;.9;.15" dur="3.7s" repeatCount="indefinite"/></path>
+<path d="M209 69 Q194 51 210 34 Q224 19 214 3"><animateTransform attributeName="transform" type="translate" values="0 1;0 -12;0 1" dur="3.3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".1;.85;.1" dur="3.3s" repeatCount="indefinite"/></path>
+</g>
+<g fill="#efd8fd"><circle cx="79" cy="54" r="3"><animate attributeName="opacity" values=".1;1;.1" dur="2.6s" repeatCount="indefinite"/></circle><circle cx="320" cy="116" r="2"><animate attributeName="opacity" values=".1;1;.1" dur="3.7s" repeatCount="indefinite"/></circle></g>
+</svg>
