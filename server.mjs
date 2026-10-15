@@ -35,10 +35,57 @@ async function chat(req,res){
   reply(res,200,{ko:answer.ko.slice(0,1200),de:answer.de.slice(0,1600)})
  }catch(e){console.error('Chat error:',e.message);reply(res,502,{error:'KI-Anfrage fehlgeschlagen oder Zeitüberschreitung'})}finally{clearTimeout(timeout)}
 }
+
+const speechCounters=new Map();
+const speechCache=new Map();
+const speechHangul=new Map(Object.entries({
+'gyesanhalgeyo':'계산할게요','pojang haejuseyo':'포장해 주세요','yeogiseo meogeulgeyo':'여기서 먹을게요',
+'igeo eolmayeyo?':'이거 얼마예요?','keopi han jan juseyo':'커피 한 잔 주세요','mul han jan juseyo':'물 한 잔 주세요',
+'ppaldae':'빨대','ttukkeong':'뚜껑','naepkin':'냅킨','yeongsujeung':'영수증','bongtu':'봉투',
+'uyu':'우유','seoltang':'설탕','eoreum':'얼음','seutaempeu kadeu':'스탬프 카드','annyeonghaseyo':'안녕하세요','annyeong':'안녕',
+'gamsahamnida':'감사합니다','kamsahamnida':'감사합니다','jal jayo':'잘 자요','gwaenchanayo':'괜찮아요',
+'eodi gayo?':'어디 가요?','jamkkanmanyo':'잠깐만요','ne':'네','aniyo':'아니요','juseyo':'주세요','saranghaeyo':'사랑해요',
+'jal meogeosseoyo':'잘 먹었어요','jigeum jayo':'지금 자요','oneul nalssi joayo':'오늘 날씨 좋아요',
+'jeoneun haksaengieyo':'저는 학생이에요','bap meogeoyo':'밥 먹어요','eodi isseoyo?':'어디 있어요?','igeo mwoyeyo?':'이거 뭐예요?',
+'swieoyo':'쉬어요'
+}));
+async function voice(req,res){
+ if(!process.env.OPENAI_API_KEY)return reply(res,503,{error:'KI-Stimme ist derzeit nicht eingerichtet'});
+ const ip=req.socket.remoteAddress||'unknown',now=Date.now();const prev=speechCounters.get(ip)||[];const recent=prev.filter(t=>now-t<3_600_000);
+ if(recent.length>=24)return reply(res,429,{error:'Stimmenlimit erreicht. Bitte später erneut versuchen.'});
+ let payload;try{payload=await bodyJSON(req)}catch{return reply(res,400,{error:'Ungültige Sprachanfrage'})}
+ const raw=String(payload?.text||'').trim().slice(0,180);
+ if(!raw||!/^[a-zA-ZÀ-ÿ0-9.,!? '\-]+$/.test(raw))return reply(res,400,{error:'Bitte koreanischen Satz in Umschrift eingeben'});
+ const tempo=['slow','clear','normal'].includes(payload?.tempo)?payload.tempo:'clear';
+ const key=raw.toLowerCase().replace(/[.!]+$/,'').trim();
+ const cacheKey=key+'|'+tempo;
+ if(speechCache.has(cacheKey)){const mp3=speechCache.get(cacheKey);res.writeHead(200,{'Content-Type':'audio/mpeg','Cache-Control':'private, max-age=86400','X-Content-Type-Options':'nosniff'});res.end(mp3);return}
+ if(speechCounters.size>300)speechCounters.clear();
+ recent.push(now);speechCounters.set(ip,recent);
+ const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),28000);
+ try{
+  let ko=speechHangul.get(key)||speechHangul.get(raw.toLowerCase());
+  if(!ko){
+   const tr=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+process.env.OPENAI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.OPENAI_MODEL||'gpt-4.1-mini',store:false,max_output_tokens:160,instructions:'Convert romanized Korean into natural Korean Hangul, preserving the exact meaning. Output ONLY a Korean sentence in Hangul, no explanations or extra text. If uncertain, choose a plausible Korean reading. This is used only for spoken audio.',input:raw})});
+   if(!tr.ok)throw Error('Transliteration request '+tr.status);
+   const data=await tr.json();ko=(data.output_text||data.output?.flatMap(x=>x.content||[]).filter(x=>x.type==='output_text').map(x=>x.text).join('')||'').trim();
+   if(!/[\uac00-\ud7af]/.test(ko)||ko.length>240)throw Error('Transliteration unavailable');
+   speechHangul.set(key,ko);
+  }
+  const speed=tempo==='slow'?.78:tempo==='normal'?1:.9;
+  const upstream=await fetch('https://api.openai.com/v1/audio/speech',{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+process.env.OPENAI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:'gpt-4o-mini-tts',voice:'cedar',input:ko,response_format:'mp3',speed,instructions:'Speak in standard Seoul Korean, native and natural. Clear consonants and vowels, gentle encouraging male tutor tone. No extra words. Preserve the exact Korean sentence.'})});
+  if(!upstream.ok){console.error('Speech API',upstream.status,(await upstream.text()).slice(0,200));return reply(res,502,{error:'KI-Stimme ist gerade nicht erreichbar'})}
+  const audio=Buffer.from(await upstream.arrayBuffer());if(!audio.length||audio.length>2_000_000)throw Error('Invalid audio');
+  if(speechCache.size>90)speechCache.delete(speechCache.keys().next().value);speechCache.set(cacheKey,audio);
+  res.writeHead(200,{'Content-Type':'audio/mpeg','Cache-Control':'private, max-age=86400','X-Content-Type-Options':'nosniff'});res.end(audio);
+ }catch(e){console.error('Voice:',e.message);return reply(res,502,{error:'KI-Aussprache nicht verfügbar. Bitte erneut versuchen.'})}finally{clearTimeout(timeout)}
+}
+
 const server=http.createServer(async(req,res)=>{
  const pathname=new URL(req.url||'/',`http://${req.headers.host||'localhost'}`).pathname;
  if(pathname==='/api/status'&&req.method==='GET')return reply(res,200,{ready:!!process.env.OPENAI_API_KEY,mode:process.env.OPENAI_API_KEY?'openai':'offline'});
  if(pathname==='/api/woo-jin'&&req.method==='POST')return chat(req,res);
+ if(pathname==='/api/voice'&&req.method==='POST')return voice(req,res);
  if(req.method!=='GET'&&req.method!=='HEAD')return reply(res,405,{error:'Methode nicht erlaubt'});
  let filename=pathname==='/'?'/index.html':pathname;
  if(!/^\/[a-zA-Z0-9_.\/-]+$/.test(filename)||filename.includes('..')||filename.startsWith('/server.')||filename.startsWith('/.'))return reply(res,404,{error:'Nicht gefunden'});
