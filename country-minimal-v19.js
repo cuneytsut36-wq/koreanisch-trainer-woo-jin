@@ -6,14 +6,14 @@ const MODES={
  de:{flag:'🇩🇪',name:'Deutsch',land:'Deutschland',greeting:'Hallo!',guide:'Lukas',avatar:'assets/v18-avatar-lukas.svg',scene:'assets/v18-scene-de.svg',description:'Entdecke Deutschland und lerne in deinem Tempo.'},
  en:{flag:'🇬🇧',name:'English',land:'United Kingdom',greeting:'Hello!',guide:'Alex',avatar:'assets/v18-avatar-alex.svg',scene:'assets/v18-scene-en.svg',description:'Explore Britain and learn at your own pace.'}
 };
-const fixedUi={ko:'de',de:'de',en:'en'};
-function ui(de,en){return wjTarget==='en'?en:de}
+const nativeLanguages=['de','en','tr','ja','ko','es','fr'];
+function ui(de,en){if(typeof window.wjNativeUI==='function')return window.wjNativeUI(de,en);return v27Lang==='en'?en:de}
 function mode(){return MODES[wjTarget]||MODES.ko}
 function syncMode(){
  const safe=MODES[wjTarget]?wjTarget:'ko';
- const locale=fixedUi[safe];
+ const locale=nativeLanguages.includes(v27Lang)?v27Lang:'de';
  if(v27Lang!==locale)v27Lang=locale;
- try{localStorage.setItem('v27-language',locale);localStorage.setItem('wj-learning-language',safe)}catch(e){}
+ try{localStorage.setItem('wj-learning-language',safe)}catch(e){}
  document.documentElement.dataset.learningMode=safe;
  document.documentElement.lang=locale;
  document.documentElement.setAttribute('translate','no');
@@ -25,17 +25,17 @@ const oldSwitch=wjSwitchTarget;
 wjSwitchTarget=function(lang){
  if(state.page!=='home'||!MODES[lang])return;
  if(lang===wjTarget){syncMode();return;}
- const next=fixedUi[lang];v27Lang=next;
- try{localStorage.setItem('v27-language',next)}catch(e){}
- document.documentElement.lang=next;
  oldSwitch(lang);
  syncMode();
 };
-const oldSetLanguage=v27SetLanguage;
 v27SetLanguage=function(lang){
- /* No second language selector: the interface is tied to the selected country. */
- if(lang!==fixedUi[wjTarget])return;
- oldSetLanguage(lang);
+ /* The learner's native language is independent from their chosen study language. */
+ if(!nativeLanguages.includes(lang))return;
+ v27Lang=lang;
+ try{localStorage.setItem('v27-language',lang)}catch(e){}
+ document.documentElement.lang=lang;
+ document.documentElement.setAttribute('translate','no');
+ render();
 };
 const englishTitles={
  'Begrüßung':'Greetings','Im Café':'At the café','Am Flughafen':'At the airport','Unterwegs':'Getting around',
@@ -84,7 +84,7 @@ function homeMinimal(){
   ['✦',ui('Sprachcoach','Language coach'),m.guide,'wooJin']
  ];
  return '<section class="v18-shell v19-home" data-lang="'+wjTarget+'">'+
-  '<header class="v19-welcome"><div><span class="v18-kicker">LINGUAWORLD · LANGUAGE STUDIO</span><h1>'+ui('Deine Lernwelt','Your learning world')+'</h1><p>'+ui('Lernsprache wählen','Choose a language')+'</p></div>'+flags()+'</header>'+
+  '<header class="v19-welcome"><div><span class="v18-kicker">LINGUAWORLD · LANGUAGE STUDIO</span><h1>'+ui('Deine Lernwelt','Your learning world')+'</h1><p>'+ui('Ich möchte lernen','I want to learn')+'</p></div>'+flags()+'</header>'+(typeof window.wjNativePicker==='function'?window.wjNativePicker():'')+
   '<section class="v19-hero"><img class="v19-scene" src="'+m.scene+'" alt="'+ui('Pixelart-Landschaft','Pixel-art landscape')+' '+m.land+'">'+
    '<div class="v19-shade"></div><div class="v19-hero-body"><span class="v19-country">'+m.flag+' '+m.land+'</span>'+
    '<h2>'+m.greeting+'</h2><p>'+m.description+'</p>'+
@@ -119,7 +119,7 @@ socialTop=function(){
  if(storyModes)storyModes.innerHTML='';
 };
 function translateEnglishInterface(){
- if(wjTarget!=='en')return;
+ if(v27Lang!=='en')return;
  const main=document.getElementById('main');if(!main)return;
  const texts={
   'Deine Großbritannien-Karte.':'Your United Kingdom map.',
@@ -153,7 +153,7 @@ function translateEnglishInterface(){
 
 /* Restrict translations to interface labels: never rewrite studied words, their meanings, messages, or quiz answer options. */
 function localizeEnglishLabels(){
- if(wjTarget!=='en')return;
+ if(v27Lang!=='en')return;
  const root=document.getElementById('main');if(!root||typeof NodeFilter==='undefined')return;
  const dict={
   'Vokabeln':'Vocabulary','Vokabeln.':'Vocabulary.','ENGLISCH':'ENGLISH',
