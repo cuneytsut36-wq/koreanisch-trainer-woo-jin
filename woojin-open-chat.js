@@ -12,7 +12,7 @@ function wjOpenStatusLine(){if(wjOpenChat.localReady)return '✦ Freier KI-Chat 
  if(wjOpenChat.loading)return wjOpenChat.status||'KI-Modell wird geladen …';
  return wjOpenChat.error||'Offline-Lerncoach · echte KI optional';}
 function wjOpenControls(){
- return '<section class="wj-open-status" aria-live="polite"><div class="wj-open-badge"><span class="wj-open-light '+(wjOpenChat.localReady||wjOpenChat.backend?'ready':'')+'"></span><div><strong>Woo Jin · freier Chat</strong><small id="wj-open-note">'+esc(wjOpenStatusLine())+'</small></div></div>'+
+ return '<section class="wj-open-status" aria-live="polite"><div class="wj-open-badge"><span class="wj-open-light '+(wjOpenChat.localReady||wjOpenChat.backend?'ready':'')+'"></span><div><strong>'+(typeof wjWorldGuides!=='undefined'?wjWorldGuides[wjTarget]:'Woo Jin')+' · freier Chat</strong><small id="wj-open-note">'+esc(wjOpenStatusLine())+'</small></div></div>'+
  (!wjOpenChat.localReady&&!wjOpenChat.backend?'<button id="wj-open-button" onclick="wjOpenStart()" '+(wjOpenChat.loading?'disabled':'')+'>'+(wjOpenChat.loading?'Modell lädt …':'✦ Echte KI starten')+'</button>':'<span class="wj-open-active">Aktiv</span>')+
  '<p>Ein richtiges Sprachmodell kann frei antworten und den Gesprächsverlauf berücksichtigen. Lokal nur auf Geräten mit WebGPU. Der erste Download kann mehrere hundert MB groß sein.</p></section>';
 }
@@ -24,15 +24,19 @@ async function wjOpenCheck(){
  try{const r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)return;const s=await r.json();wjOpenChat.backend=!!s.ai;wjOpenRefresh()}catch{}
 }
 function wjOpenSystemPrompt(){
- const langs={de:'German',en:'English',tr:'Turkish',ko:'Korean',ja:'Japanese',es:'Spanish',fr:'French'};
- const target={ko:'Korean',de:'German',en:'English'}[wjTarget]||'Korean';
+ const interfaceLanguages={de:'German',en:'English',tr:'Turkish',ko:'Korean',ja:'Japanese',es:'Spanish',fr:'French'};
+ const profiles={
+ ko:{name:'Woo Jin',identity:'a calm, observant and friendly Korean language learning guide, interested in daily life, food and culture',language:'Korean',style:'Use simple romanized Korean phrases with a concise translation when useful. NEVER print Hangul; the learner prefers Latin romanization.'},
+ de:{name:'Lukas',identity:'a patient, lightly humorous German language learning guide with an approachable, encouraging conversational manner',language:'German',style:'Speak naturally in accessible German first, adapt to CEFR level, and explain a difficult phrase in the user interface language only if needed.'},
+ en:{name:'Alex',identity:'a relaxed, curious and encouraging English language learning guide who likes friendly real-world conversation',language:'English',style:'Speak naturally in accessible English first, adapt to CEFR level, and give a brief explanation in the user interface language if needed.'}
+ };
+ const target=profiles[wjTarget]||profiles.ko;
  const level=wjTarget==='ko'?state.level:wjWorldLevel;
- return 'You are Woo Jin, a thoughtful, friendly Korean character and real conversational learning companion. '+
- 'Hold a natural conversation like a helpful person, not a scripted menu. Respond thoughtfully to any reasonable topic, remember context in this exchange, ask occasional relevant questions, and be warm without repetitive praise. '+
- 'The user is learning '+target+' at CEFR level '+level+'. Their interface language is '+(langs[v27Lang]||'German')+'. '+
- 'Normally respond in that interface language. Help them practise '+target+' when appropriate, give natural examples, correct mistakes gently and only when relevant. '+
- 'Important: when showing Korean examples use ONLY Latin romanization, NEVER Hangul; use Japanese or other native scripts only if the user is learning those languages. '+
- 'Do not invent personal memories, never claim to be human, and admit uncertainty. Keep responses concise, generally 1–4 sentences. If the user asks to chat casually, do so rather than forcing a lesson.';
+ return 'You are '+target.name+', '+target.identity+'. You are an AI character, not a human. '+
+ 'Hold a natural conversation, follow the context of this chat, ask occasional meaningful follow-up questions and avoid repetitive praise. '+
+ 'Teach '+target.language+' for CEFR '+level+'. '+target.style+' The user interface language is '+(interfaceLanguages[v27Lang]||'German')+'. '+
+ 'Correct gently only when relevant. Respond generally in 1–4 sentences. Be honest about uncertainty, do not invent memories or real personal experiences. '+
+ 'If the learner wants everyday chat, do not force lessons or quizzes.';
 }
 function wjOpenMessages(){
  const hist=wjTarget==='ko'?
@@ -82,7 +86,7 @@ async function wjOpenTypeMessage(text){
  if(!chat)return;
  const bubble=document.createElement('div');
  bubble.className=wjTarget==='ko'?'wj-message theirs wj-open-preview':'wj-world-msg bot wj-open-preview';
- bubble.innerHTML=wjTarget==='ko'?'<span class="wj-avatar-mini"><img src="woo-jin-pixel.svg" alt=""></span><div class="wj-bubble"><div class="wj-korean"></div></div>':'<strong>Woo Jin</strong><p></p>';
+ bubble.innerHTML=wjTarget==='ko'?'<span class="wj-avatar-mini"><img src="woo-jin-pixel.svg" alt=""></span><div class="wj-bubble"><div class="wj-korean"></div></div>':'<strong>'+(typeof wjWorldGuides!=='undefined'?wjWorldGuides[wjTarget]:'Woo Jin')+'</strong><p></p>';
  const node=bubble.querySelector(wjTarget==='ko'?'.wj-korean':'p');
  chat.appendChild(bubble);
  const chars=Array.from(text),chunk=Math.max(1,Math.ceil(chars.length/125));
