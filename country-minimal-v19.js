@@ -148,7 +148,7 @@ function translateEnglishInterface(){
   if(localized)el.textContent=localized;
   if(el.matches('.v18-scene-strip>span'))el.textContent=el.textContent.replace('Entdecke die Kultur','Discover the culture').replace('Story in ','Story in ');
  }
- const mapTitle=main.querySelector('.v18-map-page .v18-title');if(mapTitle)mapTitle.innerHTML='Your United Kingdom map<span style="color:var(--v18-accent)">.</span>';
+ const mapTitle=main.querySelector('.v18-map-page .v18-title');if(mapTitle){const place={ko:'Korea',de:'Germany',en:'United Kingdom'}[wjTarget]||'Korea';mapTitle.innerHTML='Your '+place+' map<span style="color:var(--v18-accent)">.</span>';}
 }
 
 /* Restrict translations to interface labels: never rewrite studied words, their meanings, messages, or quiz answer options. */
