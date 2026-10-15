@@ -67,14 +67,14 @@ async function voice(req,res){
   let ko=speechHangul.get(key)||speechHangul.get(raw.toLowerCase());
   if(!ko){
    const tr=await fetch('https://api.openai.com/v1/responses',{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+process.env.OPENAI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.OPENAI_MODEL||'gpt-4.1-mini',store:false,max_output_tokens:160,instructions:'Convert romanized Korean into natural Korean Hangul, preserving the exact meaning. Output ONLY a Korean sentence in Hangul, no explanations or extra text. If uncertain, choose a plausible Korean reading. This is used only for spoken audio.',input:raw})});
-   if(!tr.ok)throw Error('Transliteration request '+tr.status);
+   if(tr.status===429)return reply(res,429,{error:'OpenAI-API-Limit erreicht. Bitte API-Guthaben oder Abrechnung prüfen.'});if(!tr.ok)throw Error('Transliteration request '+tr.status);
    const data=await tr.json();ko=(data.output_text||data.output?.flatMap(x=>x.content||[]).filter(x=>x.type==='output_text').map(x=>x.text).join('')||'').trim();
    if(!/[\uac00-\ud7af]/.test(ko)||ko.length>240)throw Error('Transliteration unavailable');
    speechHangul.set(key,ko);
   }
   const speed=tempo==='slow'?.78:tempo==='normal'?1:.9;
   const upstream=await fetch('https://api.openai.com/v1/audio/speech',{method:'POST',signal:controller.signal,headers:{Authorization:'Bearer '+process.env.OPENAI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:'gpt-4o-mini-tts',voice:'cedar',input:ko,response_format:'mp3',speed,instructions:'Speak in standard Seoul Korean, native and natural. Clear consonants and vowels, gentle encouraging male tutor tone. No extra words. Preserve the exact Korean sentence.'})});
-  if(!upstream.ok){console.error('Speech API',upstream.status,(await upstream.text()).slice(0,200));return reply(res,502,{error:'KI-Stimme ist gerade nicht erreichbar'})}
+  if(!upstream.ok){console.error('Speech API',upstream.status,(await upstream.text()).slice(0,200));return reply(res,upstream.status===429?429:502,{error:upstream.status===429?'OpenAI-API-Limit erreicht. Bitte API-Guthaben oder Abrechnung prüfen.':'KI-Stimme ist gerade nicht erreichbar'})}
   const audio=Buffer.from(await upstream.arrayBuffer());if(!audio.length||audio.length>2_000_000)throw Error('Invalid audio');
   if(speechCache.size>90)speechCache.delete(speechCache.keys().next().value);speechCache.set(cacheKey,audio);
   res.writeHead(200,{'Content-Type':'audio/mpeg','Cache-Control':'private, max-age=86400','X-Content-Type-Options':'nosniff'});res.end(audio);
