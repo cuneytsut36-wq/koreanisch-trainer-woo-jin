@@ -39,6 +39,19 @@ const englishByGerman=new Map();
 for(const lang of ['de','en'])for(const level of (window.wjLanguageWorlds?.[lang]||[]))for(const chapter of level.chapters)for(const item of chapter.words){if(item?.de&&item?.en&&!englishByGerman.has(item.de))englishByGerman.set(item.de,item.en);}
 const dictionary=window.wjNativeGlossary||{};
 function currentNative(){return LANGS.some(x=>x[0]===v27Lang)?v27Lang:'de'}
+/* Keep quiz answer badges (A, B, C, D) while changing only the meaning. */
+function writeNativeMeaning(element,value,native){
+ if(element.matches?.('.v36-quiz-options button')){
+  let label=element.querySelector('.v20-native-answer');
+  if(!label){
+   for(const node of Array.from(element.childNodes)){if(node.nodeType===3)element.removeChild(node)}
+   label=document.createElement('span');label.className='v20-native-answer';element.appendChild(label);
+  }
+  label.textContent=value;
+ }else element.textContent=value;
+ element.setAttribute('lang',native);
+ element.setAttribute('translate','no');
+}
 function displayMeaning(german,english){
  const original=String(german??'');
  const native=currentNative();
@@ -49,18 +62,16 @@ function displayMeaning(german,english){
  if(offline[native])return offline[native];
  const cached=typeof v28Stored==='function'?v28Stored(original,native):null;
  if(cached)return cached;
- if(typeof v28QueueTranslation==='function'&&native!==wjTarget){
+ if(typeof v28QueueTranslation==='function'){
   v28QueueTranslation(original,native,function(value){
    for(const element of document.querySelectorAll('[data-native-src]')){
     if(element.getAttribute('data-native-src')===original&&element.isConnected){
-     element.textContent=value;
-     element.setAttribute('lang',native);
+     writeNativeMeaning(element,value,native);
     }
    }
    for(const element of document.querySelectorAll('[data-wj-gloss]')){
     if(element.getAttribute('data-wj-gloss')===original&&element.isConnected&&!element.hasAttribute('data-native-hidden')){
-     element.textContent=value;
-     element.setAttribute('lang',native);
+     writeNativeMeaning(element,value,native);
     }
    }
   });
@@ -107,7 +118,7 @@ function refreshNativeMeanings(){
  for(const item of document.querySelectorAll('#main [data-native-src]')){
   const source=item.getAttribute('data-native-src'),english=item.getAttribute('data-native-en');
   if(!source)continue;
-  item.textContent=displayMeaning(source,english);
+  writeNativeMeaning(item,displayMeaning(source,english),currentNative());
   item.lang=currentNative();
   item.setAttribute('translate','no');
  }
