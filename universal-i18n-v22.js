@@ -85,7 +85,7 @@
   const questionNumber=original.match(/^FRAGE\s+(\d+)\s*\/\s*(\d+)$/);
   if(questionNumber)return (exact('FRAGE')||'FRAGE')+' '+questionNumber[1]+' / '+questionNumber[2];
   const progress=original.match(/^(\d+)\s+von\s+(\d+)\s+richtig(.*)$/i);
-  if(progress){const tail={en:'correct',tr:'doğru',ja:'正解',ko:'정답',es:'correctas',fr:'bonnes réponses'};return progress[1]+' / '+progress[2]+' '+tail[l]+(progress[3]||'')}
+  if(progress){const tail={en:'correct',tr:'doğru',ja:'正解',ko:'정답',es:'correctas',fr:'bonnes réponses'};let suffix=progress[3]||'';for(const key of ['Nächstes Level freigeschaltet.','Du brauchst mindestens 4 richtige Antworten.'])suffix=suffix.replace(key,exact(key));return progress[1]+' / '+progress[2]+' '+tail[l]+suffix}
   if(original.startsWith('Richtige Antwort:'))return exact('Richtige Antwort:')+original.slice('Richtige Antwort:'.length);
   if(original.includes(' · LEVEL-ABSCHLUSS'))return original.replace('LEVEL-ABSCHLUSS',exact('LEVEL-ABSCHLUSS'));
   if(original.includes(' · STORY MODE'))return original.replace('STORY MODE',exact('STORY MODE'));
@@ -111,6 +111,7 @@
    return t+country();
   }
   if(original.startsWith('KOREA JOURNEY'))return original.replace('KOREA JOURNEY',({en:'KOREA JOURNEY',tr:'KORE YOLCULUĞU',ja:'韓国の旅',ko:'한국 여행',es:'VIAJE A COREA',fr:'VOYAGE EN CORÉE'}[l]||'KOREA JOURNEY'));
+  if(original.includes(' · ')){const pieces=original.split(' · '),result=pieces.map(x=>dynamic(x));if(result.some((x,i)=>x!==pieces[i]))return result.join(' · ');}
 
   return original;
  }
