@@ -85,3 +85,9 @@ html[data-learning-mode] .v24-sfx-toggle:focus-visible{outline:3px dashed var(--
 .v24-artbook figcaption{font-size:11px;color:var(--px-muted);padding:8px 10px}
 @media(min-width:1000px){.v24-artbook .v24-artbook-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:490px){.v24-artbook .v24-artbook-grid{grid-template-columns:1fr}}
+
+.v24-real-gif{position:absolute;display:block;image-rendering:pixelated!important;pointer-events:none;z-index:3}
+.v24-twinkle-gif{width:25px;height:25px;top:16%;right:22%;filter:drop-shadow(0 0 7px #fff3b2)}
+.v24-ship-gif{width:31px;height:31px;bottom:12%;left:9%;animation:v24-ship-journey 14s linear infinite}
+@keyframes v24-ship-journey{0%,100%{transform:translate(0,0)}50%{transform:translate(125px,-28px)}}
+@media(prefers-reduced-motion:reduce){.v24-ship-gif{animation:none}}
