@@ -28,3 +28,13 @@ html[data-lw48] #main .lw53-hero:has(.lw53-panel:not([hidden])){margin-bottom:15
 /* V53.1: when Woo Jin speaks, the popover must stack above progress and cards. */
 html[data-lw48] #main .lw53-hero:has(.lw53-panel:not([hidden])){z-index:1000!important;isolation:isolate!important}
 html[data-lw48] #main .lw53-hero .lw53-panel:not([hidden]){z-index:1500!important}
+
+/* V53.2 — hide stray Korean/Asian glyphs burned into the top-left of the generated video. The UI's live text stays above this mask. */
+html[data-lw48] #main .lw53-hero::before{
+ content:"";position:absolute!important;z-index:1!important;
+ top:0!important;left:0!important;width:64%!important;height:59%!important;
+ pointer-events:none!important;
+ background:linear-gradient(90deg,#fbfaf8 0%,#fbfaf8 48%,rgba(251,250,248,.96) 67%,rgba(251,250,248,0) 100%)!important;
+ -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%)!important;
+ mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%)!important;
+}
