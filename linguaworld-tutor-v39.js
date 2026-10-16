@@ -96,7 +96,7 @@ function getOfflineWord(code){
 function nativeMeaning(w){if(typeof wjWorldSupport==='function')return wjWorldSupport(w);return w.meaning||w.translation||''}
 function offlineWorldReply(q,code){
  const t=norm(q),o=OFFLINE[code],words=TRANSLATE[code];
- const isStart=/(^|\s)(test|quiz|prüf|frage|abfragen|mini quiz|practice|sentence practice)(\s|$)/.test(t);
+ const isStart=/(^|\s)(test|teste|testen|quiz|pruf|prufe|frage|abfragen|mini quiz|practice|sentence practice|test me|teste mich)(\s|$)/.test(t);
  const isReview=/(wiederhol|review|nochmal|again)/.test(t);
  const isGrammar=/(grammatik|grammar|erklare|explain)/.test(t);
  const isRoleplay=/(rollenspiel|roleplay|cafe|restaurant|café)/.test(t);
