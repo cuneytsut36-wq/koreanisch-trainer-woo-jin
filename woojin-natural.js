@@ -62,6 +62,7 @@ async function wj42Send(value){
  finally{wjBusy=false;if(state.page==='wooJin'){render();const chat=document.getElementById('wjChat');if(chat)chat.scrollTop=chat.scrollHeight}}
 }
 function wj42Mic(){
+ if(!window.LWPrivacy.allowed('speech')){window.LWPrivacy.ask('speech');return}
  const Speech=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!Speech){alert('Spracheingabe ist in diesem Browser nicht verfügbar. Auf iPhone kannst du das Mikrofon deiner Tastatur verwenden.');return}
  if(wj42.recognition){try{wj42.recognition.stop()}catch{}wj42.recognition=null;return}
