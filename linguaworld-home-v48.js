@@ -65,11 +65,24 @@ function otherHeader(){
  const actions=bar.querySelector('.lw34-top-actions');if(!actions)return;
  if(!actions.querySelector('.lw48-other-settings')){const b=document.createElement('button');b.type='button';b.className='lw48-other-settings';b.innerHTML=icon('gear');b.setAttribute('aria-label',t().settings);b.title=t().settings;b.addEventListener('click',openSettings);actions.append(b)}
 }
+function styleNavigation(){
+ const nav=document.getElementById('bottomNav');
+ if(!nav)return;
+ nav.querySelectorAll('button').forEach(btn=>{
+  const active=btn.classList.contains('active')||btn.getAttribute('aria-current')==='page';
+  btn.style.setProperty('background',active?'#e5f3ec':'transparent','important');
+  btn.style.setProperty('color',active?'#278267':'#8996a6','important');
+  btn.style.setProperty('border','0','important');
+  btn.style.setProperty('box-shadow','none','important');
+  btn.querySelectorAll('span,svg').forEach(el=>el.style.setProperty('color','inherit','important'));
+ });
+}
 function update(){
  try{
   document.documentElement.dataset.lw48='on';
   document.querySelectorAll('#main .lw43-app-language,#main .lw38-picker-header').forEach(n=>n.remove());
   if(typeof state!=='undefined'&&state.page==='home'){home()}else{otherHeader()}
+  styleNavigation()
  }catch(e){console.warn('LinguaWorld home V48',e)}
 }
 const prior=render;
