@@ -1,5 +1,5 @@
 /* V49 polished iPhone homepage, true transparent user-uploaded Sakura logo. */
-:root{--lw49-ink:#111a32;--lw49-green:#2f8b73;--lw49-soft:#e8f4ed;--lw49-logo:url("https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/18df521a-9f25-4494-8cf1-dc96eb76161f.png");--lw49-icons:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_081919_d1de782b-cfde-4683-b466-1b0aa9b1cab8.png");}
+:root{--lw49-ink:#111a32;--lw49-green:#2f8b73;--lw49-soft:#e8f4ed;--lw49-logo:url("privacy-scene.svg");--lw49-icons:url("privacy-scene.svg");}
 html[data-lw48] body{background:#fbfaf8!important}
 html[data-lw48] #main{overflow:visible!important}
 html.lw49-ios[data-lw48] #main:has(.lw48-home){padding-top:max(74px,env(safe-area-inset-top,0px))!important}
