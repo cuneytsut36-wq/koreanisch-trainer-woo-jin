@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap');
 /* LinguaWorld V31 – playable image-to-code reconstruction of user-approved 4-panel reference */
 html[data-lw31]{--lw31-navy:#07132d;--lw31-panel:#07172e;--lw31-border:#466ab1;--lw31-ice:#2fe6ff;--lw31-pink:#f695fe;--lw31-purple:#9645ff;color-scheme:dark}
 html[data-lw31="ko"]{--lw31-purple:#9850fa;--lw31-tint:#b166fc;--lw31-border:#626fd2;--lw31-pink:#ffa6ec}
