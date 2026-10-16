@@ -1,0 +1,25 @@
+/* V36: restored world-selection start screen, three equal flags in one row. */
+.lw36-welcome{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:calc(22px + env(safe-area-inset-top,0px)) 20px calc(22px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse at 50% 14%,#272247 0%,#101829 47%,#090e19 100%);font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#f4f6fb;isolation:isolate}
+.lw36-welcome *{box-sizing:border-box}
+.lw36-glow{pointer-events:none;position:absolute;width:360px;height:360px;top:10%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,#a393f015 0%,transparent 70%);filter:blur(24px)}
+.lw36-entry{position:relative;width:min(100%,740px);display:flex;align-items:center;flex-direction:column;text-align:center;gap:12px;animation:lw36-in .3s ease-out}
+.lw36-logo{font-size:19px;font-weight:800;letter-spacing:-.035em;color:#f6f7ff;display:flex;align-items:center;gap:9px;margin-bottom:38px}
+.lw36-logo span{font-size:26px;color:#b3a3f4}
+.lw36-eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:#b2a4e9}
+.lw36-entry h1{font-family:inherit;font-size:clamp(28px,5vw,45px);font-weight:800;line-height:1.15;letter-spacing:-.045em;color:#fff;margin:0}
+.lw36-entry p{font-size:clamp(13px,1.8vw,16px);color:#aebbd0;line-height:1.5;margin:0 0 30px}
+.lw36-flags{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;width:100%}
+.lw36-flag{position:relative;min-width:0;min-height:194px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:11px;padding:20px 12px;background:#172134;border:1px solid #334158;border-radius:17px;color:#f5f6fd;cursor:pointer;font:inherit;transition:transform .16s,border-color .16s,background-color .16s}
+.lw36-flag:hover{transform:translateY(-4px);background:#202b41;border-color:#9185ce}
+.lw36-flag:active{transform:scale(.97)}
+.lw36-flag:focus-visible{outline:3px solid #c6b3ff;outline-offset:4px}
+.lw36-flag-circle{display:grid;place-items:center;width:74px;height:74px;font-size:40px;line-height:1;background:#2a354c;border:1px solid #465675;border-radius:50%}
+.lw36-flag strong{font-size:17px;letter-spacing:-.025em;font-weight:750}
+.lw36-flag small{font-size:12px;color:#a6b5ce}
+.lw36-flag-arrow{position:absolute;right:14px;top:11px;font-size:16px;color:#8d9ebc}
+.lw36-footer{margin-top:33px;color:#67768f;font-size:10px;font-weight:700;letter-spacing:.1em;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+.lw36-footer span{color:#a795e8}
+@keyframes lw36-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:590px){.lw36-welcome{padding-left:12px;padding-right:12px}.lw36-entry{gap:9px}.lw36-logo{margin-bottom:34px}.lw36-entry h1{font-size:clamp(24px,7vw,35px)}.lw36-entry p{margin-bottom:23px}.lw36-flags{gap:8px}.lw36-flag{min-height:149px;padding:17px 5px;gap:10px;border-radius:13px}.lw36-flag-circle{width:58px;height:58px;font-size:32px}.lw36-flag strong{font-size:13px}.lw36-flag small{font-size:10px}.lw36-flag-arrow{top:7px;right:8px;font-size:11px}.lw36-footer{margin-top:30px;font-size:9px;gap:7px}}
+@media(max-width:360px){.lw36-flags{gap:6px}.lw36-flag strong{font-size:12px}.lw36-flag small{font-size:9px}.lw36-flag-circle{width:52px;height:52px;font-size:28px}}
+@media(prefers-reduced-motion:reduce){.lw36-entry{animation:none}.lw36-flag{transition:none}}
