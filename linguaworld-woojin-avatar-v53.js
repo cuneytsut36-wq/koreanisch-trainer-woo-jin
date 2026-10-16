@@ -1,8 +1,8 @@
-/* LinguaWorld V54: Woo Jin greets once, then rests motionless for at least 60 seconds.
-   Uses a 10-second forward-and-back segment of the existing 20-second clip. */
+/* LinguaWorld V55 — continuous calm idle clip + occasional short greeting.
+   Keeps original pixel-avatar hotspot, accessibility and native coach integration. */
 (function(){
 'use strict';
-const VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/35bd4e71-d0b7-42b3-8d8f-4b5f2e5a26aa.mp4", POSTER="https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png";
+const IDLE_VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/bb18829d-ca98-40eb-a2a2-15984ff73f94.mp4", GREETING_VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/af9f52e6-b181-448f-82e0-3554fd537cfa.mp4", POSTER="https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png";
 const words={
  de:{label:'Woo Jin – interaktiver KI-Avatar',intro:'Annyeong! Schön, dass du da bist. Wollen wir etwas Koreanisch üben?',greet:'Begrüßen',chat:'KI-Chat',mic:'Sprechen',close:'Schließen',hint:'Tippe auf Woo Jin',listening:'Ich höre zu …',notSupported:'Spracherkennung ist hier nicht verfügbar. Öffne den KI-Chat.',miss:'Ich habe dich nicht verstanden. Versuch es noch einmal.',microphone:'Mikrofon'},
  tr:{label:'Woo Jin – etkileşimli yapay zekâ avatarı',intro:'Annyeong! Bugün biraz Korece çalışalım mı?',greet:'Selamla',chat:'Yapay zekâ sohbeti',mic:'Konuş',close:'Kapat',hint:'Woo Jin’e dokun',listening:'Dinliyorum …',notSupported:'Ses algılama bu tarayıcıda yok. Sohbeti aç.',miss:'Seni anlayamadım. Tekrar deneyelim.',microphone:'Mikrofon'},
@@ -22,7 +22,7 @@ function close(hero){
  const btn=hero?.querySelector('.lw53-avatar');if(btn)btn.setAttribute('aria-expanded','false');
 }
 function speak(hero){
- hero?.querySelector('.lw53-video')?.__lw54Greet?.();
+ hero?.__lw55Controller?.greet?.();
  if(!('speechSynthesis' in window))return;
  try{window.speechSynthesis.cancel();const phrase=new SpeechSynthesisUtterance('안녕하세요! 저는 우진이에요. 같이 한국어를 배워요!');phrase.lang='ko-KR';phrase.rate=.78;phrase.pitch=1;phrase.onstart=()=>hero.classList.add('lw53-speaking');phrase.onend=phrase.onerror=()=>hero.classList.remove('lw53-speaking');window.speechSynthesis.speak(phrase)}catch(e){console.warn('Woo Jin voice',e)}
 }
@@ -55,47 +55,66 @@ function mic(hero){
   r.start();
  }catch(e){status.textContent=d.notSupported}
 }
-/* One natural greeting cycle (5 seconds forward, 5 seconds back); never loop continuously. */
-const LW54_GREETING_SECONDS=10.08;
-const LW54_REST_MILLIS=60000;
-function lw54Control(video,hero){
- let stopped=false,replayTimer=null;
- function clearReplay(){if(replayTimer!==null){clearTimeout(replayTimer);replayTimer=null}}
- function scheduleReplay(){
-  clearReplay();
-  replayTimer=setTimeout(()=>{
-   replayTimer=null;
-   if(!hero.isConnected){stopped=true;return}
-   if(document.hidden){scheduleReplay();return}
-   startGreeting();
-  },LW54_REST_MILLIS);
+/* Idle stays active for the whole visit. Greeting overlays briefly, once at start and again every 60 seconds. */
+const LW55_GREETING_INTERVAL=60000;
+let lw55Controller=null;
+function lw55Control(idle,greet,hero){
+ let timer=null,destroyed=false,startedAt=0,greetingActive=false;
+ function clear(){if(timer!==null){clearTimeout(timer);timer=null}}
+ function stopGreeting(){
+  if(destroyed||!greetingActive)return;
+  greetingActive=false;
+  hero.classList.remove('lw55-greeting-active');
+  greet.pause();
  }
- function finishGreeting(){
-  if(stopped)return;
-  stopped=true;
-  video.pause();
-  // Keep the last rendered frame displayed while Woo Jin is idle.
-  if(video.readyState>=2){try{video.currentTime=Math.min(LW54_GREETING_SECONDS,Math.max(.1,video.duration-.1))}catch(_){}}
-  scheduleReplay();
+ function schedule(){
+  clear();
+  const elapsed=Date.now()-startedAt;
+  timer=setTimeout(()=>{
+   timer=null;
+   if(destroyed||!hero.isConnected){destroy();return}
+   if(document.hidden){timer=setTimeout(schedule,1000);return}
+   startGreeting();
+  },Math.max(0,LW55_GREETING_INTERVAL-elapsed));
  }
  function startGreeting(){
-  if(!hero.isConnected)return;
-  clearReplay();stopped=false;
-  try{video.currentTime=0}catch(_){}
-  const promise=video.play();
-  if(promise&&promise.catch)promise.catch(()=>{finishGreeting()});
+  if(destroyed||!hero.isConnected)return;
+  stopGreeting();
+  startedAt=Date.now();
+  greetingActive=true;
+  try{greet.currentTime=0}catch(_){}
+  hero.classList.add('lw55-greeting-active');
+  // The idle layer NEVER stops underneath the short greeting.
+  const play=greet.play();
+  if(play&&typeof play.catch==='function')play.catch(()=>stopGreeting());
+  schedule();
  }
- video.loop=false;
- video.removeAttribute('loop');
- video.addEventListener('timeupdate',()=>{
-  if(!stopped && video.currentTime>=LW54_GREETING_SECONDS-.08)finishGreeting();
- });
- video.addEventListener('ended',finishGreeting);
- video.addEventListener('error',()=>{clearReplay();video.style.display='none'});
- video.__lw54Greet=function(){if(!stopped)return;startGreeting()};
- video.__lw54GetState=()=>({stopped,resting:replayTimer!==null,currentTime:video.currentTime});
- video.addEventListener('loadedmetadata',()=>{if(video.duration>0&&video.duration<LW54_GREETING_SECONDS)console.warn('Woo Jin shorter than greeting segment')},{once:true});
- startGreeting();
+ function destroy(){
+  destroyed=true;clear();idle.pause();greet.pause();
+  hero.classList.remove('lw55-greeting-active');
+  document.removeEventListener('visibilitychange',handleVisibility);
+ }
+ function handleVisibility(){
+  if(destroyed)return;
+  if(document.hidden){greet.pause();idle.pause()}
+  else{
+   idle.play().catch(()=>{});
+   if(greetingActive)greet.play().catch(()=>stopGreeting());
+   if(Date.now()-startedAt>=LW55_GREETING_INTERVAL){startGreeting()}
+  }
+ }
+ function state(){return{idlePaused:idle.paused,greetingActive,secondsUntilNext:Math.max(0,(LW55_GREETING_INTERVAL-(Date.now()-startedAt))/1000),greetingTime:greet.currentTime,destroyed}}
+ greet.loop=false;greet.removeAttribute('loop');
+ greet.addEventListener('ended',stopGreeting);
+ greet.addEventListener('timeupdate',()=>{if(greetingActive&&greet.currentTime>=4.9)stopGreeting()});
+ greet.addEventListener('error',()=>{greet.style.display='none';stopGreeting()});
+ idle.addEventListener('error',()=>{idle.style.display='none'});
+ document.addEventListener('visibilitychange',handleVisibility);
+ idle.play().catch(()=>{idle.style.display='none'});
+ // Avoid a black first frame: greeting starts once metadata is available.
+ if(greet.readyState>=1)startGreeting();
+ else greet.addEventListener('loadedmetadata',startGreeting,{once:true});
+ return{greet:startGreeting,destroy,state};
 }
 function install(){
  const hero=document.querySelector('#main .lw48-hero');
@@ -104,9 +123,14 @@ function install(){
  const d=dict();const canAnimate=!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
  const layer=document.createElement('div');layer.className='lw53-motion';layer.setAttribute('aria-hidden','true');
  if(canAnimate){
-  const v=document.createElement('video');v.className='lw53-video';v.src=VID;v.poster=POSTER;v.muted=true;v.defaultMuted=true;v.loop=false;v.autoplay=false;v.playsInline=true;v.preload='metadata';v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('disablepictureinpicture','');
-  layer.appendChild(v);
-  lw54Control(v,hero);
+  const makeVideo=(url,name,loop)=>{
+   const v=document.createElement('video');v.className='lw53-video '+name;v.src=url;v.poster=POSTER;v.muted=true;v.defaultMuted=true;v.loop=loop;v.autoplay=false;v.playsInline=true;v.preload='auto';v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('disablepictureinpicture','');v.setAttribute('muted','');return v;
+  };
+  const idle=makeVideo(IDLE_VID,'lw55-idle-video',true);
+  const greeting=makeVideo(GREETING_VID,'lw55-greeting-video',false);
+  layer.append(idle,greeting);
+  lw55Controller=lw55Control(idle,greeting,hero);
+  hero.__lw55Controller=lw55Controller;
  }
  const hotspot=document.createElement('button');hotspot.className='lw53-avatar';hotspot.type='button';hotspot.setAttribute('aria-label',d.label);hotspot.setAttribute('aria-expanded','false');hotspot.setAttribute('aria-controls','lw53-panel');hotspot.innerHTML='<span class="lw53-avatar-label"><span class="lw53-dot"></span>Woo Jin <span aria-hidden="true">›</span></span>';
  const panel=document.createElement('section');panel.className='lw53-panel';panel.id='lw53-panel';panel.hidden=true;panel.setAttribute('aria-hidden','true');panel.setAttribute('aria-label',d.label);
@@ -120,8 +144,8 @@ function install(){
  panel.querySelector('.lw53-coach').addEventListener('click',()=>coach());
 }
 const oldRender=typeof render==='function'?render:null;
-if(oldRender){render=function(){let result=oldRender.apply(this,arguments);install();return result}}
-window.addEventListener('pagehide',()=>{if(recognition)try{recognition.abort()}catch(_){}});
+if(oldRender){render=function(){if(lw55Controller){lw55Controller.destroy();lw55Controller=null}let result=oldRender.apply(this,arguments);install();return result}}
+window.addEventListener('pagehide',()=>{if(recognition)try{recognition.abort()}catch(_){};if(lw55Controller){lw55Controller.destroy();lw55Controller=null}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const hero=document.querySelector('.lw53-hero');if(hero?.classList.contains('lw53-open'))close(hero)}});
 install();
 })();
