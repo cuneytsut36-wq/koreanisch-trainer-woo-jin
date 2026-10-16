@@ -1,0 +1,19 @@
+/* LinguaWorld V51 — stronger cinematic motion / three distinct accents.
+   Korea: sakura-pink · Germany: sunny yellow · England: cool blue.
+   Page background stays white; selected styling only alters card and accents. */
+html body .lw36-welcome.lw45-welcome.lw50-welcome{background:#fbfaf7!important;color:#11192f!important}
+html body .lw50-welcome{--lw51-accent:#f45092;--lw51-soft:rgba(255,103,163,.13);--lw51-dark:#a92a58}
+html body .lw50-welcome[data-preview="ko"]{--lw51-accent:#f45092;--lw51-soft:rgba(255,103,163,.13);--lw51-dark:#a92a58}
+html body .lw50-welcome[data-preview="de"]{--lw51-accent:#ffd531;--lw51-soft:rgba(255,213,49,.16);--lw51-dark:#805e00}
+html body .lw50-welcome[data-preview="en"]{--lw51-accent:#198cf0;--lw51-soft:rgba(25,140,240,.12);--lw51-dark:#1260a7}
+html body .lw50-welcome .lw45-world.selected{border:2px solid var(--lw51-accent)!important;box-shadow:0 0 0 2px var(--lw51-soft),0 9px 24px #2c323b2b!important}
+html body .lw50-welcome .lw45-world.selected .lw45-arrow{background:var(--lw51-accent)!important;border:1px solid var(--lw51-accent)!important;box-shadow:0 7px 18px var(--lw51-soft)!important;color:#fff!important}
+html body .lw50-welcome[data-preview="de"] .lw45-world.selected .lw45-arrow{color:#273044!important}
+html body .lw50-welcome .lw45-world:active{transform:scale(.985)!important}
+html body .lw50-welcome .lw50-video{transition:opacity .7s ease!important;will-change:opacity}
+html body .lw50-welcome .lw45-scene{background-color:#fbfaf7!important}
+html body .lw50-welcome .lw45-scene:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:linear-gradient(to bottom,rgba(255,255,255,0) 43%,rgba(251,250,247,.08) 64%,rgba(251,250,247,.85) 82%,#fbfaf7 96%)!important}
+html body .lw50-welcome .lw50-instruction{color:var(--lw51-dark)!important;font-weight:600!important;background:#ffffffb8!important;padding:6px 8px!important;border-radius:10px!important}
+html body .lw50-welcome .lw45-lower h1{color:#10182d!important}
+html body .lw50-welcome .lw45-wordmark.lw49-branded{filter:none!important}
+@media(prefers-reduced-motion:reduce){html body .lw50-welcome .lw50-video{display:none!important}}
