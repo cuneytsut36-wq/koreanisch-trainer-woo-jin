@@ -1,0 +1,26 @@
+/* V53 -- Woo Jin as an animated, tappable character in the Seoul homepage hero */
+html[data-lw48] #main .lw48-hero.lw53-hero{background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png")!important;background-position:center center!important;background-size:cover!important;isolation:isolate!important;overflow:visible!important}
+html[data-lw48] #main .lw53-hero .lw53-motion{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none;background:transparent;border-radius:0}
+html[data-lw48] #main .lw53-hero .lw53-video{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center center;pointer-events:none}
+html[data-lw48] #main .lw53-hero:after{z-index:1!important;background:linear-gradient(90deg,rgba(251,250,247,.77),rgba(251,250,247,.05) 66%)!important}
+html[data-lw48] #main .lw53-hero .lw48-hero-text{position:relative;z-index:2!important;pointer-events:none}
+html[data-lw48] #main .lw53-hero .lw53-avatar{position:absolute!important;z-index:3!important;right:0!important;top:0!important;width:52%!important;height:94%!important;min-height:0!important;background:transparent!important;border:0!important;box-shadow:none!important;cursor:pointer!important;-webkit-tap-highlight-color:transparent;color:#164d45;outline-offset:-5px!important;padding:0!important;touch-action:manipulation!important}
+html[data-lw48] #main .lw53-hero .lw53-avatar-label{position:absolute;bottom:11px;right:8px;display:flex;align-items:center;gap:6px;padding:6px 9px;background:#ffffffdc;color:#1f5b50;font-size:11px;font-weight:750;border-radius:999px;border:1px solid #dfebe3;box-shadow:0 3px 14px #31463e1f;backdrop-filter:blur(7px)}
+html[data-lw48] #main .lw53-hero .lw53-dot{width:7px;height:7px;border-radius:100%;background:#30ac81;box-shadow:0 0 0 3px #39b78a18;flex:none}
+html[data-lw48] #main .lw53-hero.lw53-open .lw53-avatar-label,html[data-lw48] #main .lw53-hero.lw53-listening .lw53-avatar-label{background:#e8f7ef}
+html[data-lw48] #main .lw53-hero.lw53-speaking .lw53-dot{animation:lw53-pulse .55s ease-in-out infinite alternate}
+@keyframes lw53-pulse{from{box-shadow:0 0 0 1px #1fa37320}to{box-shadow:0 0 0 8px #1fa37325}}
+html[data-lw48] #main .lw53-hero .lw53-panel{position:absolute;z-index:15;right:0;top:calc(100% - 8px);width:min(100%,295px);padding:13px 14px;background:#fffffff9;border:1px solid #dcebe3;border-radius:15px;box-shadow:0 12px 30px #1a303e26;backdrop-filter:blur(8px);color:#1c2731}
+html[data-lw48] #main .lw53-hero .lw53-panel[hidden]{display:none!important}
+html[data-lw48] #main .lw53-hero .lw53-panel-top{display:flex;align-items:center;justify-content:space-between}
+html[data-lw48] #main .lw53-hero .lw53-panel-top strong{font-size:15px;color:#132c29;font-weight:800}
+html[data-lw48] #main .lw53-hero .lw53-close{display:grid;place-items:center;width:30px;height:30px;min-width:30px;padding:0;background:#f5f8f5;color:#334b45;font-size:20px;border:1px solid #e1e9e4;border-radius:50%}
+html[data-lw48] #main .lw53-hero .lw53-panel p{font-size:12px;color:#4f6065;line-height:1.46;margin:5px 0 11px}
+html[data-lw48] #main .lw53-hero .lw53-panel-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+html[data-lw48] #main .lw53-hero .lw53-panel-actions button{font-size:11px;font-weight:650;padding:10px 7px;min-width:0;min-height:40px;border-radius:10px;border:1px solid #dfebe4;background:#eef7f1;color:#245e4d;box-shadow:none!important}
+html[data-lw48] #main .lw53-hero .lw53-panel-actions .lw53-coach{grid-column:1/-1;background:#2c8a6c;color:#fff;border-color:#2c8a6c}
+html[data-lw48] #main .lw53-hero .lw53-panel .lw53-status{margin:6px 0 0;font-size:11px;color:#516861}
+html[data-lw48] #main .lw53-hero .lw53-status:empty{display:none}
+html[data-lw48] #main .lw53-hero:has(.lw53-panel:not([hidden])){margin-bottom:155px!important}
+@media(max-width:400px){html[data-lw48] #main .lw53-hero .lw53-avatar-label{font-size:10px;padding:5px 7px;right:2px;bottom:8px}html[data-lw48] #main .lw53-hero .lw53-avatar{width:49%!important}html[data-lw48] #main .lw53-hero .lw53-panel{width:min(100%,280px)}}
+@media(prefers-reduced-motion:reduce){html[data-lw48] #main .lw53-hero .lw53-video{display:none!important}html[data-lw48] #main .lw53-hero .lw53-dot{animation:none!important}}
