@@ -3,13 +3,13 @@
 (function(){
 'use strict';
 const portraits={
- ko:'https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/77dcbb63-fce5-463b-a25f-de16f2122a09.png',
- de:'https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/231cb641-672d-4a79-b738-844d2214a849.png',
- en:'https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/34688424-985b-4ec8-9f4e-36916212492e.png'
+ ko:window.LWPrivacy.asset('https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/77dcbb63-fce5-463b-a25f-de16f2122a09.png','privacy-scene.svg'),
+ de:window.LWPrivacy.asset('https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/231cb641-672d-4a79-b738-844d2214a849.png','privacy-scene.svg'),
+ en:window.LWPrivacy.asset('https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/34688424-985b-4ec8-9f4e-36916212492e.png','privacy-scene.svg')
 };
 const art={
- map:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_165144_07658f79-7120-4560-b618-0148832db437.png',
- korea:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png'
+ map:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_165144_07658f79-7120-4560-b618-0148832db437.png','privacy-scene.svg'),
+ korea:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png','privacy-scene.svg')
 };
 const W={
  ko:{flag:'🇰🇷',name:'Korea',label:'한국어',guide:'Woo Jin',lang:'Koreanisch',hello:'안녕하세요!'},
