@@ -14,7 +14,7 @@ html[data-lw48] #main .lw48-world-pill strong{font-size:12px!important;color:#1d
 html[data-lw48] #main .lw48-caret{font-size:17px!important;margin-left:2px!important;color:#52625e!important}
 html[data-lw48] #main .lw48-settings-btn{width:37px!important;min-width:37px!important;padding:0!important}
 html[data-lw48] #main .lw48-settings-btn svg{width:18px!important;height:18px!important}
-html[data-lw48] #main .lw48-hero{position:relative!important;isolation:isolate!important;width:100%!important;height:clamp(236px,70vw,333px)!important;min-height:236px!important;margin:0!important;padding:29px 11px 22px!important;display:block!important;overflow:hidden!important;border:0!important;border-radius:0!important;background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_090559_a27c54cd-6520-4a64-93dc-f8e9f8330bf3.png")!important;background-color:#fbfaf7!important;background-size:cover!important;background-repeat:no-repeat!important;background-position:center center!important;box-shadow:none!important}
+html[data-lw48] #main .lw48-hero{position:relative!important;isolation:isolate!important;width:100%!important;height:clamp(236px,70vw,333px)!important;min-height:236px!important;margin:0!important;padding:29px 11px 22px!important;display:block!important;overflow:hidden!important;border:0!important;border-radius:0!important;background-image:url("privacy-scene.svg")!important;background-color:#fbfaf7!important;background-size:cover!important;background-repeat:no-repeat!important;background-position:center center!important;box-shadow:none!important}
 html[data-lw48] #main .lw48-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fbfaf7b0,transparent 63%);z-index:0}
 html[data-lw48] #main .lw48-hero-text{position:relative;z-index:1;width:62%;max-width:305px}
 html[data-lw48] #main .lw48-greeting{font-size:clamp(14px,3.8vw,18px)!important;font-weight:540!important;color:#1b2930!important;margin:0 0 5px!important;line-height:1.2!important}
@@ -65,7 +65,7 @@ html body.lw48-modal-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){html[data-lw48] #main .lw48-feature{transition:none!important}}
 
 /* V48.1 illustrated feature tiles, matching the reference mockup. */
-html[data-lw48] #main .lw48-feature-art{display:block!important;flex:0 0 48px!important;width:48px!important;height:48px!important;min-height:48px!important;margin:0 0 7px!important;background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_081919_d1de782b-cfde-4683-b466-1b0aa9b1cab8.png")!important;background-size:200% 200%!important;background-repeat:no-repeat!important;background-color:#fafaf7!important;border:0!important;border-radius:10px!important}
+html[data-lw48] #main .lw48-feature-art{display:block!important;flex:0 0 48px!important;width:48px!important;height:48px!important;min-height:48px!important;margin:0 0 7px!important;background-image:url("privacy-scene.svg")!important;background-size:200% 200%!important;background-repeat:no-repeat!important;background-color:#fafaf7!important;border:0!important;border-radius:10px!important}
 html[data-lw48] #main .lw48-feature-book .lw48-feature-art{background-position:0 0!important}
 html[data-lw48] #main .lw48-feature-cards .lw48-feature-art{background-position:100% 0!important}
 html[data-lw48] #main .lw48-feature-headphones .lw48-feature-art{background-position:0 100%!important}
