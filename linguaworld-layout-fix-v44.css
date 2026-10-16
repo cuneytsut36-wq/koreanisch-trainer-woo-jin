@@ -2,7 +2,7 @@
 html[data-lw35] body{background:#f7f8f5!important;color:#18252b!important}
 html[data-lw35] #main{padding-top:calc(14px + env(safe-area-inset-top,0px))!important;padding-bottom:calc(145px + env(safe-area-inset-bottom,0px))!important}
 html[data-lw35] #main :is(.lw35-header,.lw34-topbar){margin-top:0!important}
-html[data-lw35] #main .lw35-home .lw35-hero{position:relative!important;background:linear-gradient(90deg,#f6f9f4f2 0%,#f8faf0c9 56%,#ffffff20 100%),url('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png') center/cover!important}
+html[data-lw35] #main .lw35-home .lw35-hero{position:relative!important;background:linear-gradient(90deg,#f6f9f4f2 0%,#f8faf0c9 56%,#ffffff20 100%),url('privacy-scene.svg') center/cover!important}
 html[data-lw35] #main .lw35-home .lw35-hero .lw30-hero-veil{opacity:0!important;background:transparent!important}
 html[data-lw35] #main .lw35-home .lw35-hero :is(.lw30-hero-words,.lw30-title,.lw30-foreign,.lw30-language,.lw30-hero-words p){color:#162b28!important;-webkit-text-fill-color:#162b28!important;text-shadow:none!important;opacity:1!important}
 html[data-lw35] #main .lw35-home .lw35-hero .lw30-hero-words{z-index:4!important}
