@@ -38,3 +38,27 @@ html[data-lw48] #main .lw53-hero::before{
  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%)!important;
  mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 100%)!important;
 }
+
+/* V55: Two-state avatar. Quiet idle is always playing; greeting is only a short overlay. */
+html[data-lw48] #main .lw53-hero .lw53-motion{isolation:isolate!important}
+html[data-lw48] #main .lw53-hero .lw53-motion .lw55-idle-video{z-index:0!important;opacity:1!important;visibility:visible!important}
+html[data-lw48] #main .lw53-hero .lw53-motion .lw55-greeting-video{
+ z-index:2!important;visibility:hidden!important;opacity:0!important;
+ transition:opacity .24s ease!important;will-change:opacity;
+}
+html[data-lw48] #main .lw53-hero.lw55-greeting-active .lw53-motion .lw55-greeting-video{
+ visibility:visible!important;opacity:1!important;
+}
+/* A very light drifting blossom breeze persists during both animation states. */
+html[data-lw48] #main .lw53-hero .lw53-motion::after{
+ content:"";position:absolute;z-index:3;inset:0;pointer-events:none;
+ background-image:radial-gradient(ellipse 4px 3px at 80% 34%,#f6bfdbba 60%,transparent 72%),radial-gradient(ellipse 3px 5px at 90% 70%,#f3b1caaa 60%,transparent 72%),radial-gradient(ellipse 4px 3px at 61% 19%,#ffd0e2ac 60%,transparent 72%);
+ animation:lw55-breeze 12s ease-in-out infinite alternate;
+ opacity:.7;
+}
+@keyframes lw55-breeze{from{transform:translate3d(8px,-4px,0);opacity:.42}to{transform:translate3d(-12px,13px,0);opacity:.78}}
+@media(prefers-reduced-motion:reduce){
+ html[data-lw48] #main .lw53-hero .lw53-motion .lw55-idle-video,
+ html[data-lw48] #main .lw53-hero .lw53-motion .lw55-greeting-video{display:none!important}
+ html[data-lw48] #main .lw53-hero .lw53-motion::after{display:none!important}
+}
