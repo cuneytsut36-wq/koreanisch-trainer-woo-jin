@@ -4,10 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0d1021" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icons/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="description" content="Anime Bid Battle: Fordere deine Freunde zur geheimen Anime-Charakter-Auktion heraus." />
-  <title>BID BATTLE — Anime Auction Arena</title>
+  <title>BID BATTLE — Anime Auction Showdown</title>
+  <meta name="theme-color" content="#090b12" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg:#0c0e1b; --bg2:#111428; --surface:#171a30; --surface2:#1e223b;
@@ -99,16 +106,96 @@
     @media(max-width:680px){.gamehead>.pill{display:none}.shell{padding:17px 14px 35px}.topbar{margin-bottom:23px}.brand{font-size:24px}.pill{font-size:10px;padding:8px 10px}.hero{grid-template-columns:1fr;gap:14px;padding:5px 0 20px}.hero h1{font-size:clamp(72px,17vw,112px);margin:14px 0 20px}.hero p{font-size:14px;margin:0}.hero-art{display:none}.set-card{padding:18px;border-radius:21px}.features{margin:18px 0 22px}.gamehead{margin:0 0 13px}.gamehead h1{font-size:41px}.round-tracker{margin-bottom:14px}.game-grid{gap:8px}.auction-panel{padding:10px;border-radius:16px}.stage-top{padding:5px 7px 12px}.character-stage{height:245px;padding:18px}.character-symbol{font-size:118px;right:12px;top:7px}.character-stage h2{font-size:39px}.team-panel{padding:10px;min-width:0;border-radius:14px}.team-name{font-size:22px;margin-bottom:8px}.budget{padding:9px;margin-bottom:10px}.budget-value{font-size:25px}.budget-label{font-size:10px}.roster-item{padding:5px;min-height:43px;gap:6px}.roster-avatar{width:29px;height:29px;font-size:15px;border-radius:7px}.roster-info strong{font-size:10px}.roster-info small{font-size:9px}.roster-power{font-size:17px}.slot-index{font-size:14px}.team-kicker{font-size:9px}.final-panel{padding:11px}.final-name{font-size:25px}.final-score{font-size:55px}.final-grid{gap:8px}.end-header h1{font-size:53px}.final-panel .result-row{font-size:11px;padding:8px 7px}.topright{gap:5px}.tiny-btn{font-size:11px;padding:8px 9px}}
     @media(max-width:370px){.universe{padding:10px 7px}.uni-title{font-size:11px}.uni-sub{font-size:9px}.uni-icon{width:27px;height:27px}.name-input{padding:10px}.team-name{font-size:19px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+    /* BID BATTLE 2.0 — visual game system */
+    :root{--bg:#070910;--bg2:#0d101c;--surface:#111523;--surface2:#191e30;--text:#f8f7fd;--muted:#929bb4;--border:#30384d;--purple:#a78bfa;--purple2:#6a4ab1;--orange:#ffb24a;--green:#60e2ac;--pink:#ff6b8f;--shadow:0 26px 75px #0009;}
+    html{background:#080a12}body{background:#080a12;color:#f6f6fc;line-height:1.5;font-weight:500;}
+    body::before{background:radial-gradient(ellipse 38% 40% at 0% 0%,#31224b7c,transparent 82%),radial-gradient(ellipse 30% 40% at 95% 10%,#5a26315a,transparent 80%),radial-gradient(ellipse 40% 44% at 48% 95%,#192b514f,transparent 87%),#080a12;z-index:-2}
+    body::after{opacity:.23;background-image:linear-gradient(#ffffff09 1px,transparent 1px),linear-gradient(90deg,#ffffff09 1px,transparent 1px);background-size:62px 62px;mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 85%,transparent)}
+    ::selection{background:#ffbd70;color:#11131e}
+    .shell{max-width:1370px;padding:21px 36px 55px}.topbar{padding:12px 0 24px;border-bottom:1px solid #ffffff12;margin-bottom:40px;position:relative;z-index:5}
+    .brand{font-family:'Barlow Condensed',Impact,sans-serif;font-size:31px;letter-spacing:.2px;font-weight:900;gap:11px}.brand b{color:#ffbf65}.logo{background:#f4a847;border-radius:10px;transform:skew(-7deg);height:41px;width:41px;box-shadow:0 0 22px #f8a85a3b;font-size:22px}
+    .pill{border:1px solid #4b3d45;background:#ffb96912;color:#f8c67b;letter-spacing:1.3px;font-size:10px}.tiny-btn{background:#ffffff09;color:#d2d7e6;min-height:36px;transition:.2s}
+    .tiny-btn:hover{background:#ffffff14;transform:translateY(-1px)}.eyebrow{font-size:11px;color:#ffbe67;letter-spacing:2px}
+    .hero{grid-template-columns:minmax(0,1.16fr) minmax(385px,.88fr);align-items:center;gap:45px;min-height:625px;padding:14px 0 62px}
+    .hero-left{position:relative;min-width:0}.hero-pretitle{display:inline-flex;align-items:center;gap:10px;letter-spacing:2.2px;font-weight:900;color:#bdbed2;font-size:11px;margin-bottom:19px}
+    .blinking-dot,.live-indicator{display:inline-block;flex:none;height:7px;width:7px;border-radius:99px;background:#68f5bb;box-shadow:0 0 0 4px #6be6b51a,0 0 19px #64efaeaa;animation:blink 2s ease-in-out infinite}@keyframes blink{50%{opacity:.55}}
+    .hero h1{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;letter-spacing:-1.5px;font-size:clamp(72px,8.8vw,128px);line-height:.79;margin:6px 0 20px;color:#faf9ff;text-shadow:0 13px 39px #0007}
+    .hero h1 em{font-style:normal;background:linear-gradient(94deg,#ffc169,#ff957b 60%,#fe7eaa);background-clip:text;-webkit-background-clip:text;color:transparent;letter-spacing:-2px}
+    .hero h1 .hero-stop{color:#ffb957;text-shadow:0 0 32px #f9a15a77}.hero p{font-size:15px;line-height:1.75;color:#aeb5cb;max-width:580px}.hero p strong{color:#f5f3ff}
+    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:23px}.hero-badges span{border:1px solid #ffffff24;background:#ffffff0b;border-radius:7px;padding:9px 13px;font-size:10px;font-weight:900;letter-spacing:.9px;color:#dddce8}
+    .hero-showcase{position:relative;height:240px;margin:12px 0 -18px;isolation:isolate;overflow:hidden;max-width:590px}
+    .hero-shine{position:absolute;inset:auto 10% -80px;width:80%;height:220px;background:radial-gradient(ellipse,#ffba6850,transparent 68%);filter:blur(27px)}
+    .showcase-card{position:absolute;width:150px;height:210px;border:2px solid #ffffff60;border-radius:14px;overflow:hidden;background:#202539;box-shadow:0 20px 45px #000b}
+    .showcase-left{left:16%;top:25px;transform:rotate(-13deg);animation:floatCardA 5s ease-in-out infinite}.showcase-right{left:52%;top:18px;transform:rotate(11deg);animation:floatCardB 5.3s ease-in-out infinite}
+    @keyframes floatCardA{50%{transform:translateY(-9px) rotate(-11deg)}}@keyframes floatCardB{50%{transform:translateY(10px) rotate(10deg)}}
+    .showcase-left{border-color:#9985f4}.showcase-right{border-color:#ffb45d}.showcase-card .portrait-wrap{position:absolute;inset:0}
+    .showcase-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,#0d1024 5%,transparent 60%)}
+    .showcase-rank{position:absolute;z-index:2;top:9px;left:9px;background:#111628b0;border:1px solid #ffffff60;border-radius:6px;color:#ffcf81;font-size:10px;padding:3px 7px;font-weight:900;letter-spacing:1.1px}
+    .showcase-caption{position:absolute;z-index:2;bottom:12px;left:12px;right:12px;font-family:'Barlow Condensed',Impact,sans-serif;color:white;font-size:25px;font-weight:900;line-height:1;display:flex;justify-content:space-between;align-items:end}
+    .showcase-caption b{color:#ffca7a;font-size:19px}.showcase-vs{position:absolute;z-index:3;left:48%;top:101px;transform:translateX(-50%) rotate(-9deg);background:#ffb958;color:#13111a;border:3px solid #0e1020;box-shadow:0 6px 26px #000a;padding:8px 13px;border-radius:9px;font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;font-size:27px}
+    .set-card{border:1px solid #40465e;border-radius:26px;background:linear-gradient(155deg,#222336f2,#11131ff7 70%);padding:26px;box-shadow:0 30px 110px #0009,0 0 65px #4f405322;backdrop-filter:blur(14px)}
+    .set-card::before{background:radial-gradient(circle,#ee986d1a,transparent 70%)}.set-header{display:flex;align-items:center;gap:14px;margin:4px 0 28px}.set-header .set-icon{height:52px;width:52px;border:1px solid #ffc67c55;background:#ffbc691b;display:grid;place-items:center;border-radius:15px;font-size:24px;flex:none}
+    .set-header h2{margin:2px 0 1px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:33px;font-weight:900;line-height:1}.set-header h2 span{color:#ffba65}.set-header p{font-size:11px;color:#949cb5;margin:6px 0 0;line-height:1.3}.section-label{font-size:10px;letter-spacing:1.35px;color:#d0cbd9;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+    .section-line{width:18px;height:1px;background:#4c5267}.universes{gap:10px;margin-bottom:25px}.universe{height:128px;min-height:128px;position:relative;overflow:hidden;isolation:isolate;border:1px solid #475069;background:#191a29;padding:0;display:flex;align-items:end;border-radius:15px}
+    .universe:hover{transform:translateY(-3px);border-color:#fff8}.universe.active{border:2px solid #ffbe69;background:#191929;box-shadow:0 0 0 1px #ffbd6e22,0 0 35px #f2a6522e}
+    .uni-background{position:absolute;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(140deg,#343953,#191929)}.universe:nth-child(1) .uni-background{background:linear-gradient(140deg,#c77a40,#343954)}.universe:nth-child(2) .uni-background{background:linear-gradient(140deg,#9f4649,#313e54)}.universe:nth-child(3) .uni-background{background:linear-gradient(140deg,#486aab,#30315a)}.universe:nth-child(4) .uni-background{background:linear-gradient(140deg,#b68b37,#46386b)}
+    .uni-background .portrait-wrap{position:absolute;inset:0}.uni-background img{object-position:50% 30%!important;filter:saturate(.88)}
+    .universe::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#090c1be8 5%,#090c1b1a 72%)}
+    .uni-details{display:flex;flex-direction:column;align-items:flex-start;padding:12px 11px;width:100%;text-shadow:0 2px 5px #000b}.uni-details b{font-family:'Barlow Condensed',Impact,sans-serif;font-size:21px;color:white;font-weight:900;line-height:1.05}.uni-details small{font-size:9px;letter-spacing:1.3px;font-weight:900;color:#d9cfdf;margin-top:4px}
+    .uni-check{position:absolute;top:8px;right:8px;border:1px solid #ffffff85;border-radius:50%;font-size:10px;background:#ffb55e;color:#24141b;display:none;width:21px;height:21px;align-items:center;justify-content:center;font-weight:900}.universe.active .uni-check{display:flex}
+    .names{margin-bottom:10px}.field label{font-size:10px;color:#9aa3c1;letter-spacing:1.2px}.name-input{background:#101522;border-color:#3a425c;min-width:0;padding:14px 12px;border-radius:11px;font-size:13px;font-weight:800}.name-input:focus{border-color:#ffba68;box-shadow:0 0 0 3px #ffba6815}
+    .game-rules-mini{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #373f55;background:#0d1220;border-radius:12px;margin:13px 0 18px;padding:12px 5px;text-align:center}
+    .game-rules-mini>div{display:grid;gap:3px}.game-rules-mini>div+div{border-left:1px solid #343c52}.game-rules-mini b{color:#ffbf72;font-family:'Barlow Condensed',Impact,sans-serif;font-size:24px;line-height:1}.game-rules-mini span{font-size:8px;letter-spacing:.9px;font-weight:900;color:#828ca8}
+    .primary{background:linear-gradient(97deg,#ffcc77,#ffac55);color:#24161b;border-radius:11px;font-weight:900;letter-spacing:1.1px;box-shadow:0 8px 28px #ff9e5550;min-height:54px;gap:13px;transition:transform .16s,box-shadow .16s,filter .16s}.primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 34px #ffa65863}.primary span{font-size:21px;line-height:.5}.secondary{background:#191e2e;border-color:#49516b;border-radius:10px;letter-spacing:.7px}.subtext{font-size:9px;color:#7b849b;letter-spacing:1.1px;font-weight:900;margin-top:13px}
+    .portrait-wrap{position:relative;display:block;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#56617d,#1c2438 85%)}.portrait-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity .45s ease,transform .7s ease;position:relative;z-index:1;display:block}.portrait-wrap img.loaded{opacity:1}.portrait-fallback{display:grid;position:absolute;inset:0;place-items:center;font-family:'Barlow Condensed',Impact,sans-serif;font-size:58px;color:#ffdd8a7d;font-weight:900;background:radial-gradient(circle at 50% 35%,#f5aa6d22,transparent 65%)}
+    .showcase-card .portrait-fallback{font-size:110px}.portrait-wrap:has(img.loaded) .portrait-fallback{opacity:0}
+    /* Arena */
+    .arena-screen{max-width:1310px;margin:auto}.gamehead{align-items:center;margin:0 0 17px}.gamehead h1{font-size:62px;line-height:.92}.round-now{color:#ffbc68}.round-total{font-size:.56em;color:#66718d}.arena-separator{color:#68718d;margin:0 7px}.arena-status{font-weight:900;color:#c9d3de;font-size:10px;letter-spacing:1.5px;background:#ffffff0b;border:1px solid #41475e;padding:11px 16px;border-radius:9px;display:flex;gap:11px;align-items:center}
+    .round-tracker{margin-bottom:24px;gap:5px}.round-dot{height:6px;background:#333b51;border-radius:3px}.round-dot.past{background:#8175dd}.round-dot.current{background:#ffb855;box-shadow:0 0 14px #ffae6099;animation:trackPulse 1.5s ease-in-out infinite}@keyframes trackPulse{50%{filter:brightness(1.7)}}
+    .game-grid{grid-template-columns:minmax(204px,.92fr) minmax(370px,1.37fr) minmax(204px,.92fr);align-items:start;gap:16px}
+    .team-panel,.auction-panel,.final-panel,.history-panel{border:1px solid #3a4258;background:linear-gradient(155deg,#1a1f30,#101522);border-radius:18px;box-shadow:0 16px 54px #0006}.team-panel{padding:17px 14px;min-height:640px}.team-panel.team-a{border-top:3px solid #a68afa}.team-panel.team-b{border-top:3px solid #ffb767}.team-brandline{display:flex;justify-content:space-between;align-items:center;gap:5px}.team-kicker{font-size:10px;letter-spacing:1.25px;color:#c7bbf0}.team-b .team-kicker,.final-panel.b .team-kicker{color:#fbc07b}.team-count{font-size:9px;color:#7d8ba9;letter-spacing:1px;font-weight:900}
+    .team-name{font-size:36px;margin:5px 0 18px;line-height:.95}.budget{background:#0b1221;border:1px solid #303d58;border-radius:10px;padding:13px 12px;gap:8px}.budget>div{min-width:0;flex:1}.budget-label{display:block;font-size:9px;letter-spacing:.3px;color:#98a7c2}.budget-value{font-size:32px;white-space:nowrap;color:#a793fc}.team-b .budget-value{color:#ffc17e}.budget-bar{margin-top:9px;width:100%;height:5px;border-radius:5px;background:#303a50;display:block;overflow:hidden}.budget-bar i{height:100%;background:#a992f6;display:block;border-radius:5px;transition:width .4s}.team-b .budget-bar i{background:#ffc070}
+    .roster-header{display:flex;justify-content:space-between;color:#9da9c2;letter-spacing:1px;font-size:9px;font-weight:900;margin:22px 2px 11px}.roster-header span{color:#d8dcea}.team-roster{gap:9px}.roster-item{min-height:68px;gap:10px;padding:7px;background:#ffffff07;border-color:#364057;border-radius:10px}.roster-item:not(.empty){background:linear-gradient(110deg,#ffffff0e,#ffffff04)}.roster-item.empty{background:#11172594;border:1px dashed #3c455d}
+    .roster-avatar{height:53px;width:47px;border-radius:7px;background:linear-gradient(145deg,var(--ac),#172137);padding:0;overflow:hidden}.roster-avatar .portrait-wrap{height:100%;width:100%}.roster-avatar .portrait-fallback{font-size:25px}.roster-info strong{font-size:12px;color:#f1f1fa}.roster-info small{font-size:10px}.roster-power{font-size:21px;color:#ffce89;white-space:nowrap}.roster-power small{font-size:9px;color:#7d8fa8;letter-spacing:.3px}.slot-index{color:#505a73;font-size:21px}.slot-description{font-size:9px;color:#77849e;letter-spacing:1px;font-weight:900}.slot-plus{margin-left:auto;color:#3f4a60;font-size:20px;padding-right:7px}
+    .auction-panel{padding:15px;border-top:3px solid #ffb764;min-height:650px}.stage-top{padding:4px 5px 15px}.stage-top span:first-child{color:#efebf5;font-size:11px;display:flex;align-items:center;gap:10px;letter-spacing:1.35px}.stage-top em{font-style:normal;color:#75819e}.stage-top .live-indicator{background:#ff8f72;box-shadow:0 0 0 4px #ff98701b,0 0 14px #ffae70}.rarity{background:#e7a34a20;border:1px solid #ffc67d77;color:#ffce87;padding:7px 11px;font-size:10px}
+    .character-stage{height:380px;position:relative;border:1px solid #ffffff3a;border-radius:14px;overflow:hidden;padding:0;display:block;background:radial-gradient(ellipse at 68% 47%,var(--shade),transparent 69%),linear-gradient(145deg,#2d314d,#0a1220 78%)}
+    .character-stage::before{content:'';position:absolute;z-index:0;left:38%;top:14%;height:250px;width:250px;box-shadow:0 0 0 15px #ffffff06,0 0 0 65px #ffffff04;transform:none;border:1px solid #ffffff24}
+    .character-stage::after{z-index:2;background:linear-gradient(90deg,#0e1429e8 0%,#15192d40 45%,#0b12211c 100%),linear-gradient(0deg,#080b16ed,transparent 59%);pointer-events:none}
+    .stage-beam{position:absolute;z-index:0;width:400px;height:400px;right:-100px;top:-40px;background:radial-gradient(circle,var(--shade),transparent 65%);filter:blur(20px);animation:auraBeat 4s ease-in-out infinite}.stage-orbit{position:absolute;z-index:1;right:5%;top:16%;border:2px dashed #ffffff44;height:270px;width:270px;border-radius:50%;animation:spin 48s linear infinite}
+    @keyframes auraBeat{50%{opacity:.55;transform:scale(1.16)}}
+    .stage-portrait{position:absolute;inset:0 0 0 36%;width:64%;height:100%;z-index:1;background:transparent;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0%,#000 18%)}
+    .stage-portrait img{object-fit:cover;object-position:50% 17%;animation:artReveal .7s cubic-bezier(.14,.65,.34,1.1) both;transform-origin:center 30%;filter:contrast(1.06) saturate(1.07)}
+    @keyframes artReveal{from{transform:scale(1.23) translateY(23px)}to{transform:scale(1) translateY(0)}}.stage-portrait .portrait-fallback{background:radial-gradient(ellipse,#ffffff26,transparent 70%);font-size:185px}
+    .stage-sticker{position:absolute;z-index:4;right:14px;top:15px;background:#faba63;color:#221521;padding:9px 11px;font:900 16px/.81 'Barlow Condensed',Impact,sans-serif;transform:rotate(10deg);border:3px solid #111727;box-shadow:0 5px 15px #0007;text-align:center;letter-spacing:.3px}.card-copy{position:absolute;z-index:5;left:22px;bottom:20px;right:10px;max-width:95%;pointer-events:none}.character-index{font:900 11px 'DM Sans',sans-serif;color:#ffcb83;letter-spacing:1.4px}.character-stage h2{font-size:clamp(38px,4.5vw,61px);line-height:.87;max-width:95%;margin:8px 0 10px;text-shadow:0 3px 23px #000c}.character-description{font-size:12px;color:#e4dff1;letter-spacing:.5px}
+    .character-stats{margin:11px 0 8px}.stat{background:#101727;border-color:#364058;border-radius:10px;padding:10px 12px}.stat span{font-size:9px;color:#929cb8}.stat b{font-size:28px}.stat b small{font-size:12px;color:#8c91ac;font-family:DM Sans,sans-serif}
+    .bid-zone{padding:12px 4px 2px}.bid-title{font-size:26px}.bid-heading{align-items:center}.bid-side{background:#ffffff0b;padding:6px 8px;border-radius:7px;max-width:50%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bid-turn{margin:3px 0 8px;color:#9ba6be}.bid-turn strong{color:#e9e5f4}.bid-meter{margin:0 0 6px;display:flex;justify-content:space-between;align-items:center;border:1px solid #3a425e;border-radius:12px;background:#11182a;padding:10px 15px;text-align:left}.bid-meter-label{letter-spacing:1.3px;font-size:9px;font-weight:900;color:#909ab5}.bid-amount{font-size:59px;line-height:.8}.bid-euro{font-size:30px}.bid-remaining{text-align:right;font-size:9px;color:#8390a8;font-weight:900;letter-spacing:.9px}.bid-remaining strong{font:900 26px 'Barlow Condensed',Impact,sans-serif;color:#f0e9fa;letter-spacing:0}
+    .bid-slider{margin:13px 0 12px;height:6px;accent-color:#ffb75e}.quick-bids{margin:0 0 13px}.quick-bids button{border-radius:8px;padding:11px 6px;border-color:#404962;background:#20283a;font-size:10px;letter-spacing:.3px;transition:.18s}.quick-bids button:hover:not(:disabled){background:#40394a;transform:translateY(-2px)}.quick-bids button:last-child{color:#ffc87e;border-color:#8b693c}.bid-notice{font-size:10px;margin:11px 0 0}
+    .handoff{min-height:520px;border:1px solid #6f5c91;background:radial-gradient(ellipse at center,#2d244c,#0e1423 85%);gap:6px}.handoff-icon{font-size:65px;filter:drop-shadow(0 0 30px #b39cf78b);animation:float 3s ease-in-out infinite}.handoff h2{font-size:55px;line-height:.88;margin:12px 0}.handoff p{line-height:1.65}.handoff p strong{color:#ffc57e}.handoff button{margin-top:20px;font-size:11px}
+    .reveal{padding:25px 8px 10px}.reveal-emblem{font-size:62px;animation:victoryZoom .65s cubic-bezier(.18,.85,.24,1.2) both;filter:drop-shadow(0 0 30px #ffb96065)}@keyframes victoryZoom{from{transform:scale(.4) rotate(-20deg);opacity:0}to{transform:scale(1);opacity:1}}
+    .reveal h2{font-size:50px;overflow-wrap:anywhere}.reveal h2 span{color:#ffbd70}.reveal p{font-weight:800;color:#aeb6ce}.bid-compare{gap:10px;margin:22px 0}.compare-tile{border-radius:10px;border:1px solid #404961;padding:14px 8px;font-size:10px}.compare-tile b{font-size:40px;color:#ffc67e;margin-top:6px}.legend{background:#111725;border-color:#2d3449;color:#8994ad;padding:13px 15px;margin-top:21px}.legend-inline{letter-spacing:1px;font-weight:900;font-size:10px;color:#75829c;margin-top:16px}.foot{font-weight:600;letter-spacing:.2px}
+    /* Victory / team cards */
+    .end-header{margin-bottom:28px}.end-header h1{font-size:clamp(55px,8vw,100px);line-height:.86}.end-header h1 span{color:#ffbb69}.end-header p{letter-spacing:1px;text-transform:uppercase;font-weight:900;font-size:11px}
+    .winner-card{position:relative;overflow:hidden;max-width:840px;background:radial-gradient(ellipse at 50% -30%,#ffb55e68,transparent 67%),radial-gradient(ellipse at 20% 100%,#a180ff22,transparent 70%),#1a1928;border:1px solid #ffce8499;padding:28px 12px 35px;box-shadow:0 0 70px #ffad6332;isolation:isolate}
+    .winner-card::before{content:'';position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(60deg,transparent,transparent 26px,#ffffff06 27px,#ffffff06 29px)}
+    .trophy{font-size:56px;animation:float 3.5s ease-in-out infinite}.winner-tag{font-size:12px;color:#ffd88c}.winner-name{font-size:clamp(51px,8vw,93px);line-height:.9;text-transform:uppercase;text-shadow:0 5px 20px #0008}.winner-note{font-weight:800;font-size:11px;letter-spacing:.5px;margin-top:14px}
+    .confetti-sparks i{position:absolute;width:6px;height:13px;top:-18px;left:calc(4% + var(--i)*5.2%);background:#ffce82;animation:fall 3.4s linear infinite;animation-delay:calc(var(--i)*-.19s);opacity:.8;transform:rotate(25deg)}.confetti-sparks i:nth-child(3n){background:#ab93fd}.confetti-sparks i:nth-child(4n){background:#ef83a6}@keyframes fall{0%{top:-8%;transform:rotate(10deg)}100%{top:110%;transform:rotate(720deg)}}
+    .final-grid{max-width:940px;margin:0 auto}.final-panel{padding:18px;border-radius:17px}.final-name{font-size:37px}.final-score{font-size:69px}.final-score span{font-size:17px;color:#8490b0}.score-label{font-size:9px}.result-row{padding:5px 9px 5px 5px;align-items:center;gap:10px;min-height:55px}.result-row .portrait-wrap{height:44px;width:39px;flex:none;border-radius:7px}.result-row .portrait-fallback{font-size:21px}.result-row span{font-size:12px;flex:1}.result-row strong{font:900 24px 'Barlow Condensed',Impact,sans-serif;color:#fbc47d}.result-roster{gap:7px;margin:17px 0}.synergy-section{line-height:1.8}.final-actions .primary,.final-actions .secondary{min-height:48px;font-size:11px}
+    @media(max-width:1120px){.shell{padding:20px 24px 50px}.game-grid{grid-template-columns:minmax(170px,.9fr) minmax(320px,1.5fr) minmax(170px,.9fr);gap:10px}.team-panel{padding:13px 9px}.roster-power small{display:none}.hero{gap:18px}.hero h1{font-size:clamp(75px,9vw,110px)}}
+    @media(max-width:940px){.hero{grid-template-columns:1fr;gap:33px;max-width:710px;margin:0 auto}.hero-left{min-height:0}.hero h1{font-size:clamp(82px,14vw,125px)}.hero-showcase{display:none}.set-card{padding:24px}.game-grid{grid-template-columns:1fr 1fr;gap:12px}.center-content{grid-column:1/-1;grid-row:1}.team-panel{min-height:0;padding:14px}.auction-panel{max-width:650px;margin:0 auto;min-height:0}.roster-item{min-height:57px}.roster-avatar{width:39px;height:42px}.gamehead h1{font-size:53px}}
+    @media(max-width:680px){.shell{padding:10px 12px 40px}.topbar{padding:10px 0 18px;margin-bottom:26px}.brand{font-size:26px}.logo{height:36px;width:36px}.topright .pill{display:none}.topright{gap:6px}.tiny-btn{padding:7px 9px;font-size:10px}.hero{padding:6px 0}.hero h1{font-size:clamp(72px,15.7vw,109px)}.hero-pretitle{font-size:9px;letter-spacing:1.5px}.hero p{font-size:13px}.hero-badges{margin-bottom:12px}.hero-badges span{font-size:9px;padding:8px}.set-card{padding:17px;border-radius:21px}.set-header{margin-bottom:22px}.set-header h2{font-size:27px}.set-header .set-icon{width:43px;height:43px}.universe{height:112px;min-height:112px}.uni-details b{font-size:19px}.uni-details small{font-size:8px}.names{gap:8px}.name-input{font-size:12px;padding:11px 9px}.gamehead{margin:0 0 13px}.gamehead h1{font-size:47px}.gamehead .eyebrow{font-size:10px}.arena-status{display:none}.round-tracker{margin-bottom:15px}.auction-panel{padding:9px;border-radius:13px}.character-stage{height:310px}.character-stage h2{font-size:clamp(38px,10vw,53px)}.card-copy{bottom:19px;left:17px}.character-index{font-size:10px}.stage-portrait{left:30%;width:70%}.stage-sticker{font-size:12px;right:11px;top:11px}.stage-orbit{width:220px;height:220px}.character-stats{gap:7px}.stat{padding:9px}.stat span{font-size:8px}.stat b{font-size:24px}.stat b small{font-size:9px}.bid-title{font-size:24px}.bid-side{font-size:9px}.bid-zone{padding:9px 3px}.bid-turn{font-size:11px}.bid-amount{font-size:54px}.quick-bids{gap:4px}.quick-bids button{padding:9px 3px}.game-grid{gap:8px}.team-panel{padding:11px 7px;border-radius:13px}.team-name{font-size:25px;margin:5px 0 12px}.team-kicker,.team-count{font-size:8px}.budget{padding:8px 8px;display:block}.budget-value{display:block;margin-top:7px;font-size:29px}.budget-label{font-size:8px}.budget-bar{margin-top:6px}.roster-header{margin:12px 1px 9px}.roster-item{min-height:48px;gap:5px;padding:4px;border-radius:7px}.roster-avatar{width:32px;height:36px}.roster-info strong{font-size:10px;white-space:normal;line-height:1.1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.roster-info small{display:none}.roster-power{font-size:16px}.slot-description{font-size:8px}.slot-index{font-size:16px}.slot-plus{font-size:14px;padding:0}.end-header h1{font-size:58px}.winner-name{font-size:57px}.final-grid{gap:9px}.final-panel{padding:10px}.final-name{font-size:26px}.final-score{font-size:51px}.final-score span{font-size:12px}.result-row{gap:5px;padding:4px}.result-row .portrait-wrap{width:30px;height:36px}.result-row span{font-size:10px}.result-row strong{font-size:19px}.score-total{font-size:10px}.handoff{min-height:390px;padding:28px 15px}.handoff h2{font-size:44px}}
+    @media(max-width:370px){.roster-power{display:none}.roster-avatar{width:32px;flex-shrink:0}.gamehead h1{font-size:42px}.universe{height:102px;min-height:102px}.uni-details b{font-size:17px}}
+    @media(prefers-reduced-motion:reduce){.showcase-card,.confetti-sparks i,.stage-portrait img,.stage-beam,.stage-orbit,.trophy{animation:none!important}}
+
   </style>
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
       <div class="brand"><span class="logo" aria-hidden="true">⚡</span><span>BID <b>BATTLE</b></span></div>
-      <div class="topright"><span class="pill">ANIME AUCTION ARENA</span><button class="tiny-btn" id="resetTop" hidden type="button">↺ Neu starten</button></div>
+      <div class="topright"><span class="pill">⚔ DUEL ARENA · 1v1</span><button class="tiny-btn" id="soundToggle" type="button" title="Sound aktivieren" aria-label="Sound aktivieren">♪ Aus</button><button class="tiny-btn" id="resetTop" hidden type="button">↺ Neu starten</button></div>
     </header>
     <div id="app" aria-live="polite"></div>
-    <footer class="foot">Fangemachtes Anime-Partyspiel · Bewertungen dienen nur dem Spiel · Keine offizielle Verbindung zu den Anime-Marken</footer>
+    <footer class="foot">FAN-GAME · Charakterbilder über Jikan / MyAnimeList · Power-Werte sind nur für das Spiel · Keine Verbindung zu Anime-Marken</footer>
   </main>
   <script>
     'use strict';
@@ -153,6 +240,7 @@
     function loadSave(){try{const s=JSON.parse(localStorage.getItem(SAVE_KEY));if(!s||!catalog[s.universe]||!Array.isArray(s.order)||s.order.length!==TOTAL||!Array.isArray(s.teams)||s.teams.length!==2||!Array.isArray(s.money)||s.money.length!==2||!Array.isArray(s.names)||s.names.length!==2||typeof s.round!=='number'||s.round<0||s.round>TOTAL||!['auction','handoff','reveal','final'].includes(s.phase))return null;return s;}catch(e){return null}}
     function clearSave(){try{localStorage.removeItem(SAVE_KEY)}catch(e){}}
     function newGame(sameSet=false){
+      gameSound('reveal');
       const universe=sameSet && state?state.universe:setup.universe;
       const names=sameSet && state?state.names:[setup.names[0].trim().slice(0,16)||'Spieler A',setup.names[1].trim().slice(0,16)||'Spieler B'];
       const order=sameSet && state?[...state.order]:shuffle(catalog[universe].entries.map((_,i)=>i)).slice(0,TOTAL);
@@ -180,13 +268,13 @@
       if(full(0)||full(1)){
         state.automatic=[];
         while(state.round<TOTAL){const w=chooseAutoRecipient();state.automatic.push(giveCharacter(w,0,'Restverteilung',[0,0]));}
-        state.phase='final';save();return;
+        state.phase='final';save();gameSound('victory');return;
       }
       // Both budgets exhausted: distribute all remaining characters without a further auction.
       if(!eligibility(0)&&!eligibility(1)){
         state.automatic=[];
         while(state.round<TOTAL){const w=chooseAutoRecipient();state.automatic.push(giveCharacter(w,0,'Ohne Budget zugeteilt',[0,0]));}
-        state.phase='final';save();return;
+        state.phase='final';save();gameSound('victory');return;
       }
       state.phase='auction';state.bids=[null,null];state.turn=eligibility(0)?0:1;
       if(!eligibility(0))state.bids[0]=0;
@@ -198,7 +286,7 @@
       const i=state.turn;
       if(!eligibility(i))return;
       if(!Number.isInteger(amount)||amount<0||amount>state.money[i])return;
-      state.bids[i]=amount;
+      state.bids[i]=amount;gameSound('bid');
       const other=1-i;
       if(state.bids[other]===null){state.turn=other;state.phase='handoff';}
       else resolveAuction();
@@ -214,71 +302,152 @@
       else if(b>a){winner=1;reason='Höchstes Gebot'}
       else {winner=chooseAutoRecipient();reason=a===0?'Beide passen – Gratiszuteilung':'Gleichstand – Teamregel';}
       state.last=giveCharacter(winner,state.bids[winner],reason,[a,b]);
-      state.phase='reveal';
+      state.phase='reveal';gameSound('reveal');
     }
     function afterReveal(){
       if(!state||state.phase!=='reveal')return;
       prepareRound();save();render();window.scrollTo({top:0,behavior:'smooth'});
     }
     function startNew(){if(!state)return;const ok=confirm('Aktuelles Spiel wirklich beenden und zur Startseite wechseln?');if(!ok)return;clearSave();state=null;render();}
+    function portrait(name,cssClass='portrait',important=false){
+      return `<div class="portrait-wrap ${cssClass}"><img data-photo-char="${safe(name)}" alt="${safe(name)}" loading="${important?'eager':'lazy'}" decoding="async" /><span class="portrait-fallback" aria-hidden="true">✦</span></div>`;
+    }
     function teamPanel(i){
       const team=state.teams[i],empty=TEAM_SIZE-team.length;
-      const rows=team.map(id=>{const c=charOf(id);return `<div class="roster-item"><div class="roster-avatar" style="--ac:${c.color}">${safe(c.symbol)}</div><div class="roster-info"><strong>${safe(c.name)}</strong><small>${safe(c.role)}</small></div><span class="roster-power">${c.power}</span></div>`}).join('')+Array.from({length:empty},(_,j)=>`<div class="roster-item empty"><span class="slot-index">0${team.length+j+1}</span><span style="font-size:10px;font-weight:800">Freier Platz</span></div>`).join('');
-      return `<section class="team-panel team-${i?'b':'a'}" aria-label="Team ${i?'B':'A'}"><div class="team-kicker">TEAM ${i?'B':'A'} · ${team.length}/5</div><h2 class="team-name">${safe(state.names[i])}</h2><div class="budget"><span class="budget-label">RESTBUDGET</span><strong class="budget-value">${money(state.money[i])}</strong></div><div class="team-roster">${rows}</div></section>`;
+      const rows=team.map(id=>{const c=charOf(id);return `<div class="roster-item"><div class="roster-avatar" style="--ac:${c.color}">${portrait(c.name,'roster-photo')}</div><div class="roster-info"><strong>${safe(c.name)}</strong><small>${safe(c.role)}</small></div><span class="roster-power">${c.power}<small> PWR</small></span></div>`}).join('')+Array.from({length:empty},(_,j)=>`<div class="roster-item empty"><span class="slot-index">0${team.length+j+1}</span><span class="slot-description">LEERER SLOT</span><span class="slot-plus">+</span></div>`).join('');
+      return `<section class="team-panel team-${i?'b':'a'}" aria-label="Team ${i?'B':'A'}"><div class="team-brandline"><span class="team-kicker">● TEAM ${i?'B':'A'}</span><span class="team-count">${team.length} / 5 KARTEN</span></div><h2 class="team-name">${safe(state.names[i])}</h2><div class="budget"><div><span class="budget-label">VERFÜGBARES BUDGET</span><span class="budget-bar"><i style="width:${state.money[i]/BUDGET*100}%"></i></span></div><strong class="budget-value">${money(state.money[i])}</strong></div><div class="roster-header">DEIN KADER <span>${team.length}/5</span></div><div class="team-roster">${rows}</div></section>`;
     }
     function characterCard(){
-      const onReveal=state.phase==='reveal';const shownIndex=onReveal?state.last.round:state.round+1;const c=charOf(onReveal?state.last.id:state.order[state.round]);const rarity=c.power>=97?'MYTHISCH':c.power>=92?'LEGENDÄR':c.power>=86?'EPISCH':'SELTEN';
-      return `<div class="stage-top"><span>AKTUELLER DROP</span><span class="rarity">✦ ${rarity}</span></div>
-        <div class="character-stage fade-in" style="--light:${c.color}99;--shade:${c.color}77">
-          <span class="character-symbol" aria-hidden="true">${safe(c.symbol)}</span>
-          <span class="character-index">${String(shownIndex).padStart(2,'0')} / ${TOTAL} · ${safe(c.faction)}</span>
-          <h2>${safe(c.name)}</h2><span class="character-description">${safe(c.role)}</span></div>
-        <div class="character-stats"><div class="stat"><span>Power</span><b class="highlight">${c.power}</b></div><div class="stat"><span>Typ</span><b style="font-size:16px">${safe(c.faction)}</b></div></div>`;
+      const onReveal=state.phase==='reveal',shownIndex=onReveal?state.last.round:state.round+1,c=charOf(onReveal?state.last.id:state.order[state.round]);
+      const rarity=c.power>=97?'MYTHISCH':c.power>=92?'LEGENDÄR':c.power>=86?'EPISCH':'RARE';
+      return `<div class="stage-top"><span><i class="live-indicator"></i> LIVE DROP <em>#${String(shownIndex).padStart(2,'0')}</em></span><span class="rarity">✦ ${rarity}</span></div>
+      <div class="character-stage" style="--light:${c.color};--shade:${c.color}66">
+        <div class="stage-beam"></div><div class="stage-orbit"></div>${portrait(c.name,'stage-portrait',true)}
+        <div class="stage-sticker">NEW<br>DROP!</div>
+        <div class="card-copy"><span class="character-index">◈ ${safe(c.faction)} · ${String(shownIndex).padStart(2,'0')} / ${TOTAL}</span><h2>${safe(c.name)}</h2><span class="character-description">${safe(c.role)}</span></div>
+      </div>
+      <div class="character-stats"><div class="stat"><span>POWER LEVEL</span><b class="highlight">${c.power} <small>/ 100</small></b></div><div class="stat"><span>FRAKTION</span><b style="font-size:17px">${safe(c.faction)}</b></div></div>`;
     }
     function bidStage(){
       if(state.phase==='handoff'){
         const i=state.turn;
-        return `<div class="handoff fade-in"><div class="handoff-icon">🔒</div><h2>HANDY WEITERGEBEN</h2><p>Das Gebot wurde gespeichert und bleibt geheim. Jetzt ist <strong style="color:white">${safe(state.names[i])}</strong> dran.</p><button id="revealBidding" class="primary" type="button">Ich bin ${safe(state.names[i])} →</button></div>`;
+        return `<div class="handoff fade-in"><div class="handoff-icon">🔒</div><div class="eyebrow">GEBOT GESPEICHERT</div><h2>GEHEIME<br>ÜBERGABE</h2><p>Gib dein Gerät an <strong>${safe(state.names[i])}</strong> weiter. Das vorherige Gebot bleibt versteckt.</p><button id="revealBidding" class="primary" type="button">ICH BIN ${safe(state.names[i])} <span>→</span></button></div>`;
       }
       if(state.phase==='reveal'){
-        const e=state.last,c=charOf(e.id);const free=e.price===0;
-        return `<div class="reveal fade-in"><div class="reveal-emblem">${free?'🎁':'🏆'}</div><div class="eyebrow" style="color:#ffd19b">${safe(c.name)} geht an</div><h2>${safe(state.names[e.winner])}!</h2><p>${safe(e.reason)} · ${free?'Kostenlos erhalten':money(e.price)+' bezahlt'}</p><div class="bid-compare"><div class="compare-tile">${safe(state.names[0])}<b>${money(e.bids[0])}</b></div><div class="compare-tile">${safe(state.names[1])}<b>${money(e.bids[1])}</b></div></div><button id="nextRound" type="button" class="primary full">${state.round===TOTAL?'Finale ansehen':'Nächster Charakter'} →</button></div>`;
+        const e=state.last,c=charOf(e.id),free=e.price===0;
+        return `<div class="reveal fade-in"><div class="reveal-emblem">${free?'🎁':'🏆'}</div><div class="eyebrow" style="color:#ffd19b">${safe(c.name)} GEHT AN</div><h2>${safe(state.names[e.winner])}<span>!</span></h2><p>${safe(e.reason)} · ${free?'GRATIS':money(e.price)+' BEZAHLT'}</p><div class="bid-compare"><div class="compare-tile">TEAM A · ${safe(state.names[0])}<b>${money(e.bids[0])}</b></div><div class="compare-tile">TEAM B · ${safe(state.names[1])}<b>${money(e.bids[1])}</b></div></div><button id="nextRound" type="button" class="primary full">${state.round===TOTAL?'ZUM GROSSEN FINALE':'NÄCHSTEN DROP ENTHÜLLEN'} <span>→</span></button></div>`;
       }
       const i=state.turn,p=state.names[i],cash=state.money[i];
-      return `<div class="bid-zone fade-in"><div class="bid-heading"><span class="bid-title">DEIN GEBOT</span><span class="bid-side">${safe(p)} · max. ${money(cash)}</span></div>
-      <p class="bid-turn">Biete jetzt auf diesen Charakter. Der andere Spieler sieht dein Gebot nicht.</p>
-      <div class="bid-meter"><strong id="bidAmount" class="bid-amount">${draftAmount}</strong><span class="bid-euro">€</span></div>
+      return `<div class="bid-zone fade-in"><div class="bid-heading"><span class="bid-title">SETZE DEIN GEBOT</span><span class="bid-side">TEAM ${i?'B':'A'} · ${safe(p)}</span></div>
+      <p class="bid-turn">Wie viel ist dir dieser Kämpfer wert? <strong>Dein Gebot ist geheim.</strong></p>
+      <div class="bid-meter"><div><div class="bid-meter-label">DEIN ANGEBOT</div><strong id="bidAmount" class="bid-amount">${draftAmount}</strong><span class="bid-euro">€</span></div><div class="bid-remaining">BUDGET<br><strong>${money(cash)}</strong></div></div>
       <input aria-label="Gebot in Euro" id="bidSlider" class="bid-slider" type="range" min="0" max="${cash}" step="1" value="${draftAmount}" />
-      <div class="quick-bids"><button type="button" data-quick="0">Passen</button><button type="button" data-quick="3" ${cash<3?'disabled':''}>3 €</button><button type="button" data-quick="5" ${cash<5?'disabled':''}>5 €</button><button type="button" data-quick="10" ${cash<10?'disabled':''}>10 €</button><button type="button" data-quick="max">Alles</button></div>
-      <button id="submitBid" class="primary full" type="button">Gebot geheim abgeben →</button>
-      <p class="bid-notice">Du kennst die kommenden Charaktere nicht. Behalte dein Budget im Blick.</p></div>`;
+      <div class="quick-bids"><button type="button" data-quick="0">PASS</button><button type="button" data-quick="3" ${cash<3?'disabled':''}>3 €</button><button type="button" data-quick="5" ${cash<5?'disabled':''}>5 €</button><button type="button" data-quick="10" ${cash<10?'disabled':''}>10 €</button><button type="button" data-quick="max">ALL IN</button></div>
+      <button id="submitBid" class="primary full" type="button">🔒 GEBOT ABGEBEN <span>→</span></button>
+      <p class="bid-notice">Der nächste Charakter bleibt geheim. Strategisch bieten!</p></div>`;
     }
     function getSynergies(ids){const names=ids.map(id=>charOf(id).name);return (synergyRules[state.universe]||[]).filter(([members])=>members.every(n=>names.includes(n))).map(([_,bonus,label])=>({bonus,label}));}
     function calcScore(i){const power=teamTotal(i),synergies=getSynergies(state.teams[i]);return {power,synergies,score:power+synergies.reduce((s,b)=>s+b.bonus,0)};}
-    function finalPanel(i){const d=calcScore(i);const team=state.teams[i];return `<section class="final-panel ${i?'b':'a'}"><div class="team-kicker">TEAM ${i?'B':'A'}</div><div class="final-name">${safe(state.names[i])}</div><div class="final-score">${d.score}</div><div class="score-label">Gesamtstärke</div><div class="result-roster">${team.map(id=>{const c=charOf(id);return `<div class="result-row"><span>${safe(c.name)}</span><span>${c.power} PWR</span></div>`}).join('')}</div><div class="synergy-section">Basisstärke: <b>${d.power}</b>${d.synergies.length?d.synergies.map(e=>`<span class="synergy-chip">✦ ${safe(e.label)} +${e.bonus}</span>`).join(''):'<span class="synergy-chip" style="color:#979cb7">Keine Spezial-Synergie</span>'}</div><div class="score-total"><span>Übrig: ${money(state.money[i])}</span><b>${d.score} PUNKTE</b></div></section>`;}
+    function finalPanel(i){const d=calcScore(i);const team=state.teams[i];return `<section class="final-panel ${i?'b':'a'}"><div class="team-kicker">● TEAM ${i?'B':'A'}</div><div class="final-name">${safe(state.names[i])}</div><div class="final-score">${d.score}<span> PTS</span></div><div class="score-label">TEAM POWER</div><div class="result-roster">${team.map(id=>{const c=charOf(id);return `<div class="result-row">${portrait(c.name,'final-photo')}<span>${safe(c.name)}</span><strong>${c.power}</strong></div>`}).join('')}</div><div class="synergy-section">BASISPOWER: <b>${d.power}</b>${d.synergies.length?d.synergies.map(e=>`<span class="synergy-chip">✦ ${safe(e.label)} +${e.bonus}</span>`).join(''):'<span class="synergy-chip">Keine Team-Synergien</span>'}</div><div class="score-total"><span>REST: ${money(state.money[i])}</span><b>${d.score} PUNKTE</b></div></section>`;}
     function historyPanel(){return `<details class="history-panel"><summary>Auktionsverlauf ansehen (${state.history.length} Runden)</summary><div>${state.history.map(e=>`<div class="history-entry"><span>#${e.round} <strong>${safe(charOf(e.id).name)}</strong></span><span>${safe(state.names[e.winner])} · ${money(e.price)}${e.reason.startsWith('Rest')?' (Rest)':''}</span></div>`).join('')}</div></details>`;}
-    function renderFinal(){const a=calcScore(0),b=calcScore(1),w=a.score===b.score?-1:a.score>b.score?0:1;const auto=state.automatic||[];return `<div class="fade-in"><div class="end-header"><div class="eyebrow">DIE ENTSCHEIDUNG</div><h1>TEAM A <span style="color:var(--orange)">VS</span> TEAM B</h1><p>Alle zehn Charaktere wurden verteilt. Wer hat das stärkere Team ersteigert?</p></div>
-      <div class="winner-card"><div class="trophy">${w<0?'🤝':'🏆'}</div><div class="winner-tag">${w<0?'UNENTSCHIEDEN':'DAS SIEGERTEAM'}</div><div class="winner-name">${w<0?'Gleichstand!':safe(state.names[w])}</div><div class="winner-note">${w<0?'Beide Teams erreichen exakt denselben Power-Wert.':`${Math.abs(a.score-b.score)} Punkte Vorsprung – ${safe(state.names[w])} gewinnt das Duell!`}</div></div>
-      ${auto.length?`<div class="legend" style="max-width:860px;margin:0 auto 20px"><strong>🎁 Automatische Restverteilung:</strong> ${auto.map(e=>`${safe(charOf(e.id).name)} → ${safe(state.names[e.winner])}`).join(' · ')}. Sobald kein reguläres Bieten mehr möglich ist, werden die restlichen Charaktere kostenlos auf freie Plätze verteilt.</div>`:''}
-      <div class="final-grid">${finalPanel(0)}${finalPanel(1)}</div><div class="final-actions"><button id="rematch" type="button" class="primary">⚡ Neues zufälliges Duell</button><button id="sameSet" type="button" class="secondary">↺ Mit gleichen 10 spielen</button><button id="home" type="button" class="secondary">Thema wechseln</button></div>${historyPanel()}
-      <p class="toastline">Das Urteil basiert auf spielerischen Power-Werten + Team-Synergien, nicht auf offiziellen Ranglisten.</p></div>`;}
+    function renderFinal(){const a=calcScore(0),b=calcScore(1),w=a.score===b.score?-1:a.score>b.score?0:1,auto=state.automatic||[];return `<div class="fade-in result-screen"><div class="end-header"><div class="eyebrow">🏆 GRAND FINALE · ${safe(catalog[state.universe].name).toUpperCase()}</div><h1>FINAL <span>SHOWDOWN</span></h1><p>10 Charaktere · 2 Kader · 1 Champion</p></div>
+      <div class="winner-card"><div class="confetti-sparks" aria-hidden="true">${Array.from({length:18},(_,i)=>`<i style="--i:${i}"></i>`).join('')}</div><div class="trophy">${w<0?'⚔':'🏆'}</div><div class="winner-tag">${w<0?'UNENTSCHIEDEN':'THE CHAMPION'}</div><div class="winner-name">${w<0?'GLEICHSTAND':safe(state.names[w])}</div><div class="winner-note">${w<0?'Beide Teams haben dieselbe Power!':`+${Math.abs(a.score-b.score)} PUNKTE VORSPRUNG · TEAM ${w?'B':'A'} GEWINNT!`}</div></div>
+      <div class="final-grid">${finalPanel(0)}${finalPanel(1)}</div>
+      ${auto.length?`<div class="legend" style="max-width:880px;margin:20px auto"><strong>🎁 AUTO-DRAFT:</strong> ${auto.map(e=>`${safe(charOf(e.id).name)} → ${safe(state.names[e.winner])}`).join(' · ')}</div>`:''}
+      <div class="final-actions"><button id="rematch" type="button" class="primary">⚡ NEUES DUELL</button><button id="sameSet" type="button" class="secondary">↺ SELBE KARTEN</button><button id="home" type="button" class="secondary">THEMA WECHSELN</button></div>${historyPanel()}
+      <p class="toastline">Fangame · Stärkepunkte und Synergien sind spielerische Einschätzungen.</p></div>`;}
     function renderGame(){
       if(state.phase==='final')return renderFinal();
-      return `<div class="fade-in"><div class="gamehead"><div><div class="eyebrow">${safe(catalog[state.universe].name)} · ${safe(catalog[state.universe].tagline)}</div><h1>RUNDE ${String(state.phase==='reveal'?state.round:state.round+1).padStart(2,'0')} <span style="color:#777e9f">/ ${TOTAL}</span></h1></div><div class="pill" style="align-self:center">🎴 2 SPIELER</div></div>
+      return `<div class="fade-in arena-screen"><div class="gamehead"><div><div class="eyebrow">${safe(catalog[state.universe].name).toUpperCase()} <span class="arena-separator">/</span> LIVE AUCTION</div><h1>ROUND <span class="round-now">${String(state.phase==='reveal'?state.round:state.round+1).padStart(2,'0')}</span> <span class="round-total">/ ${TOTAL}</span></h1></div><div class="arena-status"><span class="live-indicator"></span> AUKTION LÄUFT</div></div>
       <div class="round-tracker" aria-label="Rundenfortschritt">${Array.from({length:TOTAL},(_,i)=>`<div class="round-dot ${i<state.round?'past':i===state.round?'current':''}"></div>`).join('')}</div>
       <div class="game-grid">${teamPanel(0)}<div class="center-content"><section class="auction-panel">${state.phase==='handoff'?'':characterCard()}${bidStage()}</section></div>${teamPanel(1)}</div>
-      <div class="legend"><strong>So funktioniert's:</strong> Ihr habt jeweils 20 €. Beide bieten geheim auf denselben Charakter. Das höchste Gebot gewinnt und wird vom Budget abgezogen. Bei Gleichstand erhält das Team mit weniger Charakteren den Zuschlag; sonst wechselt das Vorrecht. Bei 0 € setzt du mit Bieten aus. Wer schon 5 Charaktere hat, muss aussetzen. Übrige Charaktere werden kostenlos zugeteilt.</div>
-      <div class="legend-inline"><span>✦ 10 zufällige Charaktere</span><span>✦ 5 pro Team</span><span>✦ Keine zukünftigen Drops sichtbar</span></div></div>`;
+      <div class="legend"><strong>SPIELREGEL:</strong> Beide Spieler starten mit 20 €. Jedes höchste geheime Gebot gewinnt die aktuelle Karte. Die nächsten Drops bleiben unbekannt. Bei 0 € oder 5 Karten wird ausgesetzt; verbleibende Karten werden automatisch verteilt.</div><div class="legend-inline"><span>⚡ 10 RANDOM DROPS</span><span>◈ 5 PRO TEAM</span><span>🔒 SECRET BIDS</span></div></div>`;
     }
     function renderSetup(){
-      const opts=Object.entries(catalog).map(([key,u])=>`<button class="universe ${setup.universe===key?'active':''}" data-universe="${key}" aria-pressed="${setup.universe===key}" type="button"><span class="uni-icon">${u.icon}</span><span><span class="uni-title">${safe(u.name)}</span><br/><span class="uni-sub">${safe(u.tagline)}</span></span></button>`).join('');
-      return `<div class="hero fade-in"><section><div class="eyebrow">WILLKOMMEN IN DER AUKTIONS-ARENA</div><h1>BID.<span>BUILD.</span> BATTLE.</h1><p>20 € in der Tasche. Zehn unbekannte Charaktere. Zwei rivalisierende Teams. Biete clever, stelle dein Dream-Team zusammen und gewinne das Anime-Duell.</p><div class="features"><span class="feature">⚡ 2 Spieler</span><span class="feature">💰 20 € Startgeld</span><span class="feature">🎴 10 Charaktere</span><span class="feature">🏆 1 Gewinner</span></div><div class="hero-art" aria-hidden="true"><div class="art-halo"></div><div class="art-card back"><span class="art-symbol">忍</span>TEAM A</div><div class="art-card front"><span class="art-symbol">⚡</span>TEAM B</div></div></section>
-        <section class="set-card"><div class="section-label">01 / WÄHLE DEIN UNIVERSUM</div><div class="universes">${opts}</div><div class="section-label">02 / WER SPIELT MIT?</div><div class="names"><div class="field"><label for="playerA"><span class="player-indicator"></span> TEAM A</label><input class="name-input" id="playerA" maxlength="16" value="${safe(setup.names[0])}" autocomplete="off"></div><div class="field"><label for="playerB"><span class="player-indicator p2"></span> TEAM B</label><input class="name-input" id="playerB" maxlength="16" value="${safe(setup.names[1])}" autocomplete="off"></div></div><div class="section-label" style="margin-top:5px">03 / STARTE DIE AUKTION</div><button class="primary full" id="startGame" type="button">⚡ Jetzt spielen <span aria-hidden="true">→</span></button><div class="subtext">Kostenlos · Ohne Anmeldung · Lokal auf einem Gerät</div></section></div>`;
+      const faces={naruto:'Naruto Uzumaki',onepiece:'Monkey D. Luffy',jjk:'Satoru Gojo',dragonball:'Son Goku'};
+      const opts=Object.entries(catalog).map(([key,u])=>`<button class="universe ${setup.universe===key?'active':''}" data-universe="${key}" aria-pressed="${setup.universe===key}" type="button"><div class="uni-background">${portrait(faces[key],'uni-photo')}</div><span class="uni-check">✓</span><span class="uni-details"><b>${safe(u.name)}</b><small>${key==='naruto'?'SHINOBI':'onepiece'===key?'PIRATES':key==='jjk'?'SORCERERS':'SAIYANS'}</small></span></button>`).join('');
+      return `<div class="hero fade-in"><section class="hero-left"><div class="hero-pretitle"><span class="blinking-dot"></span> THE ULTIMATE ANIME AUCTION GAME</div><h1>BUILD YOUR<br><em>DREAM</em><br>TEAM<span class="hero-stop">.</span></h1><p>10 zufällige Anime-Charaktere. Nur <strong>20 € Budget</strong>. Du weißt nie, wer als Nächstes kommt. Biete klug, sammle deine Legenden und besiege deinen Rivalen.</p><div class="hero-badges"><span>⚔ 1 VS 1</span><span>💰 20 €</span><span>🎴 10 DROPS</span><span>🏆 1 SIEGER</span></div>
+      <div class="hero-showcase" aria-hidden="true"><div class="hero-shine"></div><div class="showcase-card showcase-left"><div class="showcase-rank">SS TIER</div>${portrait('Satoru Gojo','showcase-photo')}<div class="showcase-caption">GOJO <b>100</b></div></div><div class="showcase-card showcase-right"><div class="showcase-rank">MYTHIC</div>${portrait('Naruto Uzumaki','showcase-photo')}<div class="showcase-caption">NARUTO <b>98</b></div></div><div class="showcase-vs">VS</div></div>
+      </section><section class="set-card"><div class="set-header"><span class="set-icon">⚡</span><div><div class="section-label">PLAYER SETUP</div><h2>READY TO <span>BATTLE?</span></h2><p>Wähle dein Universum und stelle dich dem Duell.</p></div></div>
+      <div class="section-label">01 <span class="section-line"></span> WÄHLE DEIN UNIVERSUM</div><div class="universes">${opts}</div>
+      <div class="section-label">02 <span class="section-line"></span> SPIELERNAMEN</div><div class="names"><div class="field"><label for="playerA"><span class="player-indicator"></span> TEAM A</label><input class="name-input" id="playerA" maxlength="16" value="${safe(setup.names[0])}" autocomplete="off" placeholder="Spieler A"></div><div class="field"><label for="playerB"><span class="player-indicator p2"></span> TEAM B</label><input class="name-input" id="playerB" maxlength="16" value="${safe(setup.names[1])}" autocomplete="off" placeholder="Spieler B"></div></div>
+      <div class="game-rules-mini"><div><b>20 €</b><span>STARTBUDGET</span></div><div><b>10</b><span>KARTEN</span></div><div><b>5 / 5</b><span>DEIN TEAM</span></div></div>
+      <button class="primary full start-cta" id="startGame" type="button">⚡ START THE BATTLE <span>→</span></button><div class="subtext">FREE TO PLAY · 2 SPIELER · EIN GERÄT</div></section></div>`;
     }
-    function render(){app.innerHTML=state?renderGame():renderSetup();resetTop.hidden=!state;bindEvents();}
+    // Image catalog (character portraits from the public Jikan / MyAnimeList anime API).
+    // The game has a functional CSS fallback if the external image service is unavailable.
+    const ANIME_API_IDS={naruto:1735,onepiece:21,jjk:40748,dragonball:30694};
+    const imageBanks={}, imagePromises={};
+    const normalized=n=>String(n).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+    const aliases={
+      'Pain':'Nagato', 'Killer B':'Killer Bee', 'Might Guy':'Might Guy',
+      'Whitebeard':'Edward Newgate','Blackbeard':'Marshall D Teach','Big Mom':'Charlotte Linlin',
+      'Ace':'Portgas D Ace','Garp':'Monkey D Garp','Kizaru':'Borsalino','Akainu':'Sakazuki',
+      'Aokiji':'Kuzan','Doflamingo':'Donquixote Doflamingo','Katakuri':'Charlotte Katakuri',
+      'Trafalgar Law':'Trafalgar D Water Law','Eustass Kid':'Eustass Kid',
+      'Son Goku':'Son Gokuu','Frieza':'Freeza','Majin Boo':'Majin Buu',
+      'Android 17':'Jinzouningen 17 gou','Android 18':'Jinzouningen 18 gou',
+      'Goku Black':'Black Goku','Master Roshi':'Muten Rouhi',
+      'Ryomen Sukuna':'Sukuna Ryomen','Rika':'Orimoto Rika'
+    };
+    function charImage(name){
+      const search=normalized(aliases[name]||name);
+      for(const universe of Object.keys(imageBanks)){
+        const bank=imageBanks[universe];if(!bank)continue;
+        if(bank[search])return bank[search];
+        const tokens=search.split(' ').filter(x=>x.length>1);
+        const ranked=Object.keys(bank).filter(x=>tokens.every(t=>x.split(' ').includes(t)));
+        if(ranked.length===1)return bank[ranked[0]];
+      }
+      return null;
+    }
+    function hydratePhotos(){
+      document.querySelectorAll('img[data-photo-char]').forEach(img=>{
+        const url=charImage(img.dataset.photoChar);
+        if(!url || img.dataset.photoUrl===url)return;
+        img.dataset.photoUrl=url;img.onerror=()=>{img.classList.remove('loaded');img.classList.add('failed');};
+        img.onload=()=>{img.classList.add('loaded');img.classList.remove('failed')};
+        img.referrerPolicy='no-referrer';img.src=url;
+      });
+    }
+    function loadAnimePhotos(universe){
+      if(imagePromises[universe])return imagePromises[universe];
+      const key='bidbattle.imgbank.v2.'+universe;
+      try{const data=JSON.parse(localStorage.getItem(key)||'null');if(data&&data.bank&&Date.now()-data.at<30*86400000){imageBanks[universe]=data.bank;hydratePhotos();return imagePromises[universe]=Promise.resolve()}}catch(e){}
+      imagePromises[universe]=fetch(`https://api.jikan.moe/v4/anime/${ANIME_API_IDS[universe]}/characters`,{mode:'cors'}).then(r=>{if(!r.ok)throw new Error('Bilder-API: '+r.status);return r.json()}).then(obj=>{
+        const bank={};for(const row of (obj.data||[])){
+          const ch=row.character,url=ch?.images?.webp?.image_url||ch?.images?.jpg?.image_url;
+          if(ch?.name&&url)bank[normalized(ch.name)]=url;
+        }
+        imageBanks[universe]=bank;
+        try{localStorage.setItem(key,JSON.stringify({at:Date.now(),bank}))}catch(e){}
+        hydratePhotos();
+      }).catch(()=>{});
+      return imagePromises[universe];
+    }
+    function ensureImages(){
+      loadAnimePhotos(state?.universe||setup.universe);
+      if(!state){
+        // Stagger the other universes to respect Jikan's rate limit.
+        const keys=Object.keys(ANIME_API_IDS).filter(x=>x!==setup.universe);
+        keys.forEach((key,i)=>setTimeout(()=>loadAnimePhotos(key),1100*(i+1)));
+      }
+    }
+    let soundEnabled=false;
+    function gameSound(kind='bid'){
+      if(!soundEnabled)return;
+      try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ctx=gameSound.ctx||(gameSound.ctx=new C());
+        const notes=kind==='victory'?[523,659,784,1046]:kind==='reveal'?[290,490,780]:[470,580];
+        notes.forEach((note,i)=>{const o=ctx.createOscillator(),gain=ctx.createGain();o.type='triangle';o.frequency.value=note;
+          const t=ctx.currentTime+i*.115;gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.06,t+.015);gain.gain.exponentialRampToValueAtTime(.0001,t+.22);
+          o.connect(gain);gain.connect(ctx.destination);o.start(t);o.stop(t+.24)});
+      }catch(e){}
+    }
+    function render(){app.innerHTML=state?renderGame():renderSetup();resetTop.hidden=!state;bindEvents();hydratePhotos();}
+    document.getElementById('soundToggle').addEventListener('click',e=>{soundEnabled=!soundEnabled;e.currentTarget.textContent=soundEnabled?'♫ An':'♪ Aus';e.currentTarget.title=soundEnabled?'Sound ausschalten':'Sound aktivieren';if(soundEnabled)gameSound()});
     function bindEvents(){
       if(!state){
-        app.querySelectorAll('[data-universe]').forEach(btn=>btn.addEventListener('click',()=>{setup.universe=btn.dataset.universe;setup.names=[document.getElementById('playerA').value,document.getElementById('playerB').value];render()}));
+        app.querySelectorAll('[data-universe]').forEach(btn=>btn.addEventListener('click',()=>{setup.universe=btn.dataset.universe;setup.names=[document.getElementById('playerA').value,document.getElementById('playerB').value];render();loadAnimePhotos(setup.universe)}));
         document.getElementById('playerA').addEventListener('input',e=>setup.names[0]=e.target.value);
         document.getElementById('playerB').addEventListener('input',e=>setup.names[1]=e.target.value);
         document.getElementById('startGame').addEventListener('click',()=>newGame());
@@ -300,7 +469,8 @@
     resetTop.addEventListener('click',startNew);
     // Recover gracefully if an old or partially written save is malformed.
     try{if(state){if(state.phase==='auction'&&state.bids[state.turn]!==null){state.phase='handoff';}if(state.round===TOTAL&&state.phase!=='reveal')state.phase='final';}}catch(e){state=null;clearSave();}
-    render();
+    render();ensureImages();
+    if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});}
   </script>
 </body>
 </html>
