@@ -1,8 +1,8 @@
-/* LinguaWorld V55 — continuous calm idle clip + occasional short greeting.
+/* LinguaWorld V56 — natural full gesture, no double-exposed animation, calm idle.
    Keeps original pixel-avatar hotspot, accessibility and native coach integration. */
 (function(){
 'use strict';
-const IDLE_VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/bb18829d-ca98-40eb-a2a2-15984ff73f94.mp4", GREETING_VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/af9f52e6-b181-448f-82e0-3554fd537cfa.mp4", POSTER="https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png";
+const IDLE_VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/bb18829d-ca98-40eb-a2a2-15984ff73f94.mp4", GREETING_VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/e91b166e-afde-445b-a825-31339f6bea3d.mp4", POSTER="https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png";
 const words={
  de:{label:'Woo Jin – interaktiver KI-Avatar',intro:'Annyeong! Schön, dass du da bist. Wollen wir etwas Koreanisch üben?',greet:'Begrüßen',chat:'KI-Chat',mic:'Sprechen',close:'Schließen',hint:'Tippe auf Woo Jin',listening:'Ich höre zu …',notSupported:'Spracherkennung ist hier nicht verfügbar. Öffne den KI-Chat.',miss:'Ich habe dich nicht verstanden. Versuch es noch einmal.',microphone:'Mikrofon'},
  tr:{label:'Woo Jin – etkileşimli yapay zekâ avatarı',intro:'Annyeong! Bugün biraz Korece çalışalım mı?',greet:'Selamla',chat:'Yapay zekâ sohbeti',mic:'Konuş',close:'Kapat',hint:'Woo Jin’e dokun',listening:'Dinliyorum …',notSupported:'Ses algılama bu tarayıcıda yok. Sohbeti aç.',miss:'Seni anlayamadım. Tekrar deneyelim.',microphone:'Mikrofon'},
@@ -59,13 +59,17 @@ function mic(hero){
 const LW55_GREETING_INTERVAL=60000;
 let lw55Controller=null;
 function lw55Control(idle,greet,hero){
- let timer=null,destroyed=false,startedAt=0,greetingActive=false;
+ let timer=null,safety=null,destroyed=false,startedAt=0,greetingActive=false;
  function clear(){if(timer!==null){clearTimeout(timer);timer=null}}
+ function clearSafety(){if(safety!==null){clearTimeout(safety);safety=null}}
  function stopGreeting(){
   if(destroyed||!greetingActive)return;
-  greetingActive=false;
-  hero.classList.remove('lw55-greeting-active');
+  greetingActive=false;clearSafety();
   greet.pause();
+  try{idle.currentTime=0}catch(_){}
+  // Exactly one movie is visible at a time; the idle resumes in its calm pose.
+  hero.classList.remove('lw55-greeting-active');
+  if(!document.hidden)idle.play().catch(()=>{});
  }
  function schedule(){
   clear();
@@ -79,39 +83,38 @@ function lw55Control(idle,greet,hero){
  }
  function startGreeting(){
   if(destroyed||!hero.isConnected)return;
-  stopGreeting();
-  startedAt=Date.now();
-  greetingActive=true;
+  if(greetingActive){stopGreeting()}
+  startedAt=Date.now();greetingActive=true;
+  idle.pause();
   try{greet.currentTime=0}catch(_){}
   hero.classList.add('lw55-greeting-active');
-  // The idle layer NEVER stops underneath the short greeting.
+  // Never blend a moving idle underneath the greeting.
   const play=greet.play();
   if(play&&typeof play.catch==='function')play.catch(()=>stopGreeting());
+  clearSafety();safety=setTimeout(stopGreeting,Math.max(9000,((Number.isFinite(greet.duration)?greet.duration:8)+1)*1000));
   schedule();
  }
  function destroy(){
-  destroyed=true;clear();idle.pause();greet.pause();
+  destroyed=true;clear();clearSafety();idle.pause();greet.pause();
   hero.classList.remove('lw55-greeting-active');
   document.removeEventListener('visibilitychange',handleVisibility);
  }
  function handleVisibility(){
   if(destroyed)return;
-  if(document.hidden){greet.pause();idle.pause()}
+  if(document.hidden){idle.pause();greet.pause()}
   else{
-   idle.play().catch(()=>{});
    if(greetingActive)greet.play().catch(()=>stopGreeting());
+   else idle.play().catch(()=>{});
    if(Date.now()-startedAt>=LW55_GREETING_INTERVAL){startGreeting()}
   }
  }
  function state(){return{idlePaused:idle.paused,greetingActive,secondsUntilNext:Math.max(0,(LW55_GREETING_INTERVAL-(Date.now()-startedAt))/1000),greetingTime:greet.currentTime,destroyed}}
  greet.loop=false;greet.removeAttribute('loop');
  greet.addEventListener('ended',stopGreeting);
- greet.addEventListener('timeupdate',()=>{if(greetingActive&&greet.currentTime>=4.9)stopGreeting()});
  greet.addEventListener('error',()=>{greet.style.display='none';stopGreeting()});
  idle.addEventListener('error',()=>{idle.style.display='none'});
  document.addEventListener('visibilitychange',handleVisibility);
  idle.play().catch(()=>{idle.style.display='none'});
- // Avoid a black first frame: greeting starts once metadata is available.
  if(greet.readyState>=1)startGreeting();
  else greet.addEventListener('loadedmetadata',startGreeting,{once:true});
  return{greet:startGreeting,destroy,state};
