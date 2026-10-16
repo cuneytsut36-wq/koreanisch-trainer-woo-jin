@@ -2,10 +2,10 @@
 (function(){
 'use strict';
 const A={
-  hero:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png',
-  map:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163338_81d5bc85-afed-4f6c-a934-ec72f5702f86.png',
-  story:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163338_021e797c-752a-4918-b518-0d20d2656c8c.png',
-  characters:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_154838_680232c9-9ba0-4ddd-8be2-78b606d93fe2.png'
+  hero:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png','privacy-scene.svg'),
+  map:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163338_81d5bc85-afed-4f6c-a934-ec72f5702f86.png','privacy-scene.svg'),
+  story:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163338_021e797c-752a-4918-b518-0d20d2656c8c.png','privacy-scene.svg'),
+  characters:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_154838_680232c9-9ba0-4ddd-8be2-78b606d93fe2.png','privacy-scene.svg')
 };
 const W={
 ko:{flag:'🇰🇷',region:'Korea',label:'한국어',learn:'Koreanisch',greet:'안녕하세요!',guide:'Woo Jin',alt:'Seoul',cities:['Seoul','Gyeongju','Busan','Jeju'],citySub:['Lv. 1 – 10','Lv. 21 – 30','Lv. 11 – 20','Lv. 31 – 40']},
