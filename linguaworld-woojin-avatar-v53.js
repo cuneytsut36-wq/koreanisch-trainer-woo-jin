@@ -1,5 +1,5 @@
-/* LinguaWorld V53: interactive animated Woo Jin in the homepage hero.
-   20-second reversible image-to-video loop; preserves all existing learning functions. */
+/* LinguaWorld V54: Woo Jin greets once, then rests motionless for at least 60 seconds.
+   Uses a 10-second forward-and-back segment of the existing 20-second clip. */
 (function(){
 'use strict';
 const VID="https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/35bd4e71-d0b7-42b3-8d8f-4b5f2e5a26aa.mp4", POSTER="https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png";
@@ -22,6 +22,7 @@ function close(hero){
  const btn=hero?.querySelector('.lw53-avatar');if(btn)btn.setAttribute('aria-expanded','false');
 }
 function speak(hero){
+ hero?.querySelector('.lw53-video')?.__lw54Greet?.();
  if(!('speechSynthesis' in window))return;
  try{window.speechSynthesis.cancel();const phrase=new SpeechSynthesisUtterance('안녕하세요! 저는 우진이에요. 같이 한국어를 배워요!');phrase.lang='ko-KR';phrase.rate=.78;phrase.pitch=1;phrase.onstart=()=>hero.classList.add('lw53-speaking');phrase.onend=phrase.onerror=()=>hero.classList.remove('lw53-speaking');window.speechSynthesis.speak(phrase)}catch(e){console.warn('Woo Jin voice',e)}
 }
@@ -54,6 +55,48 @@ function mic(hero){
   r.start();
  }catch(e){status.textContent=d.notSupported}
 }
+/* One natural greeting cycle (5 seconds forward, 5 seconds back); never loop continuously. */
+const LW54_GREETING_SECONDS=10.08;
+const LW54_REST_MILLIS=60000;
+function lw54Control(video,hero){
+ let stopped=false,replayTimer=null;
+ function clearReplay(){if(replayTimer!==null){clearTimeout(replayTimer);replayTimer=null}}
+ function scheduleReplay(){
+  clearReplay();
+  replayTimer=setTimeout(()=>{
+   replayTimer=null;
+   if(!hero.isConnected){stopped=true;return}
+   if(document.hidden){scheduleReplay();return}
+   startGreeting();
+  },LW54_REST_MILLIS);
+ }
+ function finishGreeting(){
+  if(stopped)return;
+  stopped=true;
+  video.pause();
+  // Keep the last rendered frame displayed while Woo Jin is idle.
+  if(video.readyState>=2){try{video.currentTime=Math.min(LW54_GREETING_SECONDS,Math.max(.1,video.duration-.1))}catch(_){}}
+  scheduleReplay();
+ }
+ function startGreeting(){
+  if(!hero.isConnected)return;
+  clearReplay();stopped=false;
+  try{video.currentTime=0}catch(_){}
+  const promise=video.play();
+  if(promise&&promise.catch)promise.catch(()=>{finishGreeting()});
+ }
+ video.loop=false;
+ video.removeAttribute('loop');
+ video.addEventListener('timeupdate',()=>{
+  if(!stopped && video.currentTime>=LW54_GREETING_SECONDS-.08)finishGreeting();
+ });
+ video.addEventListener('ended',finishGreeting);
+ video.addEventListener('error',()=>{clearReplay();video.style.display='none'});
+ video.__lw54Greet=function(){if(!stopped)return;startGreeting()};
+ video.__lw54GetState=()=>({stopped,resting:replayTimer!==null,currentTime:video.currentTime});
+ video.addEventListener('loadedmetadata',()=>{if(video.duration>0&&video.duration<LW54_GREETING_SECONDS)console.warn('Woo Jin shorter than greeting segment')},{once:true});
+ startGreeting();
+}
 function install(){
  const hero=document.querySelector('#main .lw48-hero');
  if(!hero||hero.querySelector('.lw53-avatar'))return;
@@ -61,10 +104,9 @@ function install(){
  const d=dict();const canAnimate=!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
  const layer=document.createElement('div');layer.className='lw53-motion';layer.setAttribute('aria-hidden','true');
  if(canAnimate){
-  const v=document.createElement('video');v.className='lw53-video';v.src=VID;v.poster=POSTER;v.muted=true;v.defaultMuted=true;v.loop=true;v.autoplay=true;v.playsInline=true;v.preload='metadata';v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('disablepictureinpicture','');
-  v.addEventListener('error',()=>{v.style.display='none'},{once:true});
+  const v=document.createElement('video');v.className='lw53-video';v.src=VID;v.poster=POSTER;v.muted=true;v.defaultMuted=true;v.loop=false;v.autoplay=false;v.playsInline=true;v.preload='metadata';v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('disablepictureinpicture','');
   layer.appendChild(v);
-  v.play().catch(()=>{v.style.display='none'});
+  lw54Control(v,hero);
  }
  const hotspot=document.createElement('button');hotspot.className='lw53-avatar';hotspot.type='button';hotspot.setAttribute('aria-label',d.label);hotspot.setAttribute('aria-expanded','false');hotspot.setAttribute('aria-controls','lw53-panel');hotspot.innerHTML='<span class="lw53-avatar-label"><span class="lw53-dot"></span>Woo Jin <span aria-hidden="true">›</span></span>';
  const panel=document.createElement('section');panel.className='lw53-panel';panel.id='lw53-panel';panel.hidden=true;panel.setAttribute('aria-hidden','true');panel.setAttribute('aria-label',d.label);
