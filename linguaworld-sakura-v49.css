@@ -1,0 +1,51 @@
+/* V49 polished iPhone homepage, true transparent user-uploaded Sakura logo. */
+:root{--lw49-ink:#111a32;--lw49-green:#2f8b73;--lw49-soft:#e8f4ed;--lw49-logo:url("https://d2ol7oe51mr4n9.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/18df521a-9f25-4494-8cf1-dc96eb76161f.png");--lw49-icons:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_081919_d1de782b-cfde-4683-b466-1b0aa9b1cab8.png");}
+html[data-lw48] body{background:#fbfaf8!important}
+html[data-lw48] #main{overflow:visible!important}
+html.lw49-ios[data-lw48] #main:has(.lw48-home){padding-top:max(74px,env(safe-area-inset-top,0px))!important}
+html.lw49-ios[data-lw48] #main:has(.lw34-topbar){padding-top:max(74px,env(safe-area-inset-top,0px))!important}
+/* Original PNG has transparent padding. Image placed as a tightly centered background crop,
+   preserving all original lettering and Sakura artwork without remaking the brand. */
+.lw49-brand-image{display:block!important;width:100%!important;height:100%!important;min-height:0!important;background-image:var(--lw49-logo)!important;background-repeat:no-repeat!important;background-size:100% auto!important;background-position:center center!important}
+html[data-lw48] #main .lw48-brand.lw49-branded{display:block!important;flex:0 0 auto!important;width:clamp(153px,46vw,196px)!important;height:52px!important;margin:0!important;padding:0!important;overflow:hidden!important;color:transparent!important;line-height:0!important}
+html[data-lw48] #main .lw48-brand .lw49-brand-image{height:52px!important;width:100%!important}
+html[data-lw48] #main .lw48-header{min-height:60px!important;padding:1px 0 7px!important;margin-bottom:7px!important}
+html[data-lw48] #main .lw48-header-actions{gap:5px!important;flex:0 1 auto!important;min-width:0!important}
+html[data-lw48] #main .lw48-world-pill{border:1px solid #e7eae6!important;border-radius:20px!important;max-width:161px!important;min-width:0!important;height:38px!important;min-height:38px!important;padding:0 10px!important;gap:5px!important;font-size:12px!important}
+html[data-lw48] #main .lw48-world-pill strong{max-width:94px!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;font-size:12px!important}
+html[data-lw48] #main .lw48-settings-btn{width:37px!important;min-width:37px!important;flex:0 0 37px!important}
+/* Make the active navigation calm green on all three learning worlds. */
+html[data-lw48] #bottomNav.lw42-nav>button.active,html[data-lw48][data-lw34] #bottomNav.lw34-nav .lw34-nav-item.active{background:#e4f3ea!important;color:#268469!important;box-shadow:none!important;border:0!important}
+html[data-lw48] #bottomNav.lw42-nav>button.active :is(svg,span){color:#268469!important}
+/* Sprite fallback: old shorthand background rules had erased cards and coach background-image. */
+html[data-lw48] #main .lw48-feature.lw48-feature-book .lw48-feature-art,
+html[data-lw48] #main .lw48-feature.lw48-feature-cards .lw48-feature-art,
+html[data-lw48] #main .lw48-feature.lw48-feature-headphones .lw48-feature-art,
+html[data-lw48] #main .lw48-feature.lw48-feature-bot .lw48-feature-art{background-image:var(--lw49-icons)!important;background-color:#fafaf7!important;background-repeat:no-repeat!important;background-size:200% 200%!important;border-radius:9px!important}
+html[data-lw48] #main .lw48-feature.lw48-feature-book .lw48-feature-art{background-position:left top!important}
+html[data-lw48] #main .lw48-feature.lw48-feature-cards .lw48-feature-art{background-position:right top!important}
+html[data-lw48] #main .lw48-feature.lw48-feature-headphones .lw48-feature-art{background-position:left bottom!important}
+html[data-lw48] #main .lw48-feature.lw48-feature-bot .lw48-feature-art{background-position:right bottom!important}
+html[data-lw48] #main .lw48-feature-art svg{display:none!important}
+html[data-lw48] #main .lw48-feature{border:1px solid #e9ece9!important;box-shadow:0 5px 21px #121d1b0b!important}
+html[data-lw48] #main .lw48-hero{border-radius:0!important}
+html[data-lw48] #main .lw48-hero:after{background:linear-gradient(90deg,#fbfaf8b5 0%,transparent 68%)!important}
+html[data-lw48] #main .lw48-feature-sub{max-width:calc(100% - 22px)!important;line-height:1.35!important}
+html[data-lw48] #main .lw48-progress{border:1px solid #e9eeeb!important;box-shadow:0 4px 20px #10251a0c!important}
+/* Other screens, shared header artwork. */
+html[data-lw48] #main .lw34-topbar .lw34-brand:has(.lw49-brand-image){display:flex!important;align-items:center!important;min-width:0!important}
+html[data-lw48] #main .lw34-topbar .lw34-brand .lw34-brand-icon[hidden]{display:none!important}
+html[data-lw48] #main .lw34-topbar .lw34-brand .lw49-branded{display:block!important;flex:0 0 auto!important;height:45px!important;width:clamp(144px,43vw,190px)!important;overflow:hidden!important;font-size:0!important}
+html[data-lw48] #main .lw34-topbar .lw49-brand-image{height:45px!important}
+/* Welcome screen logo: original image, no approximation. */
+.lw45-welcome .lw45-wordmark.lw49-branded{display:block!important;width:clamp(226px,64vw,320px)!important;height:80px!important;margin:0!important;overflow:hidden!important;line-height:0!important}
+.lw45-welcome .lw45-wordmark .lw49-brand-image{height:80px!important}
+.lw45-welcome .lw45-subline{margin-top:0!important}
+@media(max-width:390px){
+ html[data-lw48] #main .lw48-brand.lw49-branded{width:clamp(142px,43vw,174px)!important;height:48px!important}
+ html[data-lw48] #main .lw48-brand .lw49-brand-image{height:48px!important}
+ html[data-lw48] #main .lw48-world-pill{padding:0 7px!important;max-width:144px!important}
+ html[data-lw48] #main .lw48-world-pill strong{max-width:82px!important;font-size:11px!important}
+ html[data-lw48] #main .lw48-settings-btn{width:35px!important;min-width:35px!important}
+ html[data-lw48] #main .lw48-feature-sub{font-size:10.5px!important}
+}
