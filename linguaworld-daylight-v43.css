@@ -28,7 +28,7 @@ html[data-lw35] .lw35-header :is(.lw35-heart,.lw35-current-world){border:0!impor
 .lw36-flag small{font-size:10px!important;color:var(--day-muted)!important;text-shadow:none!important}
 .lw36-flag-arrow{display:none!important}.lw36-footer{color:#83928c!important}
 html[data-lw35] #main .lw35-home{gap:12px!important}
-html[data-lw35] #main .lw35-home .lw35-hero{height:clamp(220px,36vw,295px)!important;min-height:220px!important;background:linear-gradient(90deg,#eff8f5f8,#f4f8f2cd 48%,#f4f8f244),url('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png') center/cover!important;border:1px solid var(--day-stroke)!important;border-radius:20px!important;box-shadow:none!important}
+html[data-lw35] #main .lw35-home .lw35-hero{height:clamp(220px,36vw,295px)!important;min-height:220px!important;background:linear-gradient(90deg,#eff8f5f8,#f4f8f2cd 48%,#f4f8f244),url('privacy-scene.svg') center/cover!important;border:1px solid var(--day-stroke)!important;border-radius:20px!important;box-shadow:none!important}
 html[data-lw35] #main .lw35-home .lw35-hero :is(.lw30-title,.lw30-foreign,.lw30-language,p){color:#183a33!important;text-shadow:none!important}
 html[data-lw35] #main .lw35-home .lw35-hero .lw30-title{font-size:clamp(29px,5vw,43px)!important;font-weight:850!important}
 html[data-lw35] #main .lw35-home .lw35-status{border:1px solid var(--day-stroke)!important;background:#fff!important;border-radius:16px!important;box-shadow:var(--day-shadow)!important}
