@@ -20,9 +20,9 @@ const POSTERS={
  en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084026_0c3ef4b3-5b27-4b0e-ac38-7d38722bc485.png'
 };
 const VIDEOS={
- ko:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084123_77f6422b-8631-4eb7-a075-89abbede1d4d.mp4',
- de:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084124_0270ab1e-2ba6-4fc3-b339-ba0c2db1a56c.mp4',
- en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084124_f7b2292e-6ba1-4d28-b23c-b939a5df9072.mp4'
+ ko:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085306_b5bee684-a45c-49d1-8df6-ac16dbd39667.mp4',
+ de:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085305_6fbafab3-283e-4a7b-a6b6-ef1c2f6fb2c3.mp4',
+ en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085305_84602865-df4b-46f1-805c-1193966b461c.mp4'
 };
 const INSTRUCTION={
  de:'Einmal tippen: Welt ansehen · Doppelt tippen: Lernen starten',
