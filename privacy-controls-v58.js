@@ -14,7 +14,7 @@ function ask(n){
  choices[n]=true;try{localStorage.setItem(KEY,JSON.stringify(choices))}catch(e){}
  location.reload();return false;
 }
-function asset(url,fallback){return allowed('media')?url:(fallback||'privacy-scene.svg')}
+function asset(url,fallback){return allowed('media')?url:(fallback!==undefined?fallback:'privacy-scene.svg')}
 function open(){
  var old=document.getElementById('lw58-dialog');if(old){old.remove();return}
  var overlay=document.createElement('div');overlay.id='lw58-dialog';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Datenschutzeinstellungen');
