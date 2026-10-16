@@ -65,10 +65,10 @@ function decorateCard(card){
   img.alt=photo.label;img.referrerPolicy='no-referrer';
   img.onerror=()=>{frame.remove();visual.classList.remove('lw37-has-photo')};
   img.onload=()=>{if(img.naturalWidth)visual.classList.add('lw37-has-photo')};
-  img.src=BASE+photo.id+'?auto=format&fit=crop&w=950&h=600&q=80';
+  img.src=window.LWPrivacy.allowed('media')?BASE+photo.id+'?auto=format&fit=crop&w=950&h=600&q=80':'privacy-scene.svg';
   const source=document.createElement('a');source.className='lw37-credit';
   source.href='https://unsplash.com/s/photos/'+encodeURIComponent(photo.label);
-  source.target='_blank';source.rel='noopener noreferrer';source.textContent=word('photo')+' · Unsplash';
+  source.target='_blank';source.rel='noopener noreferrer';source.textContent=window.LWPrivacy.allowed('media')?word('photo')+' · Unsplash':'Illustration · Lokaler Modus';
   source.setAttribute('aria-label',photo.label+' – Unsplash');
   frame.append(img,source);visual.insertBefore(frame,visual.firstChild);
  }
