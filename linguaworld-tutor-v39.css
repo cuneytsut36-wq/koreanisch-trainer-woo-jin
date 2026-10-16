@@ -1,0 +1,12 @@
+/* LinguaWorld Tutor V39 — quiet, consistent conversational trainer interface. */
+.lw39-coach-header{display:flex;align-items:center;gap:10px;margin:14px 0 10px;padding:11px 13px;border:1px solid #30405b;border-radius:12px;background:#172237;color:#eef4ff}
+.lw39-icon{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:9px;background:#383055;color:#cab6ff;font-size:18px}
+.lw39-coach-header>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.lw39-coach-header strong{font-size:13px;font-weight:750}
+.lw39-coach-header small{font-size:11px;color:#acbad0}
+.lw39-hint{margin-left:auto;font-size:10px;color:#a9bdd4;white-space:nowrap}
+.lw39-practice{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:11px 0 15px}
+.lw39-practice-btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:9px 6px!important;border:1px solid #35435b!important;background:#1c273c!important;color:#e7eefc!important;border-radius:9px!important;font-size:12px!important;box-shadow:none!important}
+.lw39-practice-btn:hover{background:#263753!important;border-color:#8b7fd0!important}
+.lw39-practice-btn span:first-child{color:#c7adff;font-size:14px}
+@media(max-width:660px){.lw39-coach-header{margin:10px 0 7px;padding:9px}.lw39-hint{font-size:9px}.lw39-practice{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.lw39-practice-btn{min-height:38px;font-size:11px!important}}
