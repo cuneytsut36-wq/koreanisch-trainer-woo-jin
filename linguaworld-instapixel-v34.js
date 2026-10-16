@@ -16,7 +16,7 @@ fr:{welcome:'Bienvenue sur LinguaWorld',subtitle:'Choisis ton voyage linguistiqu
 };
 function t(k){return(dict[typeof v27Lang==='string'?v27Lang:'de']||dict.de)[k]||dict.de[k]||k}
 const worlds=[['ko','🇰🇷','Koreanisch','Korea'],['de','🇩🇪','Deutsch','Deutschland'],['en','🇬🇧','Englisch','United Kingdom']];
-const art='https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png';
+const art=window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png','privacy-scene.svg');
 function el(tag,cls){const x=document.createElement(tag);x.className=cls||'';return x}
 function hasChoice(){try{return localStorage.getItem(KEY)==='yes'}catch(e){return window.__lw34Selected===true}}
 function markChoice(){window.__lw34Selected=true;try{localStorage.setItem(KEY,'yes')}catch(e){}}
