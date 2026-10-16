@@ -1,0 +1,39 @@
+/* LinguaWorld V44 — targeted readability / safe-area layout repair */
+html[data-lw35] body{background:#f7f8f5!important;color:#18252b!important}
+html[data-lw35] #main{padding-top:calc(14px + env(safe-area-inset-top,0px))!important;padding-bottom:calc(145px + env(safe-area-inset-bottom,0px))!important}
+html[data-lw35] #main :is(.lw35-header,.lw34-topbar){margin-top:0!important}
+html[data-lw35] #main .lw35-home .lw35-hero{position:relative!important;background:linear-gradient(90deg,#f6f9f4f2 0%,#f8faf0c9 56%,#ffffff20 100%),url('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png') center/cover!important}
+html[data-lw35] #main .lw35-home .lw35-hero .lw30-hero-veil{opacity:0!important;background:transparent!important}
+html[data-lw35] #main .lw35-home .lw35-hero :is(.lw30-hero-words,.lw30-title,.lw30-foreign,.lw30-language,.lw30-hero-words p){color:#162b28!important;-webkit-text-fill-color:#162b28!important;text-shadow:none!important;opacity:1!important}
+html[data-lw35] #main .lw35-home .lw35-hero .lw30-hero-words{z-index:4!important}
+html[data-lw35] #main .lw35-home .lw35-hero .lw30-title{font-size:clamp(27px,6vw,37px)!important}
+html[data-lw35] #main .lw35-home .lw30-guide,.lw35-home .lw35-greeting{color:#1d2930!important}
+html[data-lw35] #main .lw35-home .lw35-greeting :is(small,span,strong){color:#22322e!important;-webkit-text-fill-color:#22322e!important;opacity:1!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest :is(strong,small){font-family:Inter,-apple-system,system-ui,sans-serif!important;letter-spacing:normal!important;text-transform:none!important;line-height:1.4!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest strong{font-size:15px!important;font-weight:720!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest small{font-size:12px!important}
+html[data-lw35] #main :is(.lw30-map,.lw31-map,.lw32-map,.lw33-map,.v18-map-page) :is(h1,h2,h3,p,small){font-family:Inter,-apple-system,system-ui,sans-serif!important;letter-spacing:normal!important}
+html[data-lw35] #main :is(.lw30-map,.lw31-map,.lw32-map,.lw33-map,.v18-map-page) :is(.lw30-map-pin,.lw31-map-label,.lw30-map-label,.lw31-chapter-badge,.lw30-map-node){background:#ffffffed!important;color:#15372f!important;border:1px solid #c2d7ce!important;text-shadow:none!important;box-shadow:0 2px 10px #15201920!important}
+html[data-lw35] #main :is(.lw30-map,.lw31-map,.lw32-map,.lw33-map,.v18-map-page) :is(.lw30-map-pin,.lw31-map-label,.lw30-map-label,.lw31-chapter-badge,.lw30-map-node) *{color:#15372f!important;-webkit-text-fill-color:#15372f!important}
+html[data-lw35] #main :is(.lw30-map,.lw31-map,.lw32-map,.lw33-map) .lw30-kicker{color:#327c68!important}
+html[data-lw35] #main :is(.lw30-map,.lw31-map,.lw32-map,.lw33-map) .lw30-map-head p{color:#637078!important}
+html[data-lw37] #main.lw37-vocab :is(.v25-title,.v25-learning h1,.v25-learning h2){color:#19282a!important;-webkit-text-fill-color:#19282a!important;opacity:1!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .v25-card-head{background:#f4f7f5!important;color:#3c5550!important;border-radius:10px 10px 0 0!important;padding:7px!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .v25-card-head :is(span,button){color:#376b5b!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .lw37-caption :is(span,h2,p){color:#19282a!important;-webkit-text-fill-color:#19282a!important}
+html[data-lw37] #main.lw37-vocab .v25-title,.v25-learning{opacity:1!important}
+html[data-lw35] #main .v26-reels,html[data-lw35] #main .v26-reel,html[data-lw35] #main .v26-reels :is(article,section){border-radius:17px!important}
+html[data-lw35] #main .v26-reels :is(.v26-reels-header,.v26-meta,.v26-caption){color:#263735!important}
+html[data-lw35] #main .v26-reels :is(h1,h2,p,small){-webkit-text-fill-color:currentColor}
+html[data-lw35] #main :is(.v22-woojin,.lw32-chat,.wj-open-status,.wj-coach,.v18-coach-mount){color:#e8edf6!important}
+html[data-lw35] #main :is(.v22-woojin,.lw32-chat,.wj-open-status,.wj-coach,.v18-coach-mount) :is(h1,h2,h3,strong,p,small){color:inherit!important;-webkit-text-fill-color:currentColor!important}
+html[data-lw35] #main :is(.v22-woojin,.lw32-chat,.wj-open-status,.wj-coach) :is(button,textarea,input){font-family:Inter,-apple-system,system-ui,sans-serif!important}
+html[data-lw35] #main :is(.v22-woojin,.lw32-chat,.wj-open-status,.wj-coach) :is(button,input,textarea){max-width:100%!important}
+html[data-lw35] #main :is(.v22-woojin,.lw32-chat,.wj-open-status,.wj-coach) :is(h1,h2,h3){font-size:clamp(18px,4.7vw,26px)!important}
+html[data-lw35] #main :is(.v22-woojin,.lw32-chat,.wj-open-status,.wj-coach) :is(.wj-open-chat,.wj-open-status){border-radius:16px!important}
+html[data-lw35] #main .lw35-header{position:relative!important;min-height:52px!important}
+html[data-lw35] #main .lw35-header :is(button,select){max-height:40px!important}
+html[data-lw35] #bottomNav.lw42-nav{bottom:calc(11px + env(safe-area-inset-bottom,0px))!important;max-width:calc(100vw - 24px)!important}
+html[data-lw35] #bottomNav.lw42-nav>button{font-family:Inter,-apple-system,system-ui,sans-serif!important;font-weight:600!important;letter-spacing:0!important}
+html[data-lw35] #bottomNav.lw42-nav>button span{font-size:clamp(10px,2.6vw,12px)!important}
+@media(max-width:420px){html[data-lw35] #main{padding-left:12px!important;padding-right:12px!important}html[data-lw35] #main .lw35-header .lw35-wordmark{font-size:20px!important}html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest{padding:10px!important}}
