@@ -20,9 +20,9 @@ const POSTERS={
  en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084026_0c3ef4b3-5b27-4b0e-ac38-7d38722bc485.png'
 };
 const VIDEOS={
- ko:'__SEOUL_VIDEO__',
- de:'__BERLIN_VIDEO__',
- en:'__LONDON_VIDEO__'
+ ko:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084123_77f6422b-8631-4eb7-a075-89abbede1d4d.mp4',
+ de:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084124_0270ab1e-2ba6-4fc3-b339-ba0c2db1a56c.mp4',
+ en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084124_f7b2292e-6ba1-4d28-b23c-b939a5df9072.mp4'
 };
 const INSTRUCTION={
  de:'Einmal tippen: Welt ansehen · Doppelt tippen: Lernen starten',
