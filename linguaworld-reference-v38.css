@@ -1,0 +1,50 @@
+/* LinguaWorld v38 — reference-inspired night Seoul pixel fantasy. Layout-only layer: original learning engine preserved. */
+:root{--lw38-bg:#060c24;--lw38-panel:#101a38;--lw38-edge:#a57cff;--lw38-ink:#fff;--lw38-muted:#c0c7ea}
+html[data-lw35] body{background:radial-gradient(ellipse at 75% 8%,#30185a 0%,transparent 43%),linear-gradient(145deg,#070b22,#111436 48%,#080f2c)!important;color:#fff!important}
+html[data-lw35] #main{max-width:940px!important}
+html[data-lw35] .lw35-header{background:#080e29bb!important;border:1px solid #7d66c5aa!important;border-radius:19px!important;padding:11px 16px!important;box-shadow:0 3px 27px #8d5cff21!important;backdrop-filter:blur(12px)}
+html[data-lw35] .lw35-header .lw35-wordmark{font-size:clamp(21px,3.7vw,29px)!important;background:linear-gradient(90deg,#fff 10%,#e5a0ff 90%);color:transparent!important;background-clip:text}
+html[data-lw35] .lw35-header .lw35-heart{color:#ff72b2!important;background:#251c42!important;border:1px solid #584189!important;border-radius:12px!important}
+html[data-lw35] #main .lw35-home{max-width:920px!important;gap:14px!important}
+html[data-lw35] #main .lw35-home .lw35-hero{height:clamp(238px,35vw,340px)!important;min-height:238px!important;background:linear-gradient(90deg,#080f35dc 0%,#101a5188 48%,#151b4355),url('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png') center/cover!important;border:2px solid #a66bff!important;border-radius:22px!important;box-shadow:0 0 22px #8854ff59,inset 0 0 35px #30175269!important}
+html[data-lw35] #main .lw35-home .lw35-hero :is(h1,.lw30-title){color:#fff!important;text-shadow:0 3px 18px #05091d!important;font-size:clamp(34px,6vw,52px)!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest{min-height:146px!important;background:linear-gradient(155deg,#282052,#091b43)!important;border:1px solid #8061e7!important;border-radius:19px!important;box-shadow:inset 0 1px #ffffff21,0 7px 22px #0005!important;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest:nth-child(2n){background:linear-gradient(155deg,#102d50,#141438)!important;border-color:#4878c8!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest:hover{transform:translateY(-3px)!important;border-color:#d3b4ff!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-qicon{width:57px!important;height:57px!important;flex-basis:57px!important;font-size:30px!important;background:#8053db4d!important;color:#fff!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest strong{font-size:17px!important;color:white!important}
+html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest small{font-size:12px!important;color:#d0dafc!important}
+html[data-lw35] #main .lw35-home .lw35-status{background:#131b3f!important;border:1px solid #7255b9!important;border-radius:17px!important}
+html[data-lw35] .lw34-nav{background:#080e27f2!important;border:1px solid #7b5bdd!important;border-radius:20px!important;box-shadow:0 0 20px #7e52ec46!important;backdrop-filter:blur(16px)}
+html[data-lw35] .lw34-nav-item.active{color:#e6b4ff!important}
+html[data-lw35] .lw34-nav-item.active svg{filter:drop-shadow(0 0 8px #be84ff)}
+/* A richly illustrated language picker retaining native world switch buttons */
+.lw36-welcome{background:radial-gradient(ellipse at 50% 38%,#18245a44,transparent 70%),linear-gradient(#090d2a45,#060d28c7),url('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png') center/cover no-repeat!important}
+.lw36-welcome:before{content:'✦   ✧    ✦   ✧   ✦';position:absolute;top:7%;left:0;width:100%;text-align:center;letter-spacing:clamp(20px,9vw,90px);font-size:21px;color:#ffabed;opacity:.68;pointer-events:none}
+.lw36-entry{width:min(100%,710px)!important;padding:clamp(20px,4vw,38px) clamp(14px,4vw,30px)!important;background:linear-gradient(155deg,#070d30c9,#10103cab)!important;border:1px solid #a376ff9c;border-radius:30px;box-shadow:0 22px 80px #02051de0,0 0 45px #ab62fa47!important;backdrop-filter:blur(12px)}
+.lw36-logo{font-weight:900!important;font-size:clamp(23px,4vw,34px)!important;margin-bottom:clamp(12px,3vh,27px)!important;letter-spacing:-.05em!important;text-shadow:0 0 20px #9e71ff!important}
+.lw36-logo span{color:#ff8fde!important}
+.lw36-eyebrow{color:#f0b5ff!important;letter-spacing:.16em!important}
+.lw36-entry h1{color:#fff!important;font-size:clamp(29px,5.5vw,49px)!important;text-shadow:0 3px 18px #06081f!important}
+.lw36-entry p{color:#e8e7ff!important;margin-bottom:20px!important}
+.lw36-flags{gap:clamp(7px,2vw,14px)!important}
+.lw36-flag{min-height:clamp(178px,28vw,225px)!important;background:linear-gradient(180deg,#2b246395,#100f3bdb)!important;border:2px solid #735bd9!important;border-radius:19px!important;box-shadow:0 9px 20px #05051eaf,inset 0 1px #ffffff52!important;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease!important}
+.lw36-flag[data-world="ko"]{background:linear-gradient(180deg,#302c6866,#13113ce6),url('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261015_163340_375b460e-df89-4d21-9f9f-baf3d039814b.png') center/cover!important}
+.lw36-flag[data-world="de"]{background:linear-gradient(160deg,#30213a99,#302044ec),url('https://images.unsplash.com/photo-1599946347371-68eb71b16afc?auto=format&fit=crop&w=480&q=80') center/cover!important;border-color:#daaa64!important}
+.lw36-flag[data-world="en"]{background:linear-gradient(160deg,#12376399,#101336dd),url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=480&q=80') center/cover!important;border-color:#4c9cfd!important}
+.lw36-flag:hover,.lw36-flag:focus-visible{transform:translateY(-6px) scale(1.015)!important;box-shadow:0 0 25px #bc86ffb0!important}
+.lw36-flag-circle{background:#09143bbb!important;backdrop-filter:blur(5px);border:1px solid #d6c7ffbd!important;box-shadow:0 0 19px #9d75ff70!important}
+.lw36-flag strong{font-size:clamp(13px,2.3vw,18px)!important;text-shadow:0 3px 9px #000!important;color:white!important}
+.lw36-flag small{color:#ece8ff!important;text-shadow:0 2px 6px #000!important}
+.lw36-flag-arrow{background:#171139ba;border:1px solid #aaa0f4;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;color:white!important}
+.lw36-footer{color:#ebc8fb!important;margin-top:23px!important}
+/* Story world and vocabulary visual language */
+html[data-lw35] #main :is(.lw35-map,.lw34-story,.lw35-story,.wj-v17-map-art){border-color:#8465e9!important;box-shadow:0 0 18px #7750c642!important;border-radius:21px!important}
+html[data-lw37] #main.lw37-vocab .v25-levels button.active{background:linear-gradient(130deg,#bd84f7,#6c47d1)!important;color:white!important;box-shadow:0 0 15px #a76cfa99!important}
+html[data-lw37] #main.lw37-vocab .lw37-card{background:linear-gradient(165deg,#1d2452,#0b1635)!important;border:1px solid #7f68d7!important;border-radius:21px!important;box-shadow:0 5px 25px #0008!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .lw37-visual{border:1px solid #5f6bb0!important;background:#18204b!important;border-radius:17px!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .lw37-caption{background:linear-gradient(#1e2852,#141a3d)!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .lw37-caption h2{color:white!important;font-size:clamp(27px,6vw,39px)!important}
+html[data-lw37] #main.lw37-vocab .lw37-card .v25-card-actions button:last-child{background:linear-gradient(115deg,#b96dff,#7750ee)!important;border-color:#cda0ff!important;color:white!important}
+@media(max-width:620px){.lw36-entry{padding:23px 10px!important;border-radius:20px}.lw36-flag{min-height:164px!important;padding:16px 4px!important}.lw36-entry h1{font-size:30px!important}html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest{min-height:116px!important;padding:11px!important}html[data-lw35] #main .lw35-home .lw35-actions .lw30-qicon{width:44px!important;height:44px!important;flex-basis:44px!important;font-size:23px!important}}
+@media(prefers-reduced-motion:reduce){.lw36-flag,html[data-lw35] #main .lw35-home .lw35-actions .lw30-quest{transition:none!important}}
