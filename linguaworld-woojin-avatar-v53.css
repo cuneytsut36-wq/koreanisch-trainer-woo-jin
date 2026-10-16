@@ -76,3 +76,22 @@ html[data-lw48] #main .lw53-hero .lw53-motion .lw55-greeting-video{
 html[data-lw48] #main .lw53-hero.lw55-greeting-active .lw53-motion .lw55-greeting-video{
  visibility:visible!important;opacity:1!important;transition:none!important;
 }
+
+/* V57: idle renders continuously. It stays decoding at zero opacity only while greeting is visible.
+   Neither clip is exposed through a translucent transition, so no double-image. */
+html[data-lw48] #main .lw53-hero .lw53-motion .lw55-idle-video{visibility:visible!important;opacity:1!important;transition:none!important;will-change:opacity!important}
+html[data-lw48] #main .lw53-hero.lw55-greeting-active .lw53-motion .lw55-idle-video{visibility:visible!important;opacity:0!important;transition:none!important}
+html[data-lw48] #main .lw53-hero .lw53-motion .lw55-greeting-video{opacity:0!important;visibility:hidden!important;transition:none!important}
+html[data-lw48] #main .lw53-hero.lw55-greeting-active .lw53-motion .lw55-greeting-video{opacity:1!important;visibility:visible!important;transition:none!important}
+/* Subtle continuous independent breeze motion; never covers the coach interaction. */
+html[data-lw48] #main .lw53-hero .lw53-motion::after{
+ animation:lw57-breeze 7.5s ease-in-out infinite alternate!important;
+ background-image:
+ radial-gradient(ellipse 4px 3px at 80% 34%,#f6bfdac0 65%,transparent 75%),
+ radial-gradient(ellipse 3px 5px at 90% 70%,#f3b1cbbb 65%,transparent 75%),
+ radial-gradient(ellipse 4px 3px at 61% 19%,#ffd0e2b5 65%,transparent 75%),
+ radial-gradient(ellipse 3px 3px at 72% 55%,#ffbbd49e 65%,transparent 75%),
+ radial-gradient(ellipse 3px 4px at 94% 25%,#ffc5dbac 65%,transparent 75%)!important;
+}
+@keyframes lw57-breeze{0%{transform:translate3d(15px,-9px,0);opacity:.42}50%{opacity:.78}100%{transform:translate3d(-19px,15px,0);opacity:.55}}
+@media(prefers-reduced-motion:reduce){html[data-lw48] #main .lw53-hero .lw53-motion::after{animation:none!important;display:none!important}}
