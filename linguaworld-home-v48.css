@@ -1,0 +1,65 @@
+/* LinguaWorld V48 — reference-inspired warm-white home, true HTML controls */
+html[data-lw48] body{background:#fbfaf7!important;color:#101827!important}
+html[data-lw48] #main{max-width:790px!important;margin:0 auto!important;padding-bottom:calc(105px + env(safe-area-inset-bottom,0px))!important}
+html[data-lw48] #main .lw43-app-language,html[data-lw48] #main .lw38-picker-header{display:none!important}
+html[data-lw48] #main .lw48-home{box-sizing:border-box!important;max-width:520px!important;width:100%!important;margin:0 auto!important;padding:0 0 15px!important;display:flex!important;flex-direction:column!important;gap:0!important;color:#121827!important;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+html[data-lw48] #main .lw48-home *{box-sizing:border-box!important}
+html[data-lw48] #main .lw48-header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:9px!important;min-height:53px!important;padding:1px 0 9px!important;margin-bottom:9px!important;border:0!important;background:transparent!important;box-shadow:none!important}
+html[data-lw48] #main .lw48-brand{display:block!important;flex-shrink:0!important;font-size:clamp(21px,5.9vw,29px)!important;font-weight:850!important;letter-spacing:-.065em!important;line-height:1.1!important;color:#101725!important;white-space:nowrap!important}
+html[data-lw48] #main .lw48-brand span{color:#32836c!important}
+html[data-lw48] #main .lw48-header-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;min-width:0!important}
+html[data-lw48] #main :is(.lw48-world-pill,.lw48-settings-btn){appearance:none!important;position:relative!important;display:flex!important;justify-content:center!important;align-items:center!important;gap:5px!important;flex:none!important;height:37px!important;min-height:37px!important;max-height:37px!important;padding:0 10px!important;border:1px solid #e8ebe8!important;border-radius:22px!important;background:#fff!important;color:#18242a!important;box-shadow:0 2px 10px #17272012!important;font:600 12px Inter,system-ui,sans-serif!important;white-space:nowrap!important;transform:none!important}
+html[data-lw48] #main .lw48-world-pill>span:first-child{font-size:17px!important}
+html[data-lw48] #main .lw48-world-pill strong{font-size:12px!important;color:#1d292b!important}
+html[data-lw48] #main .lw48-caret{font-size:17px!important;margin-left:2px!important;color:#52625e!important}
+html[data-lw48] #main .lw48-settings-btn{width:37px!important;min-width:37px!important;padding:0!important}
+html[data-lw48] #main .lw48-settings-btn svg{width:18px!important;height:18px!important}
+html[data-lw48] #main .lw48-hero{position:relative!important;isolation:isolate!important;width:100%!important;height:clamp(236px,70vw,333px)!important;min-height:236px!important;margin:0!important;padding:29px 11px 22px!important;display:block!important;overflow:hidden!important;border:0!important;border-radius:0!important;background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_081136_1571ea70-101a-414c-a350-0f1b6a41a955.png")!important;background-color:#fbfaf7!important;background-size:cover!important;background-repeat:no-repeat!important;background-position:center center!important;box-shadow:none!important}
+html[data-lw48] #main .lw48-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#fbfaf7b0,transparent 63%);z-index:0}
+html[data-lw48] #main .lw48-hero-text{position:relative;z-index:1;width:62%;max-width:305px}
+html[data-lw48] #main .lw48-greeting{font-size:clamp(14px,3.8vw,18px)!important;font-weight:540!important;color:#1b2930!important;margin:0 0 5px!important;line-height:1.2!important}
+html[data-lw48] #main .lw48-hero h1{font-size:clamp(27px,7.1vw,40px)!important;line-height:1.08!important;letter-spacing:-.05em!important;font-weight:850!important;color:#111729!important;margin:0 0 13px!important;overflow-wrap:normal!important;text-shadow:none!important}
+html[data-lw48] #main .lw48-description{color:#667181!important;font-size:clamp(12px,3vw,16px)!important;line-height:1.48!important;font-weight:500!important;margin:0!important;max-width:290px!important;text-shadow:none!important}
+html[data-lw48] #main .lw48-progress{position:relative!important;z-index:2!important;display:flex!important;flex-direction:column!important;gap:14px!important;margin:-15px 0 12px!important;padding:17px 18px 18px!important;min-height:88px!important;background:#fffffffa!important;border:1px solid #ecefeb!important;border-radius:19px!important;box-shadow:0 4px 18px #2533280d!important;color:#111827!important}
+html[data-lw48] #main .lw48-progress-heading,html[data-lw48] #main .lw48-progress-bottom{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;min-width:0!important}
+html[data-lw48] #main .lw48-progress-heading strong{font-size:15px!important;font-weight:800!important;color:#15202b!important}
+html[data-lw48] #main .lw48-progress-heading>span{font-size:13px!important;color:#576775!important;font-weight:600!important;white-space:nowrap!important}
+html[data-lw48] #main .lw48-track{position:relative!important;flex:1!important;height:9px!important;min-height:9px!important;max-height:9px!important;min-width:0!important;background:#e7eae7!important;border-radius:999px!important;overflow:hidden!important}
+html[data-lw48] #main .lw48-track>span{display:block!important;height:100%!important;background:#439783!important;border-radius:999px!important}
+html[data-lw48] #main .lw48-xp{font-size:11px!important;color:#6b7880!important;white-space:nowrap!important;font-weight:560!important}
+html[data-lw48] #main .lw48-feature-grid{width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+html[data-lw48] #main .lw48-feature{appearance:none!important;position:relative!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;min-width:0!important;width:100%!important;height:155px!important;min-height:155px!important;max-height:155px!important;margin:0!important;padding:18px 16px!important;border:1px solid #eaece8!important;border-radius:18px!important;background:#ffffff!important;box-shadow:0 3px 13px #1528210d!important;color:#1c2834!important;text-align:left!important;transform:none!important;transition:background .15s,border-color .15s!important}
+html[data-lw48] #main .lw48-feature:is(:hover,:focus-visible){border-color:#95bbae!important;background:#fafffc!important}
+html[data-lw48] #main .lw48-feature-art{display:flex!important;align-items:center!important;justify-content:center!important;width:42px!important;height:42px!important;margin:0 0 11px!important;flex:0 0 42px!important;border-radius:10px!important;background:#e6f3f5!important;color:#2786d5!important}
+html[data-lw48] #main .lw48-feature-cards .lw48-feature-art{color:#328a76!important;background:#e5f4ee!important}
+html[data-lw48] #main .lw48-feature-bot .lw48-feature-art{color:#488d9d!important;background:#e9f5f7!important}
+html[data-lw48] #main .lw48-feature-art svg{width:31px!important;height:31px!important;stroke-width:2!important;filter:none!important}
+html[data-lw48] #main .lw48-feature strong{font-size:15px!important;font-weight:800!important;letter-spacing:-.025em!important;color:#192530!important;margin:0 0 4px!important;line-height:1.1!important}
+html[data-lw48] #main .lw48-feature-sub{display:block!important;max-width:calc(100% - 12px)!important;font-size:11px!important;line-height:1.32!important;font-weight:500!important;color:#64717d!important;text-wrap:pretty!important}
+html[data-lw48] #main .lw48-feature-arrow{position:absolute!important;right:12px!important;bottom:13px!important;width:28px!important;height:28px!important;display:grid!important;place-items:center!important;border:1px solid #edf0ed!important;border-radius:50%!important;background:#fff!important;color:#344b4c!important;box-shadow:0 2px 7px #15251a12!important}
+html[data-lw48] #main .lw48-feature-arrow svg{width:15px!important;height:15px!important}
+/* Make the legacy menu look exactly like a compact native bottom bar on all pages. */
+html[data-lw48] #bottomNav.lw42-nav{box-sizing:border-box!important;left:50%!important;right:auto!important;bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;transform:translateX(-50%)!important;width:min(calc(100% - 24px),520px)!important;min-height:62px!important;height:62px!important;max-height:62px!important;border:1px solid #e6eae6!important;border-radius:17px!important;background:#fffffffa!important;box-shadow:0 4px 18px #142c1d17!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;padding:4px!important}
+html[data-lw48] #bottomNav.lw42-nav>button{min-width:0!important;width:100%!important;min-height:52px!important;max-height:52px!important;height:52px!important;padding:4px 1px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;background:transparent!important;border:0!important;border-radius:10px!important;color:#98a3ae!important;box-shadow:none!important;font-size:10px!important}
+html[data-lw48] #bottomNav.lw42-nav>button>span{color:inherit!important;font-size:10px!important;font-weight:600!important;white-space:nowrap!important;letter-spacing:0!important}
+html[data-lw48] #bottomNav.lw42-nav>button svg{height:20px!important;width:20px!important;filter:none!important;color:inherit!important}
+html[data-lw48] #bottomNav.lw42-nav>button.active{background:#ebf6f0!important;color:#2e826b!important}
+html[data-lw48] #main .lw48-other-settings{width:36px!important;height:36px!important;min-width:36px!important;padding:7px!important;background:#fff!important;color:#367e6a!important;border:1px solid #d8e5dc!important;border-radius:12px!important;box-shadow:none!important}
+html[data-lw48] #main .lw48-other-settings svg{width:19px;height:19px}
+/* Dedicated settings panel, not an app-language dropdown in the page header. */
+html body.lw48-modal-open{overflow:hidden!important}
+.lw48-settings-layer{box-sizing:border-box;position:fixed;inset:0;z-index:200000;display:flex;align-items:center;justify-content:center;padding:20px;background:#07152185;backdrop-filter:blur(3px);font-family:Inter,-apple-system,system-ui,sans-serif;color:#18252b}
+.lw48-settings-panel{box-sizing:border-box;width:min(100%,440px);max-height:calc(100dvh - 40px);overflow-y:auto;padding:22px;background:#fff;border-radius:22px;box-shadow:0 22px 65px #09192540}
+.lw48-settings-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px}
+.lw48-settings-heading h2{color:#19262d;font-size:23px;font-weight:800;letter-spacing:-.03em;margin:0}
+.lw48-settings-heading button{display:grid;place-items:center;width:37px;height:37px;border:1px solid #e4e8e5;border-radius:50%;background:#f9faf9;color:#344a46}
+.lw48-field{display:block;padding:0 0 22px;margin-bottom:20px;border-bottom:1px solid #edf0ed}
+.lw48-field:last-child{border:0;margin:0;padding:0}
+.lw48-field label{font-size:15px;font-weight:800;color:#1c2c2f}
+.lw48-field p{margin:5px 0 12px;font-size:12px;line-height:1.45;color:#78817f}
+.lw48-field select{box-sizing:border-box;width:100%;min-height:46px;padding:11px 12px;border-radius:11px;border:1px solid #dce4dc;background:#f7faf7;color:#182b29;font-size:15px;font-family:inherit}
+.lw48-setting-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.lw48-setting-row strong{color:#2b7562;font-size:14px}
+.lw48-change-world{flex:none;padding:9px 13px;min-height:38px;border:1px solid #c7dbd0;border-radius:11px;background:#eaf5ef;color:#2c806b;font-weight:700}
+@media(max-width:400px){html[data-lw48] #main .lw48-home{max-width:100%!important}html[data-lw48] #main .lw48-header{gap:4px!important}html[data-lw48] #main .lw48-brand{font-size:22px!important}html[data-lw48] #main .lw48-world-pill{padding:0 8px!important}html[data-lw48] #main .lw48-feature{height:145px!important;min-height:145px!important;max-height:145px!important;padding:14px 12px!important}html[data-lw48] #main .lw48-feature-sub{font-size:10.5px!important}html[data-lw48] #main .lw48-hero{height:245px!important;padding-top:26px!important}html[data-lw48] #main .lw48-hero-text{width:64%!important}}
+@media(prefers-reduced-motion:reduce){html[data-lw48] #main .lw48-feature{transition:none!important}}
