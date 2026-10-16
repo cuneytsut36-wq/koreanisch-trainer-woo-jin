@@ -135,9 +135,9 @@ function lw55Control(idle,greet,hero){
 function install(){
  const hero=document.querySelector('#main .lw48-hero');
  if(!hero||hero.querySelector('.lw53-avatar'))return;
- hero.classList.add('lw53-hero');
- const d=dict();const canAnimate=!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
- const layer=document.createElement('div');layer.className='lw53-motion';layer.setAttribute('aria-hidden','true');
+ hero.classList.add('lw53-hero');hero.classList.toggle('lw53-privacy-idle',!window.LWPrivacy.allowed('media'));
+ const d=dict();const canAnimate=window.LWPrivacy.allowed('media')&&!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+ const layer=document.createElement('div');layer.className='lw53-motion'+(canAnimate?'':' lw53-privacy-idle');layer.setAttribute('aria-hidden','true');
  if(canAnimate){
   const makeVideo=(url,name,loop)=>{
    const v=document.createElement('video');v.className='lw53-video '+name;v.src=url;v.poster=POSTER;v.muted=true;v.defaultMuted=true;v.loop=loop;v.autoplay=false;v.playsInline=true;v.preload='auto';v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('disablepictureinpicture','');v.setAttribute('muted','');return v;
