@@ -40,6 +40,7 @@ function coach(value){
  },200);
 }
 function mic(hero){
+ if(!window.LWPrivacy.allowed('speech')){window.LWPrivacy.ask('speech');return}
  const R=window.SpeechRecognition||window.webkitSpeechRecognition;
  const status=hero.querySelector('.lw53-status');const d=dict();
  if(!R){status.textContent=d.notSupported;return}
