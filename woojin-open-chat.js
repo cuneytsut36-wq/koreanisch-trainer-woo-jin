@@ -58,15 +58,15 @@ async function wjOpenServerReply(messages){
 }
 async function wjOpenReply(){
  const msgs=wjOpenMessages();
- if(wjOpenChat.backend){try{const text=await wjOpenServerReply(msgs);if(text)return text}catch(e){wjOpenChat.error='Servermodell momentan nicht erreichbar';wjOpenChat.backend=false}}
+ if(wjOpenChat.backend&&window.LWPrivacy.allowed('hostedAI')){try{const text=await wjOpenServerReply(msgs);if(text)return text}catch(e){wjOpenChat.error='Servermodell momentan nicht erreichbar';wjOpenChat.backend=false}}
  if(wjOpenChat.localReady){const result=await wjOpenLocalReply(msgs);if(result)return result}
  throw Error('Kein freies Modell gestartet');
 }
 async function wjOpenStart(){
  if(wjOpenChat.localReady||wjOpenChat.loading)return;
- if(wjOpenChat.backend){wjOpenRefresh();return}
+ if(wjOpenChat.backend){if(!window.LWPrivacy.allowed('hostedAI')){window.LWPrivacy.ask('hostedAI');return}wjOpenRefresh();return}
  if(!navigator.gpu){wjOpenChat.error='WebGPU fehlt. Die Offline-Übungen funktionieren weiter; für freien KI-Chat ist ein kompatibler Browser nötig.';wjOpenRefresh();return}
- if(!confirm('Ein kostenloses lokales Sprachmodell laden? Etwa 400 MB oder mehr Download; kann Akku und Gerätespeicher beanspruchen. Keine bezahlte API.'))return;
+ if(!confirm('Ein kostenloses lokales Sprachmodell aus externen Quellen auf dieses Gerät laden? Etwa 400 MB oder mehr Download; kann Akku und Gerätespeicher beanspruchen. Keine bezahlte API.'))return;
  wjOpenChat.loading=true;wjOpenChat.error='';wjOpenChat.status='Prüfe KI-Modell …';wjOpenRefresh();
  try{
   const {CreateMLCEngine,prebuiltAppConfig}=await import('https://esm.sh/@mlc-ai/web-llm@0.2.85?bundle');
