@@ -1,0 +1,39 @@
+/* V43: app menu language is separate from the three learning-world flags. */
+html[data-lw43] #main .lw34-topbar .lw38-picker-header{display:none!important}
+html[data-lw43] #main .lw34-topbar .lw34-top-actions{
+ display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important
+}
+html[data-lw43] #main .lw43-app-language{
+ display:inline-flex;align-items:center;justify-content:center;gap:6px;position:relative;
+ min-height:37px;min-width:109px;max-width:160px;padding:7px 10px;
+ background:#202b3d;border:1px solid #46566e;border-radius:10px;color:#e9f0ff;
+ font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:650;line-height:1.2;
+ white-space:nowrap;cursor:pointer;box-sizing:border-box;flex-shrink:0
+}
+html[data-lw43] #main .lw43-app-language:hover{background:#2b394d;border-color:#73829e}
+html[data-lw43] #main .lw43-app-language:focus-within{outline:2px solid #b8a6ff;outline-offset:2px}
+.lw43-app-language .lw43-icon{font-size:17px;line-height:1}
+.lw43-app-language .lw43-label{overflow:hidden;text-overflow:ellipsis}
+.lw43-app-language .lw43-chevron{font-size:15px;color:#bac4d4;margin-left:auto}
+.lw43-app-language .lw43-select{
+ position:absolute!important;inset:0!important;opacity:0!important;width:100%!important;
+ height:100%!important;min-height:0!important;cursor:pointer!important;z-index:2!important;
+ appearance:auto
+}
+html[data-lw43] .lw43-welcome-language{
+ display:flex!important;align-items:center;justify-content:center;margin:8px 0 22px!important;
+ opacity:1!important;visibility:visible!important
+}
+html[data-lw43] .lw43-welcome-language .lw38-picker-welcome{
+ background:#17253d!important;border:1px solid #5c718d!important;border-radius:12px!important;
+ padding:9px 12px!important;display:flex!important;align-items:center!important;gap:10px!important
+}
+html[data-lw43] .lw43-welcome-language .lw38-picker-title{display:inline!important;color:#eaf1ff!important;font-size:12px!important}
+html[data-lw43] .lw43-welcome-language .lw38-select{min-height:38px!important;min-width:128px!important;color:#fff!important}
+@media(max-width:600px){
+ html[data-lw43] #main .lw43-app-language{min-width:96px;max-width:117px;padding:7px 8px;font-size:11px;gap:5px}
+ html[data-lw43] #main .lw43-app-language .lw43-icon{font-size:15px}
+ html[data-lw43] .lw43-welcome-language .lw38-picker-welcome{gap:7px!important;padding:8px!important}
+ html[data-lw43] .lw43-welcome-language .lw38-picker-title{font-size:11px!important}
+ html[data-lw43] .lw43-welcome-language .lw38-select{min-width:112px!important;max-width:145px!important;font-size:11px!important}
+}
