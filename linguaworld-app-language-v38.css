@@ -1,0 +1,21 @@
+/* V38 – independent, always-discoverable app language switcher */
+.lw38-welcome-language{width:100%;display:flex;align-items:center;justify-content:center;margin:0 0 13px}
+.lw38-picker{display:flex;align-items:center;gap:10px;position:relative;color:#c8d5eb;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:650}
+.lw38-picker-title{font-size:12px;white-space:nowrap;letter-spacing:0}
+.lw38-select{appearance:auto;max-width:100%;min-width:134px;min-height:38px;padding:8px 11px;border-radius:10px;border:1px solid #52617b;background:#19253a;color:#eef3ff;font-family:inherit;font-size:12px;cursor:pointer;box-shadow:none}
+.lw38-select:focus-visible{outline:2px solid #a999f7;outline-offset:2px}
+.lw38-picker-welcome{padding:10px 14px;border:1px solid #394b64;border-radius:12px;background:#132137d9;gap:14px}
+.lw38-picker-welcome .lw38-select{background:#202e47;border-color:#697a9a;min-width:164px;font-size:13px}
+#main .lw34-topbar .lw34-top-actions{display:flex!important;align-items:center!important;gap:9px!important;min-width:0}
+#main .lw34-topbar .lw38-picker-header{padding:0;gap:6px}
+#main .lw34-topbar .lw38-picker-header .lw38-picker-title{font-size:11px;color:#b8c7e1}
+#main .lw34-topbar .lw38-picker-header .lw38-select{min-width:132px;min-height:35px;padding:7px 8px;background:#192439;border-color:#39475e;border-radius:9px;color:#edf3fc}
+@media(max-width:590px){
+ .lw38-welcome-language{margin:0 0 12px}
+ .lw38-picker-welcome{padding:9px 10px;gap:8px}
+ .lw38-picker-welcome .lw38-picker-title{font-size:11px}
+ .lw38-picker-welcome .lw38-select{min-width:128px;max-width:153px;padding:6px 7px;font-size:12px}
+ #main .lw34-topbar .lw38-picker-header .lw38-picker-title{display:none}
+ #main .lw34-topbar .lw38-picker-header .lw38-select{min-width:105px;max-width:120px;padding:6px 4px;font-size:11px}
+}
+@media(max-width:370px){#main .lw34-topbar .lw38-picker-header .lw38-select{min-width:90px;max-width:103px;font-size:10px}}
