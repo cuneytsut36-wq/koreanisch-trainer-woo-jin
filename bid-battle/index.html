@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1021" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Anime Bid Battle: Fordere deine Freunde zur geheimen Anime-Charakter-Auktion heraus." />
+  <title>BID BATTLE — Anime Auction Arena</title>
+  <style>
+    :root {
+      --bg:#0c0e1b; --bg2:#111428; --surface:#171a30; --surface2:#1e223b;
+      --text:#f5f5ff; --muted:#a2a7c4; --border:#313653;
+      --purple:#aa7cff; --purple2:#6946c6; --orange:#ffb159;
+      --green:#55e4b6; --pink:#fc73bc; --shadow:0 24px 72px #02020a80;
+    }
+    * { box-sizing:border-box; }
+    html { min-height:100%; scroll-behavior:smooth; }
+    body { min-width:320px; margin:0; background:var(--bg); color:var(--text); font-family:'DM Sans',system-ui,-apple-system,Segoe UI,sans-serif; line-height:1.45; }
+    body::before { content:''; position:fixed; z-index:-2; inset:0; pointer-events:none;
+      background:radial-gradient(ellipse 40% 34% at 10% 8%,#603c9c39,transparent 100%),radial-gradient(ellipse 43% 42% at 95% 60%,#d6625130,transparent 100%),#0c0e1b; }
+    body::after {content:'';pointer-events:none;position:fixed;z-index:-1;inset:0;opacity:.17;
+      background-image:linear-gradient(#fff1 1px, transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(90deg,transparent,#000 35%,#000 70%,transparent); }
+    button,input {font:inherit} button {cursor:pointer} button:disabled {cursor:not-allowed;opacity:.42}
+    .shell {max-width:1180px; margin:0 auto; padding:25px 28px 50px;}
+    .topbar {display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:40px;}
+    .brand {display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:28px;font-weight:900;letter-spacing:.7px;line-height:1}
+    .logo {width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#ffb565,#f26b81 52%,#9873f7);box-shadow:0 6px 22px #c66c9a4b;font-size:23px;color:#151022;transform:rotate(-7deg)}
+    .brand b {color:var(--orange)} .topright {display:flex;align-items:center;gap:10px;}
+    .pill {border:1px solid #343954;background:#ffffff0a;border-radius:99px;color:#c7c9dc;font-size:12px;font-weight:800;letter-spacing:.8px;padding:9px 14px;text-transform:uppercase;}
+    .tiny-btn {padding:9px 12px;color:#c6c9e6;background:none;border:1px solid #353951;border-radius:12px;font-weight:800;font-size:12px;}
+    .tiny-btn:hover{border-color:#8680ac;color:white}
+    .eyebrow {text-transform:uppercase;font-size:12px;color:var(--orange);letter-spacing:2.5px;font-weight:900;}
+    .hero {display:grid;grid-template-columns:minmax(0,1fr) minmax(350px,470px);gap:56px;align-items:center;min-height:535px;padding:15px 0 58px;}
+    .hero h1 {font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(74px,10vw,132px);font-weight:900;line-height:.81;letter-spacing:-1px;margin:21px 0 26px;}
+    .hero h1 span {display:block;color:var(--orange);text-shadow:0 0 70px #ff964c3f}
+    .hero p {font-size:16px;color:#b0b4d0;line-height:1.75;max-width:460px;}
+    .features {display:flex;flex-wrap:wrap;gap:11px;margin:30px 0;}
+    .feature {font-size:12px;font-weight:800;letter-spacing:.2px;background:#ffffff0c;border:1px solid #34384d;border-radius:999px;padding:9px 12px;color:#dbdbeb;}
+    .section-label {font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:900;color:#8f95b7;margin-bottom:13px;}
+    .set-card {border:1px solid #373851;background:linear-gradient(155deg,#222541,#15182a);border-radius:25px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .set-card::before {content:'';position:absolute;pointer-events:none;top:-100px;right:-90px;width:290px;height:290px;background:radial-gradient(circle,#f9ac5b23,transparent 70%)}
+    .universes {display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+    .universe {border:1px solid #373951;color:#c3c5db;border-radius:15px;background:#101325;display:flex;align-items:center;gap:10px;text-align:left;padding:13px 11px;min-height:62px;transition:transform .16s,border-color .16s,background .16s}
+    .universe:hover {transform:translateY(-2px);border-color:#7b669e}.universe.active {border-color:#f7ab63;background:#ffad5820;box-shadow:inset 0 0 0 1px #ffb15950;color:white}
+    .uni-icon {width:33px;height:33px;border-radius:10px;background:#ffffff10;display:grid;place-items:center;font-size:18px;flex:none}
+    .uni-title {font-size:13px;font-weight:900;line-height:1.3}.uni-sub {font-size:10px;color:#979ebc;font-weight:700}
+    .field {margin-bottom:14px}.field label {display:block;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#a8adc9;margin-bottom:7px}
+    .name-input {width:100%;border:1px solid #393d59;border-radius:12px;background:#101325;padding:13px 14px;color:white;outline:none;transition:border-color .2s}
+    .name-input:focus{border-color:#cba3fc}.names {display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .player-indicator {display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:var(--purple)}.player-indicator.p2 {background:var(--orange)}
+    .primary {border:0;border-radius:14px;color:#181323;font-size:14px;font-weight:900;padding:15px 22px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(110deg,#f4a961,#ffce87);box-shadow:0 6px 28px #fa9e593a;transition:transform .15s,filter .15s}
+    .primary:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.06)}.primary:active:not(:disabled){transform:translateY(0)}.primary.full {width:100%;}
+    .secondary{border:1px solid #464965;border-radius:14px;background:#24283f;color:#f5f4ff;padding:13px 18px;font-size:13px;font-weight:900}.secondary:hover{background:#303551}
+    .subtext {font-size:11px;color:#9094ac;margin-top:12px;text-align:center}
+    .hero-art {width:100%;height:410px;position:relative;display:grid;place-items:center;margin:10px 0 0}
+    .art-halo{position:absolute;width:310px;height:310px;border:1px solid #faa85662;border-radius:50%;box-shadow:0 0 0 23px #faa8560b,0 0 0 60px #faa85609,0 0 110px #e96e6534;animation:float 5s ease-in-out infinite}
+    .art-halo::before,.art-halo::after {content:'';position:absolute;inset:28px;border:2px dashed #ca9be262;border-radius:50%;animation:spin 40s linear infinite}.art-halo::after{inset:-45px;border:1px dashed #ffa24a55;animation-direction:reverse}
+    .art-card {position:absolute;width:194px;height:270px;border-radius:22px;box-shadow:0 24px 60px #03020e9e;border:2px solid #ffffff3d;display:flex;align-items:flex-end;padding:19px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:25px;line-height:1;font-weight:900;overflow:hidden}
+    .art-card::after{content:'✦';font-family:Arial;position:absolute;right:15px;top:7px;font-size:110px;opacity:.20}.art-card.back {background:linear-gradient(160deg,#7352c5,#232c66);transform:rotate(-23deg) translate(-78px,-9px)}.art-card.front{background:linear-gradient(160deg,#ffa05e,#bc4b78 64%,#523a87);transform:rotate(10deg) translate(73px,12px);box-shadow:0 28px 85px #ab558f7a}.art-symbol{position:absolute;font-size:110px;left:30px;top:54px;color:#fffb;transform:rotate(-10deg)}
+    @keyframes float{50%{transform:translateY(-12px)}}@keyframes spin{to{transform:rotate(360deg)}}
+    .gamehead {display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin:-6px 0 20px}
+    .gamehead h1,.result-title {font-family:'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;font-size:clamp(40px,5vw,60px);letter-spacing:.3px;line-height:1;margin:9px 0 0}
+    .round-tracker {display:flex;gap:7px;margin:10px 0 24px}.round-dot{height:6px;border-radius:20px;background:#30344e;flex:1;transition:background .2s}.round-dot.past{background:var(--purple)}.round-dot.current{background:var(--orange)}
+    .game-grid {display:grid;grid-template-columns:1fr minmax(340px,1.25fr) 1fr;gap:15px;align-items:start}
+    .team-panel,.auction-panel,.final-panel,.history-panel {border:1px solid #30344f;border-radius:21px;background:linear-gradient(155deg,#1a1e34,#131629);box-shadow:0 12px 40px #04051540;overflow:hidden}
+    .team-panel {padding:18px;min-height:422px;}.team-panel.team-a{border-top:3px solid var(--purple)}.team-panel.team-b{border-top:3px solid var(--orange)}
+    .team-kicker{font-size:10px;font-weight:900;letter-spacing:1.6px;color:#989dba;text-transform:uppercase}.team-name {font-family:'Barlow Condensed',Impact,sans-serif;font-size:29px;font-weight:900;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0 0 13px}
+    .budget {border-radius:14px;background:#ffffff08;padding:11px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.budget-label{color:#a2a8c5;font-size:11px;font-weight:800}.budget-value{font-family:'Barlow Condensed',Impact,sans-serif;font-size:28px;font-weight:900;line-height:1;color:#eeeaff}
+    .team-a .budget-value{color:#b996ff}.team-b .budget-value{color:#ffbc78}
+    .team-roster {display:grid;gap:8px}.roster-item {display:flex;align-items:center;gap:9px;border-radius:11px;min-height:50px;padding:6px 9px;border:1px solid #ffffff13;background:#ffffff07}.roster-item.empty{border-style:dashed;background:transparent;color:#6e7493}
+    .roster-avatar {height:35px;width:35px;flex:none;display:grid;place-items:center;border-radius:9px;font-family:'Barlow Condensed',Impact,sans-serif;font-size:19px;font-weight:900;background:linear-gradient(140deg,var(--ac),#10111f);color:white;text-shadow:0 2px 6px #0008}
+    .roster-info {min-width:0;flex:1}.roster-info strong {display:block;font-size:12px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.roster-info small{font-size:10px;color:#909ab9}.roster-power{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:20px;font-weight:900;color:#dedff0}.slot-index{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:17px;font-weight:900;margin-left:4px;color:#575d7c}
+    .roster-item.empty .slot-index{color:#555b76}
+    .center-content {min-width:0}.auction-panel{padding:17px}.stage-top{display:flex;align-items:center;justify-content:space-between;padding:4px 3px 14px}.stage-top span{font-size:11px;letter-spacing:1.5px;font-weight:900;text-transform:uppercase;color:#aaaeca}.rarity {font-size:10px;font-weight:900;border-radius:99px;padding:7px 10px;letter-spacing:1.2px;background:#ffcf7c1e;border:1px solid #ffbd6560;color:#ffd397}
+    .character-stage {height:285px;position:relative;overflow:hidden;border-radius:16px;border:1px solid #ffffff1b;background:radial-gradient(circle at 50% 36%,var(--light),transparent 65%),linear-gradient(140deg,var(--shade),#171a31 65%);display:flex;flex-direction:column;justify-content:flex-end;padding:23px;text-align:left;isolation:isolate}
+    .character-stage::before{content:'';position:absolute;width:340px;height:340px;left:50%;top:-100px;border:1px solid #ffffff20;border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 23px #ffffff07,0 0 0 72px #ffffff05;z-index:-1}.character-stage::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#111424d9,transparent 61%);z-index:-1}
+    .character-symbol{position:absolute;top:4px;right:16px;z-index:0;transform:rotate(-9deg);font-family:'Barlow Condensed',Impact,sans-serif;font-size:clamp(105px,11vw,145px);font-weight:900;line-height:1.3;color:#fff;opacity:.35;text-shadow:0 12px 45px #1412259c,0 0 35px var(--light);filter:drop-shadow(0 0 22px var(--light));user-select:none;pointer-events:none}
+    .character-index {position:relative;z-index:1;font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;color:#ffffff8b;font-size:13px;font-weight:800;letter-spacing:2px}.character-stage h2{font-family:'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;font-size:clamp(36px,4vw,49px);line-height:1;margin:6px 0 7px;position:relative;z-index:1}.character-description{font-size:12px;font-weight:700;color:#d7d4e6;position:relative;z-index:1}
+    .character-stats{display:flex;gap:8px;margin:13px 0 2px}.stat {flex:1;display:flex;justify-content:space-between;align-items:center;background:#0f1226;padding:11px 12px;border:1px solid #2d314e;border-radius:12px}.stat span{color:#8e95b4;font-size:10px;text-transform:uppercase;letter-spacing:.9px;font-weight:900}.stat b{font-family:'Barlow Condensed',Impact,sans-serif;font-size:21px;line-height:1}.stat .highlight {color:var(--orange)}
+    .bid-zone {padding:14px 2px 3px}.bid-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.bid-title{font-family:'Barlow Condensed',Impact,sans-serif;font-size:22px;font-weight:900}.bid-side{font-size:10px;color:#9ca0bd;font-weight:800}
+    .bid-turn {margin:9px 0 12px;color:#aeb3d1;font-size:12px}.bid-slider {width:100%;accent-color:var(--orange);cursor:pointer;margin:13px 0 10px}.bid-meter{display:flex;align-items:baseline;justify-content:center;gap:6px;margin:10px auto 0}.bid-amount{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;font-size:54px;line-height:1;color:#ffd08e}.bid-euro{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:27px;font-weight:800;color:#ffd08e}
+    .quick-bids{display:flex;gap:7px;margin:3px 0 14px}.quick-bids button{border-radius:9px;border:1px solid #41445b;background:#24283e;color:#e8e7f1;font-weight:800;padding:8px 9px;flex:1;font-size:11px}.quick-bids button:hover:not(:disabled){background:#39354c;border-color:#ad87cf}
+    .bid-notice{font-size:11px;color:#969bb8;text-align:center;margin:9px 0 3px;line-height:1.5}.passive-state{text-align:center;padding:13px 12px 17px}.passive-icon{font-size:34px}.passive-state h3{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:25px;line-height:1.1;margin:6px 0}.passive-state p {font-size:12px;color:#a4a9c6;margin:8px auto 16px;max-width:280px}
+    .handoff {position:relative;border-radius:17px;background:linear-gradient(150deg,#231d40,#141b34);border:1px solid #64538f;padding:34px 20px;text-align:center;min-height:330px;display:flex;flex-direction:column;justify-content:center;align-items:center}.handoff-icon{font-size:57px;margin:0 0 11px}.handoff h2{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:36px;margin:0 0 10px;line-height:1}.handoff p{color:#adb0ca;font-size:13px;max-width:300px}.handoff .primary{margin-top:12px}
+    .reveal {text-align:center;padding:10px 5px 8px}.reveal-emblem{font-size:48px;margin:0 0 7px}.reveal h2{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:36px;margin:0;line-height:1.06}.reveal p{font-size:12px;color:#adb2cd}.bid-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:17px 0}.compare-tile{border:1px solid #3a3d57;border-radius:12px;background:#101427;padding:12px 8px;font-size:11px;color:#abafc8;overflow-wrap:anywhere}.compare-tile b{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:35px;display:block;color:white}.reveal .primary{margin-top:11px}
+    .toastline{font-size:11px;color:#9499b6;text-align:center;margin-top:14px}
+    .legend{margin-top:23px;background:#ffffff07;border:1px solid #2e3148;border-radius:14px;padding:13px 17px;color:#a4a9c6;font-size:11px;line-height:1.65;}
+    .legend strong{color:#d6d8ee}.legend-inline{display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:11px;color:#8289a8;font-size:11px}
+    .muted{text-align:center;color:#a9abc4}.end-header{text-align:center;margin:5px auto 29px}.end-header h1{font-size:clamp(44px,7vw,76px);font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;line-height:1;margin:12px 0}.end-header p{font-size:13px;color:#a5a8c4}
+    .winner-card {max-width:610px;margin:0 auto 25px;text-align:center;background:radial-gradient(circle at 50% 0,#ffbd7040,transparent 75%),linear-gradient(160deg,#302443,#181b2e);border:1px solid #fcb96973;border-radius:23px;padding:22px 18px 24px;box-shadow:0 15px 70px #dd924d20}
+    .trophy{font-size:40px}.winner-tag {text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:900;color:#ffc483;margin-top:8px}.winner-name{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:clamp(44px,6vw,63px);font-weight:900;line-height:1;margin:7px 0}.winner-note{font-size:12px;color:#d4c9d5}
+    .final-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.final-panel{padding:19px}.final-panel.a{border-top:3px solid var(--purple)}.final-panel.b{border-top:3px solid var(--orange)}.final-name{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:31px;font-weight:900;overflow-wrap:anywhere}.final-score{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif;font-size:64px;font-weight:900;line-height:1;color:#caa7ff}.final-panel.b .final-score{color:#ffc17e}.score-label{font-size:11px;color:#a5a9c2;text-transform:uppercase;letter-spacing:1px;font-weight:900}.result-roster{display:grid;gap:7px;margin:15px 0}.result-row{border-radius:10px;border:1px solid #30364e;background:#ffffff07;display:flex;justify-content:space-between;gap:8px;padding:9px 10px;font-size:12px}.result-row span:last-child{color:#fbdca7;font-weight:900}.synergy-section{border-top:1px solid #353951;padding-top:13px;font-size:11px;color:#bec1d4;min-height:59px}.synergy-chip{display:block;color:#d4c1ff;margin:5px 0;font-weight:800}.score-total{border-top:1px solid #383a54;margin-top:12px;padding-top:11px;display:flex;justify-content:space-between;font-size:12px;color:#bcbfd7;font-weight:800}.score-total b{color:white}
+    .final-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:11px;margin:24px auto}.history-panel{max-width:900px;margin:0 auto;padding:15px 18px}.history-panel summary{cursor:pointer;font-size:12px;font-weight:900;color:#b5b7cd;list-style-position:inside;padding:4px}.history-entry{display:flex;justify-content:space-between;gap:12px;padding:9px 3px;border-bottom:1px solid #ffffff10;font-size:11px;color:#aeb1c7}.history-entry:last-child{border-bottom:0}.history-entry strong{color:#e2e0ee}
+    .foot {margin:40px auto 0;text-align:center;font-size:10px;color:#777d9d;line-height:1.8}
+    .fade-in{animation:appear .35s ease both}@keyframes appear{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+    @media(max-width:940px){.hero{gap:22px}.game-grid{grid-template-columns:1fr 1fr;}.center-content{grid-column:1 / -1;grid-row:1}.team-panel{min-height:0}.team-roster{grid-template-columns:1fr}.hero-art{height:340px}.art-halo{transform:scale(.84)}.art-card{transform:scale(.83)}}
+    @media(max-width:680px){.gamehead>.pill{display:none}.shell{padding:17px 14px 35px}.topbar{margin-bottom:23px}.brand{font-size:24px}.pill{font-size:10px;padding:8px 10px}.hero{grid-template-columns:1fr;gap:14px;padding:5px 0 20px}.hero h1{font-size:clamp(72px,17vw,112px);margin:14px 0 20px}.hero p{font-size:14px;margin:0}.hero-art{display:none}.set-card{padding:18px;border-radius:21px}.features{margin:18px 0 22px}.gamehead{margin:0 0 13px}.gamehead h1{font-size:41px}.round-tracker{margin-bottom:14px}.game-grid{gap:8px}.auction-panel{padding:10px;border-radius:16px}.stage-top{padding:5px 7px 12px}.character-stage{height:245px;padding:18px}.character-symbol{font-size:118px;right:12px;top:7px}.character-stage h2{font-size:39px}.team-panel{padding:10px;min-width:0;border-radius:14px}.team-name{font-size:22px;margin-bottom:8px}.budget{padding:9px;margin-bottom:10px}.budget-value{font-size:25px}.budget-label{font-size:10px}.roster-item{padding:5px;min-height:43px;gap:6px}.roster-avatar{width:29px;height:29px;font-size:15px;border-radius:7px}.roster-info strong{font-size:10px}.roster-info small{font-size:9px}.roster-power{font-size:17px}.slot-index{font-size:14px}.team-kicker{font-size:9px}.final-panel{padding:11px}.final-name{font-size:25px}.final-score{font-size:55px}.final-grid{gap:8px}.end-header h1{font-size:53px}.final-panel .result-row{font-size:11px;padding:8px 7px}.topright{gap:5px}.tiny-btn{font-size:11px;padding:8px 9px}}
+    @media(max-width:370px){.universe{padding:10px 7px}.uni-title{font-size:11px}.uni-sub{font-size:9px}.uni-icon{width:27px;height:27px}.name-input{padding:10px}.team-name{font-size:19px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="logo" aria-hidden="true">⚡</span><span>BID <b>BATTLE</b></span></div>
+      <div class="topright"><span class="pill">ANIME AUCTION ARENA</span><button class="tiny-btn" id="resetTop" hidden type="button">↺ Neu starten</button></div>
+    </header>
+    <div id="app" aria-live="polite"></div>
+    <footer class="foot">Fangemachtes Anime-Partyspiel · Bewertungen dienen nur dem Spiel · Keine offizielle Verbindung zu den Anime-Marken</footer>
+  </main>
+  <script>
+    'use strict';
+    // Static, offline-friendly app: no accounts, trackers or required external scripts.
+    const SAVE_KEY='bidbattle.save.v1';
+    const BUDGET=20, TEAM_SIZE=5, TOTAL=10;
+    // [Name, playful power, role, color, sign, faction]. Power scores are subjective game balancing.
+    const catalog={
+      naruto:{name:'Naruto',icon:'🍥',tagline:'Das Shinobi-Duell',entries:[
+        ['Naruto Uzumaki',98,'Jinchūriki','#f6a345','九','Konoha'],['Sasuke Uchiha',97,'Uchiha','#8c79d9','雷','Konoha'],['Madara Uchiha',100,'Legende','#bf5266','炎','Uchiha'],['Itachi Uchiha',92,'Genjutsu','#a65080','月','Akatsuki'],['Kakashi Hatake',88,'Kopierninja','#789cbd','雷','Konoha'],['Pain',91,'Rinnegan','#ca765c','神','Akatsuki'],['Minato Namikaze',93,'Gelber Blitz','#edb54c','閃','Konoha'],['Hashirama Senju',97,'Erster Hokage','#6cb38e','木','Konoha'],['Obito Uchiha',95,'Kamui','#9d6cbb','眼','Akatsuki'],['Kaguya Ōtsutsuki',100,'Ōtsutsuki','#c0bbe6','天','Ōtsutsuki'],['Jiraiya',85,'Sannin','#cb7d6b','蛙','Konoha'],['Orochimaru',85,'Sannin','#9590b2','蛇','Otogakure'],['Gaara',83,'Kazekage','#d29d65','砂','Suna'],['Tsunade',83,'Hokage','#8abe7e','医','Konoha'],['Might Guy',94,'Taijutsu','#81c371','拳','Konoha'],['Shikamaru Nara',77,'Stratege','#8f9aa4','影','Konoha'],['Sakura Haruno',85,'Medizinninja','#f28d9d','桜','Konoha'],['Killer B',87,'Jinchūriki','#c1a471','八','Kumo'],['Tobirama Senju',91,'Zweiter Hokage','#67a8bf','水','Konoha'],['Rock Lee',80,'Taijutsu','#6cb870','拳','Konoha'],['Deidara',79,'Explosion','#e8b96c','爆','Akatsuki'],['Kisame Hoshigaki',84,'Schwertkämpfer','#4e9fb1','鮫','Akatsuki'],['Konan',82,'Papierjutsu','#79a4d0','紙','Akatsuki'],['Hiruzen Sarutobi',84,'Dritter Hokage','#bb8560','猿','Konoha']
+      ]},
+      onepiece:{name:'One Piece',icon:'🏴‍☠️',tagline:'Piraten auf dem Auktionsdeck',entries:[
+        ['Monkey D. Luffy',99,'Kapitän','#e46f5b','☠','Strohhüte'],['Roronoa Zoro',94,'Schwertkämpfer','#56ae82','⚔','Strohhüte'],['Sanji',91,'Koch','#deb36c','炎','Strohhüte'],['Shanks',98,'Kaiser','#c65b6c','覇','Rothaar'],['Gol D. Roger',100,'Piratenkönig','#e5a35b','王','Roger'],['Whitebeard',99,'Kaiser','#a98cd1','震','Whitebeard'],['Blackbeard',97,'Finsterfrucht','#816aad','闇','Blackbeard'],['Kaido',98,'Kaiser','#717ad4','龍','Beasts'],['Big Mom',95,'Kaiserin','#d67c9f','魂','Big Mom'],['Dracule Mihawk',97,'Schwertlegende','#65968b','剣','Solo'],['Trafalgar Law',92,'Chirurg','#7974bf','医','Heart'],['Eustass Kid',87,'Magnetkraft','#c46a71','磁','Kid'],['Nico Robin',83,'Archäologin','#9679bc','花','Strohhüte'],['Jinbe',88,'Fischmensch','#4c98bb','海','Strohhüte'],['Ace',89,'Feuerfaust','#ed8c55','火','Whitebeard'],['Sabo',90,'Revolutionär','#e4ae5c','炎','Revos'],['Garp',96,'Marineheld','#6c9bce','拳','Marine'],['Kizaru',94,'Admiral','#d6b15d','光','Marine'],['Akainu',96,'Admiral','#e16b55','炎','Marine'],['Aokiji',94,'Eismacht','#72b8d5','氷','Marine'],['Doflamingo',91,'Fadenfrucht','#d281ad','糸','Donquixote'],['Katakuri',92,'Haki','#ad6f9b','餅','Big Mom'],['Yamato',91,'Mythische Zoan','#9dc5cd','狼','Wano'],['Boa Hancock',88,'Kuja-Kaiserin','#df8b99','心','Kuja']
+      ]},
+      jjk:{name:'Jujutsu Kaisen',icon:'👁️',tagline:'Der Fluch der Auktion',entries:[
+        ['Satoru Gojo',100,'Sechs Augen','#6daed8','∞','Jujutsu'],['Ryomen Sukuna',100,'König der Flüche','#c6576a','呪','Flüche'],['Yuta Okkotsu',96,'Sondergrad','#9d9ecd','愛','Jujutsu'],['Toji Fushiguro',94,'Sorcerer Killer','#61a690','刃','Solo'],['Suguru Geto',93,'Fluchmanipulation','#8d78b8','呪','Flüche'],['Kenjaku',96,'Taktiker','#9472b4','脳','Flüche'],['Yuji Itadori',91,'Nahkampf','#db767e','拳','Jujutsu'],['Megumi Fushiguro',88,'Zehn Schatten','#6e8fb0','影','Jujutsu'],['Nobara Kugisaki',84,'Resonanz','#c18c60','釘','Jujutsu'],['Maki Zenin',93,'Waffenmeisterin','#7baf8a','刀','Jujutsu'],['Toge Inumaki',85,'Fluchsprache','#8e9ac5','言','Jujutsu'],['Panda',81,'Mutierter Kern','#9598a1','熊','Jujutsu'],['Aoi Todo',89,'Boogie Woogie','#ba8d68','拳','Jujutsu'],['Mahito',91,'Seelenwandler','#7897b8','魂','Flüche'],['Jogo',88,'Vulkanfluch','#d9765b','火','Flüche'],['Hanami',85,'Naturfluch','#77aa78','森','Flüche'],['Choso',90,'Bluttechnik','#b66e80','血','Solo'],['Kinji Hakari',93,'Jackpot','#d9a76e','運','Jujutsu'],['Kashimo Hajime',93,'Blitzkraft','#80a6c8','雷','Solo'],['Uraume',89,'Eistechnik','#9dbfcd','氷','Flüche'],['Rika',95,'Fluchkönigin','#b99dbf','愛','Jujutsu'],['Naoya Zenin',88,'Projektion','#8fbc85','速','Zenin'],['Dagon',85,'Ozeanfluch','#7e9dc9','海','Flüche'],['Mei Mei',86,'Krähenkontrolle','#c0ab8b','鳥','Solo']
+      ]},
+      dragonball:{name:'Dragon Ball',icon:'🐉',tagline:'Das Turnier des Universums',entries:[
+        ['Son Goku',100,'Saiyajin','#f59a4e','悟','Saiyajin'],['Vegeta',98,'Saiyajin-Prinz','#6483c7','王','Saiyajin'],['Gohan',96,'Mystischer Kämpfer','#af7cca','飯','Saiyajin'],['Broly',99,'Legendärer Saiyajin','#8abb69','怒','Saiyajin'],['Frieza',97,'Imperator','#ae88d5','帝','Bösewichte'],['Cell',95,'Perfekte Form','#82ba7b','完','Bösewichte'],['Majin Boo',95,'Magischer Kämpfer','#d883aa','魔','Bösewichte'],['Beerus',100,'Zerstörungsgott','#9e73c1','破','Götter'],['Whis',100,'Engel','#76aec7','天','Götter'],['Jiren',99,'Pride Trooper','#bd6571','力','Universum 11'],['Piccolo',93,'Namekianer','#66b379','魔','Erdlinge'],['Trunks',94,'Zeitreisender','#9082d1','剣','Saiyajin'],['Gotenks',92,'Fusion','#ad9b64','合','Saiyajin'],['Android 17',93,'Android','#7ca9b0','17','Androiden'],['Android 18',91,'Androidin','#cfa879','18','Androiden'],['Hit',95,'Assassine','#8179c2','時','Universum 6'],['Kefla',95,'Fusion','#83b871','合','Saiyajin'],['Gogeta',100,'Fusion','#759cd1','合','Saiyajin'],['Vegito',100,'Fusion','#af78b4','合','Saiyajin'],['Goku Black',97,'Göttlicher Gegner','#a66aa4','黒','Bösewichte'],['Zamasu',94,'Gott','#78b38f','神','Bösewichte'],['Master Roshi',78,'Kampfmeister','#e0a76d','亀','Erdlinge'],['Krillin',82,'Kämpfer','#e9ae6b','気','Erdlinge'],['Tien Shinhan',84,'Kampfkünstler','#a5a278','気','Erdlinge']
+      ]}
+    };
+    const synergyRules={
+      naruto:[[['Naruto Uzumaki','Sasuke Uchiha'],10,'Schicksalsrivalen'],[['Naruto Uzumaki','Sasuke Uchiha','Sakura Haruno'],8,'Team 7'],[['Itachi Uchiha','Sasuke Uchiha'],7,'Uchiha-Brüder'],[['Madara Uchiha','Obito Uchiha'],8,'Uchiha-Allianz'],[['Might Guy','Rock Lee'],6,'Jugendliche Kraft'],[['Pain','Konan'],6,'Akatsuki-Partner']],
+      onepiece:[[['Monkey D. Luffy','Roronoa Zoro'],7,'Kapitän & Schwert'],[['Monkey D. Luffy','Roronoa Zoro','Sanji'],9,'Monster-Trio'],[['Gol D. Roger','Whitebeard'],7,'Piratenlegenden'],[['Ace','Sabo'],8,'Brüder']],
+      jjk:[[['Satoru Gojo','Yuji Itadori'],7,'Mentor & Schüler'],[['Yuji Itadori','Megumi Fushiguro','Nobara Kugisaki'],9,'Tokyo-Trio'],[['Yuta Okkotsu','Rika'],11,'Verfluchte Liebe'],[['Toji Fushiguro','Megumi Fushiguro'],5,'Fushiguro-Familie']],
+      dragonball:[[['Son Goku','Vegeta'],8,'Rivalen'],[['Son Goku','Vegeta','Gogeta'],7,'Saiyajin-Fusion'],[['Son Goku','Gohan'],6,'Vater & Sohn'],[['Android 17','Android 18'],7,'Androiden-Duo']]
+    };
+
+    const app=document.getElementById('app');
+    const resetTop=document.getElementById('resetTop');
+    let state=loadSave();
+    let setup={universe:'naruto',names:['Spieler A','Spieler B']};
+    let draftAmount=0;
+    const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const money=n=>`${n} €`;
+    const shuffle=arr=>{const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+    const charOf=id=>{const [n,p,role,color,symbol,faction]=catalog[state.universe].entries[id];return {id,name:n,power:p,role,color,symbol,faction};};
+    const teamTotal=i=>state.teams[i].reduce((n,id)=>n+charOf(id).power,0);
+    const eligibility=i=>state.teams[i].length<TEAM_SIZE && state.money[i]>0;
+    const full=i=>state.teams[i].length>=TEAM_SIZE;
+    function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state))}catch(e){}}
+    function loadSave(){try{const s=JSON.parse(localStorage.getItem(SAVE_KEY));if(!s||!catalog[s.universe]||!Array.isArray(s.order)||s.order.length!==TOTAL||!Array.isArray(s.teams)||s.teams.length!==2||!Array.isArray(s.money)||s.money.length!==2||!Array.isArray(s.names)||s.names.length!==2||typeof s.round!=='number'||s.round<0||s.round>TOTAL||!['auction','handoff','reveal','final'].includes(s.phase))return null;return s;}catch(e){return null}}
+    function clearSave(){try{localStorage.removeItem(SAVE_KEY)}catch(e){}}
+    function newGame(sameSet=false){
+      const universe=sameSet && state?state.universe:setup.universe;
+      const names=sameSet && state?state.names:[setup.names[0].trim().slice(0,16)||'Spieler A',setup.names[1].trim().slice(0,16)||'Spieler B'];
+      const order=sameSet && state?[...state.order]:shuffle(catalog[universe].entries.map((_,i)=>i)).slice(0,TOTAL);
+      state={universe,names,order,round:0,teams:[[],[]],money:[BUDGET,BUDGET],bids:[null,null],turn:0,phase:'auction',last:null,history:[],tieNext:0,automatic:[]};
+      draftAmount=0;save();prepareRound();render();
+    }
+    function chooseAutoRecipient(){
+      if(full(0))return 1;
+      if(full(1))return 0;
+      if(state.teams[0].length!==state.teams[1].length)return state.teams[0].length<state.teams[1].length?0:1;
+      const winner=state.tieNext;state.tieNext=1-state.tieNext;return winner;
+    }
+    function giveCharacter(winner,price,reason,bids){
+      const id=state.order[state.round],round=state.round+1;
+      if(full(winner))throw Error('Roster is full');
+      if(price>state.money[winner])throw Error('Bid exceeds budget');
+      state.teams[winner].push(id);state.money[winner]-=price;
+      const event={round,id,winner,price,reason,bids:[...bids]};state.history.push(event);
+      state.round++;
+      return event;
+    }
+    function prepareRound(){
+      // If a team already owns 5 characters, all others belong to the other team for free.
+      if(state.round===TOTAL){state.phase='final';save();return}
+      if(full(0)||full(1)){
+        state.automatic=[];
+        while(state.round<TOTAL){const w=chooseAutoRecipient();state.automatic.push(giveCharacter(w,0,'Restverteilung',[0,0]));}
+        state.phase='final';save();return;
+      }
+      // Both budgets exhausted: distribute all remaining characters without a further auction.
+      if(!eligibility(0)&&!eligibility(1)){
+        state.automatic=[];
+        while(state.round<TOTAL){const w=chooseAutoRecipient();state.automatic.push(giveCharacter(w,0,'Ohne Budget zugeteilt',[0,0]));}
+        state.phase='final';save();return;
+      }
+      state.phase='auction';state.bids=[null,null];state.turn=eligibility(0)?0:1;
+      if(!eligibility(0))state.bids[0]=0;
+      if(!eligibility(1))state.bids[1]=0;
+      draftAmount=0;save();
+    }
+    function placeBid(amount){
+      if(!state||state.phase!=='auction')return;
+      const i=state.turn;
+      if(!eligibility(i))return;
+      if(!Number.isInteger(amount)||amount<0||amount>state.money[i])return;
+      state.bids[i]=amount;
+      const other=1-i;
+      if(state.bids[other]===null){state.turn=other;state.phase='handoff';}
+      else resolveAuction();
+      save();render();
+    }
+    function resolveAuction(){
+      const [a,b]=state.bids;
+      if(a===null||b===null)throw Error('Missing bid');
+      let winner,reason;
+      if(full(0)){winner=1;reason='Freier Teamplatz'}
+      else if(full(1)){winner=0;reason='Freier Teamplatz'}
+      else if(a>b){winner=0;reason='Höchstes Gebot'}
+      else if(b>a){winner=1;reason='Höchstes Gebot'}
+      else {winner=chooseAutoRecipient();reason=a===0?'Beide passen – Gratiszuteilung':'Gleichstand – Teamregel';}
+      state.last=giveCharacter(winner,state.bids[winner],reason,[a,b]);
+      state.phase='reveal';
+    }
+    function afterReveal(){
+      if(!state||state.phase!=='reveal')return;
+      prepareRound();save();render();window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function startNew(){if(!state)return;const ok=confirm('Aktuelles Spiel wirklich beenden und zur Startseite wechseln?');if(!ok)return;clearSave();state=null;render();}
+    function teamPanel(i){
+      const team=state.teams[i],empty=TEAM_SIZE-team.length;
+      const rows=team.map(id=>{const c=charOf(id);return `<div class="roster-item"><div class="roster-avatar" style="--ac:${c.color}">${safe(c.symbol)}</div><div class="roster-info"><strong>${safe(c.name)}</strong><small>${safe(c.role)}</small></div><span class="roster-power">${c.power}</span></div>`}).join('')+Array.from({length:empty},(_,j)=>`<div class="roster-item empty"><span class="slot-index">0${team.length+j+1}</span><span style="font-size:10px;font-weight:800">Freier Platz</span></div>`).join('');
+      return `<section class="team-panel team-${i?'b':'a'}" aria-label="Team ${i?'B':'A'}"><div class="team-kicker">TEAM ${i?'B':'A'} · ${team.length}/5</div><h2 class="team-name">${safe(state.names[i])}</h2><div class="budget"><span class="budget-label">RESTBUDGET</span><strong class="budget-value">${money(state.money[i])}</strong></div><div class="team-roster">${rows}</div></section>`;
+    }
+    function characterCard(){
+      const onReveal=state.phase==='reveal';const shownIndex=onReveal?state.last.round:state.round+1;const c=charOf(onReveal?state.last.id:state.order[state.round]);const rarity=c.power>=97?'MYTHISCH':c.power>=92?'LEGENDÄR':c.power>=86?'EPISCH':'SELTEN';
+      return `<div class="stage-top"><span>AKTUELLER DROP</span><span class="rarity">✦ ${rarity}</span></div>
+        <div class="character-stage fade-in" style="--light:${c.color}99;--shade:${c.color}77">
+          <span class="character-symbol" aria-hidden="true">${safe(c.symbol)}</span>
+          <span class="character-index">${String(shownIndex).padStart(2,'0')} / ${TOTAL} · ${safe(c.faction)}</span>
+          <h2>${safe(c.name)}</h2><span class="character-description">${safe(c.role)}</span></div>
+        <div class="character-stats"><div class="stat"><span>Power</span><b class="highlight">${c.power}</b></div><div class="stat"><span>Typ</span><b style="font-size:16px">${safe(c.faction)}</b></div></div>`;
+    }
+    function bidStage(){
+      if(state.phase==='handoff'){
+        const i=state.turn;
+        return `<div class="handoff fade-in"><div class="handoff-icon">🔒</div><h2>HANDY WEITERGEBEN</h2><p>Das Gebot wurde gespeichert und bleibt geheim. Jetzt ist <strong style="color:white">${safe(state.names[i])}</strong> dran.</p><button id="revealBidding" class="primary" type="button">Ich bin ${safe(state.names[i])} →</button></div>`;
+      }
+      if(state.phase==='reveal'){
+        const e=state.last,c=charOf(e.id);const free=e.price===0;
+        return `<div class="reveal fade-in"><div class="reveal-emblem">${free?'🎁':'🏆'}</div><div class="eyebrow" style="color:#ffd19b">${safe(c.name)} geht an</div><h2>${safe(state.names[e.winner])}!</h2><p>${safe(e.reason)} · ${free?'Kostenlos erhalten':money(e.price)+' bezahlt'}</p><div class="bid-compare"><div class="compare-tile">${safe(state.names[0])}<b>${money(e.bids[0])}</b></div><div class="compare-tile">${safe(state.names[1])}<b>${money(e.bids[1])}</b></div></div><button id="nextRound" type="button" class="primary full">${state.round===TOTAL?'Finale ansehen':'Nächster Charakter'} →</button></div>`;
+      }
+      const i=state.turn,p=state.names[i],cash=state.money[i];
+      return `<div class="bid-zone fade-in"><div class="bid-heading"><span class="bid-title">DEIN GEBOT</span><span class="bid-side">${safe(p)} · max. ${money(cash)}</span></div>
+      <p class="bid-turn">Biete jetzt auf diesen Charakter. Der andere Spieler sieht dein Gebot nicht.</p>
+      <div class="bid-meter"><strong id="bidAmount" class="bid-amount">${draftAmount}</strong><span class="bid-euro">€</span></div>
+      <input aria-label="Gebot in Euro" id="bidSlider" class="bid-slider" type="range" min="0" max="${cash}" step="1" value="${draftAmount}" />
+      <div class="quick-bids"><button type="button" data-quick="0">Passen</button><button type="button" data-quick="3" ${cash<3?'disabled':''}>3 €</button><button type="button" data-quick="5" ${cash<5?'disabled':''}>5 €</button><button type="button" data-quick="10" ${cash<10?'disabled':''}>10 €</button><button type="button" data-quick="max">Alles</button></div>
+      <button id="submitBid" class="primary full" type="button">Gebot geheim abgeben →</button>
+      <p class="bid-notice">Du kennst die kommenden Charaktere nicht. Behalte dein Budget im Blick.</p></div>`;
+    }
+    function getSynergies(ids){const names=ids.map(id=>charOf(id).name);return (synergyRules[state.universe]||[]).filter(([members])=>members.every(n=>names.includes(n))).map(([_,bonus,label])=>({bonus,label}));}
+    function calcScore(i){const power=teamTotal(i),synergies=getSynergies(state.teams[i]);return {power,synergies,score:power+synergies.reduce((s,b)=>s+b.bonus,0)};}
+    function finalPanel(i){const d=calcScore(i);const team=state.teams[i];return `<section class="final-panel ${i?'b':'a'}"><div class="team-kicker">TEAM ${i?'B':'A'}</div><div class="final-name">${safe(state.names[i])}</div><div class="final-score">${d.score}</div><div class="score-label">Gesamtstärke</div><div class="result-roster">${team.map(id=>{const c=charOf(id);return `<div class="result-row"><span>${safe(c.name)}</span><span>${c.power} PWR</span></div>`}).join('')}</div><div class="synergy-section">Basisstärke: <b>${d.power}</b>${d.synergies.length?d.synergies.map(e=>`<span class="synergy-chip">✦ ${safe(e.label)} +${e.bonus}</span>`).join(''):'<span class="synergy-chip" style="color:#979cb7">Keine Spezial-Synergie</span>'}</div><div class="score-total"><span>Übrig: ${money(state.money[i])}</span><b>${d.score} PUNKTE</b></div></section>`;}
+    function historyPanel(){return `<details class="history-panel"><summary>Auktionsverlauf ansehen (${state.history.length} Runden)</summary><div>${state.history.map(e=>`<div class="history-entry"><span>#${e.round} <strong>${safe(charOf(e.id).name)}</strong></span><span>${safe(state.names[e.winner])} · ${money(e.price)}${e.reason.startsWith('Rest')?' (Rest)':''}</span></div>`).join('')}</div></details>`;}
+    function renderFinal(){const a=calcScore(0),b=calcScore(1),w=a.score===b.score?-1:a.score>b.score?0:1;const auto=state.automatic||[];return `<div class="fade-in"><div class="end-header"><div class="eyebrow">DIE ENTSCHEIDUNG</div><h1>TEAM A <span style="color:var(--orange)">VS</span> TEAM B</h1><p>Alle zehn Charaktere wurden verteilt. Wer hat das stärkere Team ersteigert?</p></div>
+      <div class="winner-card"><div class="trophy">${w<0?'🤝':'🏆'}</div><div class="winner-tag">${w<0?'UNENTSCHIEDEN':'DAS SIEGERTEAM'}</div><div class="winner-name">${w<0?'Gleichstand!':safe(state.names[w])}</div><div class="winner-note">${w<0?'Beide Teams erreichen exakt denselben Power-Wert.':`${Math.abs(a.score-b.score)} Punkte Vorsprung – ${safe(state.names[w])} gewinnt das Duell!`}</div></div>
+      ${auto.length?`<div class="legend" style="max-width:860px;margin:0 auto 20px"><strong>🎁 Automatische Restverteilung:</strong> ${auto.map(e=>`${safe(charOf(e.id).name)} → ${safe(state.names[e.winner])}`).join(' · ')}. Sobald kein reguläres Bieten mehr möglich ist, werden die restlichen Charaktere kostenlos auf freie Plätze verteilt.</div>`:''}
+      <div class="final-grid">${finalPanel(0)}${finalPanel(1)}</div><div class="final-actions"><button id="rematch" type="button" class="primary">⚡ Neues zufälliges Duell</button><button id="sameSet" type="button" class="secondary">↺ Mit gleichen 10 spielen</button><button id="home" type="button" class="secondary">Thema wechseln</button></div>${historyPanel()}
+      <p class="toastline">Das Urteil basiert auf spielerischen Power-Werten + Team-Synergien, nicht auf offiziellen Ranglisten.</p></div>`;}
+    function renderGame(){
+      if(state.phase==='final')return renderFinal();
+      return `<div class="fade-in"><div class="gamehead"><div><div class="eyebrow">${safe(catalog[state.universe].name)} · ${safe(catalog[state.universe].tagline)}</div><h1>RUNDE ${String(state.phase==='reveal'?state.round:state.round+1).padStart(2,'0')} <span style="color:#777e9f">/ ${TOTAL}</span></h1></div><div class="pill" style="align-self:center">🎴 2 SPIELER</div></div>
+      <div class="round-tracker" aria-label="Rundenfortschritt">${Array.from({length:TOTAL},(_,i)=>`<div class="round-dot ${i<state.round?'past':i===state.round?'current':''}"></div>`).join('')}</div>
+      <div class="game-grid">${teamPanel(0)}<div class="center-content"><section class="auction-panel">${state.phase==='handoff'?'':characterCard()}${bidStage()}</section></div>${teamPanel(1)}</div>
+      <div class="legend"><strong>So funktioniert's:</strong> Ihr habt jeweils 20 €. Beide bieten geheim auf denselben Charakter. Das höchste Gebot gewinnt und wird vom Budget abgezogen. Bei Gleichstand erhält das Team mit weniger Charakteren den Zuschlag; sonst wechselt das Vorrecht. Bei 0 € setzt du mit Bieten aus. Wer schon 5 Charaktere hat, muss aussetzen. Übrige Charaktere werden kostenlos zugeteilt.</div>
+      <div class="legend-inline"><span>✦ 10 zufällige Charaktere</span><span>✦ 5 pro Team</span><span>✦ Keine zukünftigen Drops sichtbar</span></div></div>`;
+    }
+    function renderSetup(){
+      const opts=Object.entries(catalog).map(([key,u])=>`<button class="universe ${setup.universe===key?'active':''}" data-universe="${key}" aria-pressed="${setup.universe===key}" type="button"><span class="uni-icon">${u.icon}</span><span><span class="uni-title">${safe(u.name)}</span><br/><span class="uni-sub">${safe(u.tagline)}</span></span></button>`).join('');
+      return `<div class="hero fade-in"><section><div class="eyebrow">WILLKOMMEN IN DER AUKTIONS-ARENA</div><h1>BID.<span>BUILD.</span> BATTLE.</h1><p>20 € in der Tasche. Zehn unbekannte Charaktere. Zwei rivalisierende Teams. Biete clever, stelle dein Dream-Team zusammen und gewinne das Anime-Duell.</p><div class="features"><span class="feature">⚡ 2 Spieler</span><span class="feature">💰 20 € Startgeld</span><span class="feature">🎴 10 Charaktere</span><span class="feature">🏆 1 Gewinner</span></div><div class="hero-art" aria-hidden="true"><div class="art-halo"></div><div class="art-card back"><span class="art-symbol">忍</span>TEAM A</div><div class="art-card front"><span class="art-symbol">⚡</span>TEAM B</div></div></section>
+        <section class="set-card"><div class="section-label">01 / WÄHLE DEIN UNIVERSUM</div><div class="universes">${opts}</div><div class="section-label">02 / WER SPIELT MIT?</div><div class="names"><div class="field"><label for="playerA"><span class="player-indicator"></span> TEAM A</label><input class="name-input" id="playerA" maxlength="16" value="${safe(setup.names[0])}" autocomplete="off"></div><div class="field"><label for="playerB"><span class="player-indicator p2"></span> TEAM B</label><input class="name-input" id="playerB" maxlength="16" value="${safe(setup.names[1])}" autocomplete="off"></div></div><div class="section-label" style="margin-top:5px">03 / STARTE DIE AUKTION</div><button class="primary full" id="startGame" type="button">⚡ Jetzt spielen <span aria-hidden="true">→</span></button><div class="subtext">Kostenlos · Ohne Anmeldung · Lokal auf einem Gerät</div></section></div>`;
+    }
+    function render(){app.innerHTML=state?renderGame():renderSetup();resetTop.hidden=!state;bindEvents();}
+    function bindEvents(){
+      if(!state){
+        app.querySelectorAll('[data-universe]').forEach(btn=>btn.addEventListener('click',()=>{setup.universe=btn.dataset.universe;setup.names=[document.getElementById('playerA').value,document.getElementById('playerB').value];render()}));
+        document.getElementById('playerA').addEventListener('input',e=>setup.names[0]=e.target.value);
+        document.getElementById('playerB').addEventListener('input',e=>setup.names[1]=e.target.value);
+        document.getElementById('startGame').addEventListener('click',()=>newGame());
+        return;
+      }
+      if(state.phase==='auction'){
+        const slider=document.getElementById('bidSlider');slider.addEventListener('input',e=>{draftAmount=Number(e.target.value);document.getElementById('bidAmount').textContent=draftAmount;});
+        app.querySelectorAll('[data-quick]').forEach(el=>el.addEventListener('click',()=>{draftAmount=el.dataset.quick==='max'?state.money[state.turn]:Number(el.dataset.quick);slider.value=draftAmount;document.getElementById('bidAmount').textContent=draftAmount;}));
+        document.getElementById('submitBid').addEventListener('click',()=>placeBid(draftAmount));
+      }
+      if(state.phase==='handoff')document.getElementById('revealBidding').addEventListener('click',()=>{state.phase='auction';draftAmount=0;save();render()});
+      if(state.phase==='reveal')document.getElementById('nextRound').addEventListener('click',afterReveal);
+      if(state.phase==='final'){
+        document.getElementById('rematch').addEventListener('click',()=>{setup={universe:state.universe,names:[...state.names]};newGame(false)});
+        document.getElementById('sameSet').addEventListener('click',()=>newGame(true));
+        document.getElementById('home').addEventListener('click',()=>{setup={universe:state.universe,names:[...state.names]};state=null;clearSave();render();window.scrollTo(0,0)});
+      }
+    }
+    resetTop.addEventListener('click',startNew);
+    // Recover gracefully if an old or partially written save is malformed.
+    try{if(state){if(state.phase==='auction'&&state.bids[state.turn]!==null){state.phase='handoff';}if(state.round===TOTAL&&state.phase!=='reveal')state.phase='final';}}catch(e){state=null;clearSave();}
+    render();
+  </script>
+</body>
+</html>
