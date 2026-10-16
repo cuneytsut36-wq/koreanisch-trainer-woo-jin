@@ -1,5 +1,5 @@
 /* V53 -- Woo Jin as an animated, tappable character in the Seoul homepage hero */
-html[data-lw48] #main .lw48-hero.lw53-hero{background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_092745_deade43d-0db4-4429-92a3-6c1128d65db1.png")!important;background-position:center center!important;background-size:cover!important;isolation:isolate!important;overflow:visible!important}
+html[data-lw48] #main .lw48-hero.lw53-hero{background-image:url("privacy-scene.svg")!important;background-position:center center!important;background-size:cover!important;isolation:isolate!important;overflow:visible!important}
 html[data-lw48] #main .lw53-hero .lw53-motion{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none;background:transparent;border-radius:0}
 html[data-lw48] #main .lw53-hero .lw53-video{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center center;pointer-events:none}
 html[data-lw48] #main .lw53-hero:after{z-index:1!important;background:linear-gradient(90deg,rgba(251,250,247,.77),rgba(251,250,247,.05) 66%)!important}
