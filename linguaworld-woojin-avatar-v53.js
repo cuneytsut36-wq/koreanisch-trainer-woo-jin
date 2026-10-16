@@ -147,9 +147,9 @@ function install(){
   const greeting=makeVideo(GREETING_VID,'lw55-greeting-video',false);
   layer.append(idle,greeting);
  }
- const hotspot=document.createElement('button');hotspot.className='lw53-avatar';hotspot.type='button';hotspot.setAttribute('aria-label',d.label);hotspot.setAttribute('aria-expanded','false');hotspot.setAttribute('aria-controls','lw53-panel');hotspot.innerHTML='<span class="lw53-avatar-label"><span class="lw53-dot"></span>Woo Jin <span aria-hidden="true">›</span></span>';
+ const hotspot=document.createElement('button');hotspot.className='lw53-avatar';hotspot.type='button';hotspot.setAttribute('aria-label',d.label);hotspot.setAttribute('aria-expanded','false');hotspot.setAttribute('aria-controls','lw53-panel');hotspot.innerHTML='<span class="lw53-avatar-label"><span class="lw53-dot"></span>Woo Jin · KI <span aria-hidden="true">›</span></span>';
  const panel=document.createElement('section');panel.className='lw53-panel';panel.id='lw53-panel';panel.hidden=true;panel.setAttribute('aria-hidden','true');panel.setAttribute('aria-label',d.label);
- panel.innerHTML='<div class="lw53-panel-top"><strong>Woo Jin</strong><button class="lw53-close" type="button" aria-label="'+esc(d.close)+'">×</button></div><p>'+esc(d.intro)+'</p><div class="lw53-panel-actions"><button type="button" class="lw53-hello">♫ '+esc(d.greet)+'</button><button type="button" class="lw53-talk">🎙 '+esc(d.mic)+'</button><button type="button" class="lw53-coach">'+esc(d.chat)+' →</button></div><p class="lw53-status" role="status" aria-live="polite"></p>';
+ panel.innerHTML='<div class="lw53-panel-top"><strong>Woo Jin · KI-Lernassistent</strong><button class="lw53-close" type="button" aria-label="'+esc(d.close)+'">×</button></div><p>'+esc(d.intro)+'</p><div class="lw53-panel-actions"><button type="button" class="lw53-hello">♫ '+esc(d.greet)+'</button><button type="button" class="lw53-talk">🎙 '+esc(d.mic)+'</button><button type="button" class="lw53-coach">'+esc(d.chat)+' →</button></div><p class="lw53-status" role="status" aria-live="polite"></p>';
  hero.prepend(layer);
  hero.append(hotspot,panel);
  if(canAnimate){
