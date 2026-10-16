@@ -15,14 +15,14 @@ function safe(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 
 
 const POSTERS={
- ko:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_075744_cbd09519-478e-4b2f-b29d-4bca024aee6e.png',
- de:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084026_d445abd0-bfd6-40e9-af87-ad85428c1789.png',
- en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084026_0c3ef4b3-5b27-4b0e-ac38-7d38722bc485.png'
+ ko:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_075744_cbd09519-478e-4b2f-b29d-4bca024aee6e.png','privacy-scene.svg'),
+ de:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084026_d445abd0-bfd6-40e9-af87-ad85428c1789.png','privacy-scene.svg'),
+ en:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_084026_0c3ef4b3-5b27-4b0e-ac38-7d38722bc485.png','privacy-scene.svg')
 };
 const VIDEOS={
- ko:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085306_b5bee684-a45c-49d1-8df6-ac16dbd39667.mp4',
- de:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085305_6fbafab3-283e-4a7b-a6b6-ef1c2f6fb2c3.mp4',
- en:'https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085305_84602865-df4b-46f1-805c-1193966b461c.mp4'
+ ko:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085306_b5bee684-a45c-49d1-8df6-ac16dbd39667.mp4',''),
+ de:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085305_6fbafab3-283e-4a7b-a6b6-ef1c2f6fb2c3.mp4',''),
+ en:window.LWPrivacy.asset('https://d8j0ntlcm91z4.cloudfront.net/user_3KgDSNgRcYHCEkF9DO7qAnjsYND/hf_20261016_085305_84602865-df4b-46f1-805c-1193966b461c.mp4','')
 };
 const INSTRUCTION={
  de:'Einmal tippen: Welt ansehen · Doppelt tippen: Lernen starten',
