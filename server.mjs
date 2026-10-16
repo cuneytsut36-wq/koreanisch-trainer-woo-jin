@@ -26,9 +26,9 @@ const server=http.createServer(async(req,res)=>{
    const msgs=payload.messages.slice(-17).filter(m=>['system','user','assistant'].includes(m.role)&&typeof m.content==='string'&&m.content.length<=2000).map(m=>({role:m.role,content:m.content}));
    if(msgs.length<2||msgs[0].role!=='system')throw Error('conversation');
    msgs[0]={role:'system',content:msgs[0].content.slice(0,1300)};
-   const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),19000);
+   const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),21000);
    let upstream;
-   try{upstream=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+process.env.WJ_AI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.WJ_AI_MODEL||'openai/gpt-oss-20b',messages:msgs,temperature:.7,max_tokens:320,stream:false}),signal:ctrl.signal})}finally{clearTimeout(timer)}
+   try{upstream=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':'Bearer '+process.env.WJ_AI_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.WJ_AI_MODEL||'openai/gpt-oss-20b',messages:msgs,temperature:.62,max_tokens:450,stream:false}),signal:ctrl.signal})}finally{clearTimeout(timer)}
    if(!upstream.ok)return respond(res,502,{error:'KI-Anbieter gerade nicht erreichbar'});
    const data=await upstream.json(),answer=String(data.choices?.[0]?.message?.content||'').trim().slice(0,2500);
    return respond(res,200,{answer});
